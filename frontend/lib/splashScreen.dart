@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:asl_application/main.dart';
-
+import 'main.dart';
 
 class splashScreen extends StatefulWidget {
   const splashScreen({super.key});
@@ -11,17 +10,15 @@ class splashScreen extends StatefulWidget {
 }
 
 class _splashScreenState extends State<splashScreen> {
-
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 5),(){
-
+    Timer(Duration(seconds: 5), () {
       Navigator.pushReplacement(
           context as BuildContext,
           MaterialPageRoute(
-            builder: (context)=>WelcomePage (),));
-
+            builder: (context) => WelcomePage(),
+          ));
     });
   }
 
@@ -29,22 +26,14 @@ class _splashScreenState extends State<splashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-            child:Container(
-              decoration: BoxDecoration(
-                gradient:LinearGradient(
-                  colors: [Color(0xFFd116A7B), Color(0xFFdC2DEDC)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomLeft,
-
-                ),
-
-              ),
-
-
-
-            )
-        )
-    );
+            child: Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xFFd116A7B), Color(0xFFdC2DEDC)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomLeft,
+        ),
+      ),
+    )));
   }
 }
-

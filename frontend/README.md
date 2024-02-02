@@ -1,6 +1,6 @@
-# asl_application
+# front_end
 
-A flutter application for ASL
+A new Flutter project.
 
 ## Getting Started
 
