@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'audioToAsl.dart';
 
-import 'helpCenter.dart';
-
 class signupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
