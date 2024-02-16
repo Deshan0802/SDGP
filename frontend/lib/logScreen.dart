@@ -1,8 +1,19 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
-
+import 'package:front_end/signupPage.dart';
 import 'helpCenter.dart';
+import 'package:front_end/components/my_textfield.dart';
+import 'package:front_end/components/square_tile.dart';
 
-class logScreen extends StatelessWidget {
+class LogScreen extends StatelessWidget {
+  LogScreen({super.key});
+
+  //text editing Controllers Omen
+
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,13 +21,13 @@ class logScreen extends StatelessWidget {
       appBar: AppBar(
         //Creating the appbar
         elevation: 0,
-        backgroundColor:
-            Color(0xFFdC2DEDC), // Setting the background color of the appbar
+        backgroundColor: const Color.fromARGB(
+            252, 194, 222, 220), // Setting the background color of the appbar
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             size: 20,
             color: Colors.black,
@@ -25,130 +36,109 @@ class logScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
-          color: Color(0xFFdC2DEDC),
+          color: const Color.fromARGB(252, 194, 222, 220),
           height: MediaQuery.of(context).size.height,
           width: double.infinity,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Column(
+              Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 2, // Adjust the width of the border as needed
+                  ),
+                ),
+                child: ClipOval(
+                  child: Image.asset(
+                    'assets/images/Haaand.png',
+                    width: 100, // Adjust width as needed
+                    height: 100, // Adjust height as needed
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Column(
                 children: [
                   Text(
-                    'Login',
+                    'Beyond Words,Within Reach',
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Text(
-                    'Log in to your account',
+                    'Login Page',
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
-              SizedBox(
-                height: 40,
+              const SizedBox(
+                height: 20,
               ), // Adjust the spacing between
               Expanded(
                 child: Container(
                   // Creating a seperate box to include user inputs
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50),
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
                     ),
                   ),
+
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: 60, // Ajust the spacing between the containers
-                      ),
-                      Container(
-                        width: 350,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Email',
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8.0)),
-                              borderSide: BorderSide(
-                                color: Color(0xFFd116A7B),
-                                width: 2.0,
-                              ),
-                            ),
-                            contentPadding: EdgeInsets.symmetric(
-                              vertical: 15.0,
-                              horizontal: 20.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
+                      const SizedBox(
+                        //White Box Size
                         height: 40,
                       ),
-                      Column(
-                        children: [
-                          Container(
-                            width: 350, // Adjust the width of the container
-                            child: TextField(
-                              obscureText: true, // To take password input
-                              decoration: InputDecoration(
-                                // To take input from the user
-                                hintText: 'Password',
-                                border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8.0)),
-                                  borderSide: BorderSide(
-                                    color: Color(0xFFd116A7B),
-                                    width: 2.0,
-                                  ),
-                                ),
-                                suffixIcon: IconButton(
-                                  onPressed: null,
-                                  icon: Icon(Icons.remove_red_eye),
-                                ),
-                                contentPadding: EdgeInsets.symmetric(
-                                  // Ajust the space between the box and the text
-                                  vertical: 15.0,
-                                  horizontal: 20.0,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+
+                      MyTextField(
+                        controller: usernameController,
+                        hintText: 'Username',
+                        obscureText: false,
                       ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            height: 20, // Adjust the height
-                          ),
-                          Container(
-                            width: double.infinity,
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                  right:
-                                      30.0), // Adjust the padding between the the right border
-                              child: Text(
-                                'Forgot password?',
-                                textAlign:
-                                    TextAlign.right, // Align the text right
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Color(0xFFd116A7B),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                      const SizedBox(
+                        height: 20,
                       ),
-                      SizedBox(height: 50),
+                      // User Password
+                      MyTextField(
+                        controller: passwordController,
+                        hintText: 'Password',
+                        obscureText: true,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+
+                      //forgot password textfield
+
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Forgot Password',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 93, 92, 92)),
+                            )
+                          ],
+                        ),
+                      ),
+
+                      const SizedBox(height: 30),
                       MaterialButton(
                         minWidth: 250,
                         height: 60,
@@ -156,30 +146,112 @@ class logScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => helpCenter()));
+                                  builder: (context) => const helpCenter()));
                         },
-                        color: Color(
-                            0xFFd116A7B), // defining the shape of the sign in button
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50)),
-                        child: Text(
-                          "Log In",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18),
+                        child: Container(
+                          padding: const EdgeInsets.all(25),
+                          margin: const EdgeInsets.symmetric(horizontal: 25),
+                          decoration: BoxDecoration(
+                            color: const Color.fromRGBO(17, 106, 123, 0.992),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "Log In",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                      SizedBox(
+
+                      const SizedBox(
                         height: 20,
                       ),
-                      Container(
-                        child: Text('- OR -',
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                            )),
+
+                      //Or continue with message
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Divider(
+                                thickness: 0.5,
+                                color: Colors.grey[400],
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Text('Or Continue With',
+                                  style: TextStyle(color: Colors.grey[700])),
+                            ),
+                            Expanded(
+                              child: Divider(
+                                thickness: 0.5,
+                                color: Colors.grey[400],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+
+                      //google + facebook +twitter buttons
+
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          //google
+                          SquareTile(imagePath: 'assets/images/googleLogo.png'),
+                          SizedBox(
+                            width: 25,
+                          ),
+
+                          //Facebook
+                          SquareTile(
+                              imagePath: 'assets/images/facebookLogo.png'),
+                          SizedBox(
+                            width: 25,
+                          ),
+                          //Twitter,
+                          SquareTile(
+                              imagePath: 'assets/images/twitterLogo.png'),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 23,
+                      ),
+                      //If the  user is not Signed Yet Sign Up Now register click goes to SugnUp
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text('Not a Member?'),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SignupPage()));
+                            },
+                            child: const Text(
+                              'Register',
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),

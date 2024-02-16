@@ -1,19 +1,23 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'audioToAsl.dart';
 
-class signupPage extends StatelessWidget {
+class SignupPage extends StatelessWidget {
+  const SignupPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color(0xFFdC2DEDC),
+        backgroundColor: const Color.fromARGB(252, 194, 222, 220),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             size: 20,
             color: Colors.black,
@@ -22,13 +26,13 @@ class signupPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
-          color: Color(0xFFdC2DEDC),
+          color: const Color(0xffdc2dedc),
           height: MediaQuery.of(context).size.height,
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Column(
+              const Column(
                 children: [
                   Text(
                     'Sign up',
@@ -48,13 +52,13 @@ class signupPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               Expanded(
                 child: Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(50),
@@ -63,10 +67,10 @@ class signupPage extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 50,
                       ),
-                      Container(
+                      const SizedBox(
                         width: 350,
                         child: TextField(
                           decoration: InputDecoration(
@@ -75,7 +79,7 @@ class signupPage extends StatelessWidget {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8.0)),
                               borderSide: BorderSide(
-                                color: Color(0xFFd116A7B),
+                                color: Color.fromRGBO(17, 106, 123, 0.992),
                                 width: 2.0,
                               ),
                             ),
@@ -86,13 +90,13 @@ class signupPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         // To maintain the space between buttons
                         height: 30,
                       ),
-                      Column(
+                      const Column(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 350, // Adjust the width of the container
                             child: TextField(
                               decoration: InputDecoration(
@@ -101,7 +105,7 @@ class signupPage extends StatelessWidget {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(8.0)),
                                   borderSide: BorderSide(
-                                    color: Color(0xFFd116A7B),
+                                    color: Color(0xffd116a7b),
                                     width: 2.0,
                                   ),
                                 ),
@@ -114,12 +118,12 @@ class signupPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
-                      Column(
+                      const Column(
                         children: [
-                          Container(
+                          SizedBox(
                             width: 350, // Adjust the width of the container
                             child: TextField(
                               obscureText: true, // To take password input
@@ -130,7 +134,7 @@ class signupPage extends StatelessWidget {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(8.0)),
                                   borderSide: BorderSide(
-                                    color: Color(0xFFd116A7B),
+                                    color: Color(0xffd116a7b),
                                     width: 2.0,
                                   ),
                                 ),
@@ -148,7 +152,7 @@ class signupPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       MaterialButton(
                         minWidth: 250,
                         height: 60,
@@ -156,13 +160,13 @@ class signupPage extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => audioToAsl()));
+                                  builder: (context) => const audioToAsl()));
                         },
-                        color: Color(
-                            0xFFd116A7B), // defining the shape of the sign in button
+                        color: const Color(
+                            0xffd116a7b), // defining the shape of the sign in button
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50)),
-                        child: Text(
+                        child: const Text(
                           "Sign up",
                           style: TextStyle(
                               color: Colors.white,

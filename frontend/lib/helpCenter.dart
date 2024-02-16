@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class helpCenter extends StatefulWidget {
+  const helpCenter({super.key});
+
   @override
   _HelpCenterState createState() => _HelpCenterState();
 }
@@ -21,7 +23,7 @@ class _HelpCenterState extends State<helpCenter> {
             // The back button in the app bar
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             size: 20,
             color: Colors.black,
@@ -36,7 +38,7 @@ class _HelpCenterState extends State<helpCenter> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Column(
+              const Column(
                 children: [
                   Text(
                     'Help Center ',
@@ -56,8 +58,8 @@ class _HelpCenterState extends State<helpCenter> {
                   ),
                 ],
               ),
-              SizedBox(height: 40),
-              Column(
+              const SizedBox(height: 40),
+              const Column(
                 crossAxisAlignment:
                     CrossAxisAlignment.start, // Align children to the left
                 children: [
@@ -70,7 +72,7 @@ class _HelpCenterState extends State<helpCenter> {
                   ),
                 ],
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               SingleChildScrollView(
                 scrollDirection:
                     Axis.horizontal, // Setting the scroll direction vertically
@@ -80,14 +82,14 @@ class _HelpCenterState extends State<helpCenter> {
                     (index) {
                       Color boxColor;
                       if (index % 4 == 0) {
-                        boxColor = Color(
+                        boxColor = const Color(
                             0xFF86A7FC); // Changing the colors of the boxes one after the other
                       } else if (index % 4 == 1) {
-                        boxColor = Color(0xFFC499F3);
+                        boxColor = const Color(0xFFC499F3);
                       } else if (index % 4 == 2) {
-                        boxColor = Color(0xFFF875AA);
+                        boxColor = const Color(0xFFF875AA);
                       } else {
-                        boxColor = Color(0xFF99BC85);
+                        boxColor = const Color(0xFF99BC85);
                       }
 
                       return Container(
@@ -95,17 +97,17 @@ class _HelpCenterState extends State<helpCenter> {
                             120, // Return the boxes with selected height and width
                         height: 150,
                         color: boxColor, // Setting color of the boxes
-                        margin: EdgeInsets.all(8.0),
+                        margin: const EdgeInsets.all(8.0),
                       );
                     },
                   ),
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Expanded(
                 child: Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Color(0xFFF2F1EB),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(50),
@@ -114,10 +116,10 @@ class _HelpCenterState extends State<helpCenter> {
                   ),
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 35,
                       ),
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment
                             .start, // Align children to the left
                         children: [
@@ -129,7 +131,7 @@ class _HelpCenterState extends State<helpCenter> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       // Dropdown for selecting options
@@ -138,7 +140,7 @@ class _HelpCenterState extends State<helpCenter> {
                         children: [
                           Container(
                             width: 250,
-                            margin: EdgeInsets.only(
+                            margin: const EdgeInsets.only(
                                 left: 35), // Adjust the left margin as needed
                             child: DropdownButtonFormField<String>(
                               value: selectedOption,
@@ -150,23 +152,23 @@ class _HelpCenterState extends State<helpCenter> {
                               items: dropdownOptions.map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
-                                  child: Container(
+                                  child: SizedBox(
                                     width:
                                         200, // Adjust the width of the dropdown items if needed
                                     child: Text(value),
                                   ),
                                 );
                               }).toList(),
-                              hint: Text('Select an option'),
+                              hint: const Text('Select an option'),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
 
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment
                             .start, // Align children to the left
                         children: [
@@ -179,7 +181,7 @@ class _HelpCenterState extends State<helpCenter> {
                           SizedBox(
                             height: 20,
                           ),
-                          Container(
+                          SizedBox(
                             width: 350,
                             child: TextField(
                               decoration: InputDecoration(
@@ -188,7 +190,7 @@ class _HelpCenterState extends State<helpCenter> {
                                     Radius.circular(8.0),
                                   ),
                                   borderSide: BorderSide(
-                                    color: Color(0xFFd116A7B),
+                                    color: Color(0xffd116a7b),
                                     width: 2.0,
                                   ),
                                 ),
@@ -202,16 +204,16 @@ class _HelpCenterState extends State<helpCenter> {
                         ],
                       ),
 
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       MaterialButton(
                         minWidth: 200,
                         height: 40,
                         onPressed: () {},
-                        color: Color(0xFF99BC85),
+                        color: const Color(0xFF99BC85),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50),
                         ),
-                        child: Text(
+                        child: const Text(
                           "Submit",
                           style: TextStyle(
                             color: Colors.white,

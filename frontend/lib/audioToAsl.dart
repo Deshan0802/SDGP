@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class audioToAsl extends StatefulWidget {
+  const audioToAsl({super.key});
+
   @override
   _AudioToAslState createState() => _AudioToAslState();
 }
@@ -21,7 +23,7 @@ class _AudioToAslState extends State<audioToAsl> {
             // The back button in the app bar
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             size: 20,
             color: Colors.black,
@@ -35,33 +37,33 @@ class _AudioToAslState extends State<audioToAsl> {
           width: double.infinity,
           child: Column(
             children: [
-              Text(
+              const Text(
                 "Translator",
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Container(
                 height: 50,
                 width: 300,
-                color: Color(0xFF86A7FC),
+                color: const Color(0xFF86A7FC),
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 " Record an audio ",
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 22,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
-                margin: EdgeInsets.only(left: 10),
+                margin: const EdgeInsets.only(left: 10),
                 width: 100,
                 height: 100,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Color(0xFFFF9843),
                 ),
@@ -72,7 +74,7 @@ class _AudioToAslState extends State<audioToAsl> {
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Center(
@@ -99,7 +101,7 @@ class _AudioToAslState extends State<audioToAsl> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      SizedBox(width: 25),
+                      const SizedBox(width: 25),
                       MaterialButton(
                         onPressed: () {
                           setState(() {
@@ -118,7 +120,7 @@ class _AudioToAslState extends State<audioToAsl> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      SizedBox(width: 40),
+                      const SizedBox(width: 40),
                       MaterialButton(
                         onPressed: () {},
                         minWidth: 25,
@@ -132,17 +134,17 @@ class _AudioToAslState extends State<audioToAsl> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Text(
+              const Text(
                 "-OR-",
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 22,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Container(
                 child: Column(
                   children: [
@@ -150,11 +152,11 @@ class _AudioToAslState extends State<audioToAsl> {
                       minWidth: 120,
                       height: 40,
                       onPressed: () {},
-                      color: Color(0xFF99BC85),
+                      color: const Color(0xFF99BC85),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
                       ),
-                      child: Text(
+                      child: const Text(
                         "Select audio file",
                         style: TextStyle(
                           color: Colors.white,
@@ -166,11 +168,11 @@ class _AudioToAslState extends State<audioToAsl> {
                   ],
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Expanded(
                 child: Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Color(0xFFF2F1EB),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(50),
