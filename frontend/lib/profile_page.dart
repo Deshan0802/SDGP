@@ -15,13 +15,43 @@ class SignWave extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ProfilePage(),
+      home: ProfilePage(),
     );
   }
 }
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  late TextEditingController nameController;
+  late TextEditingController phoneController;
+  late TextEditingController emailController;
+  late TextEditingController addressController;
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController(text: 'Hirushan Pathirage');
+    phoneController = TextEditingController(text: '070-4143-401');
+    emailController =
+        TextEditingController(text: 'chamuditha.20220457@iit.ac.lk');
+    addressController =
+        TextEditingController(text: 'No 435, Galle Road, Colombo 03.');
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    phoneController.dispose();
+    emailController.dispose();
+    addressController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +65,9 @@ class ProfilePage extends StatelessWidget {
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_outlined,
-              color: Colors.blueGrey), // Set the color of the back arrow
+              color: Colors.blueGrey),
           onPressed: () {
-            Navigator.pop(context); // Navigate back when pressed
+            Navigator.pop(context);
           },
         ),
       ),
@@ -45,16 +75,15 @@ class ProfilePage extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            const SizedBox(height: 10),
+            const SizedBox(height: 5),
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                    75), // Half of the radius to make it circular
+                borderRadius: BorderRadius.circular(75),
                 boxShadow: [
                   BoxShadow(
                     offset: const Offset(0, 2),
                     blurRadius: 5,
-                    color: Colors.blueGrey.withOpacity(0.7), // Shadow color
+                    color: Colors.blueGrey.withOpacity(0.7),
                   ),
                 ],
               ),
@@ -65,21 +94,38 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 50),
-            itemProfile('Name', 'Hirushan Pathirage', CupertinoIcons.person),
+            itemProfile('Name', nameController, CupertinoIcons.person),
             const SizedBox(height: 20),
-            itemProfile('Phone', '070-4143-401', CupertinoIcons.phone),
+            itemProfile('Phone', phoneController, CupertinoIcons.phone),
+            const SizedBox(height: 20),
+            itemProfile('Email', emailController, CupertinoIcons.mail),
             const SizedBox(height: 20),
             itemProfile(
-                'Email', 'chamuditha.20220457@iit.ac.lk', CupertinoIcons.mail),
-            const SizedBox(height: 20),
-            itemProfile('Address', 'No 435, Galle Road, Colombo 03.',
-                CupertinoIcons.building_2_fill),
+                'Address', addressController, CupertinoIcons.building_2_fill),
             const SizedBox(height: 40),
             ElevatedButton(
-              onPressed: () {
-                Navigator.push(
+              onPressed: () async {
+                final result = await Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => EditProfilePage()),
+                  MaterialPageRoute(
+                      builder: (context) => EditProfilePage(
+                            nameController: nameController,
+                            phoneController: phoneController,
+                            emailController: emailController,
+                            addressController: addressController,
+                            onSave: (newValues) {
+                              setState(() {
+                                nameController.text =
+                                    newValues['name'] ?? nameController.text;
+                                phoneController.text =
+                                    newValues['phone'] ?? phoneController.text;
+                                emailController.text =
+                                    newValues['email'] ?? emailController.text;
+                                addressController.text = newValues['address'] ??
+                                    addressController.text;
+                              });
+                            },
+                          )),
                 );
               },
               style: ButtonStyle(
@@ -100,7 +146,8 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  itemProfile(String title, String subtitle, IconData iconData) {
+  Widget itemProfile(
+      String title, TextEditingController controller, IconData iconData) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -116,7 +163,13 @@ class ProfilePage extends StatelessWidget {
       ),
       child: ListTile(
         title: Text(title),
-        subtitle: Text(subtitle),
+        subtitle: Text(
+          controller.text,
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 16,
+          ),
+        ),
         leading: Icon(iconData),
         tileColor: Colors.white,
       ),
@@ -124,8 +177,40 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
-class EditProfilePage extends StatelessWidget {
-  const EditProfilePage({Key? key}) : super(key: key);
+class EditProfilePage extends StatefulWidget {
+  final TextEditingController nameController;
+  final TextEditingController phoneController;
+  final TextEditingController emailController;
+  final TextEditingController addressController;
+  final Function(Map<String, String>) onSave;
+
+  const EditProfilePage({
+    Key? key,
+    required this.nameController,
+    required this.phoneController,
+    required this.emailController,
+    required this.addressController,
+    required this.onSave,
+  }) : super(key: key);
+
+  @override
+  _EditProfilePageState createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
+  late String initialName;
+  late String initialPhone;
+  late String initialEmail;
+  late String initialAddress;
+
+  @override
+  void initState() {
+    super.initState();
+    initialName = widget.nameController.text;
+    initialPhone = widget.phoneController.text;
+    initialEmail = widget.emailController.text;
+    initialAddress = widget.addressController.text;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,95 +224,121 @@ class EditProfilePage extends StatelessWidget {
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_outlined,
-              color: Colors.blueGrey), // Set the color of the back arrow
+              color: Colors.blueGrey),
           onPressed: () {
-            Navigator.pop(context); // Navigate back when pressed
+            _restoreInitialValues();
+            Navigator.pop(context);
           },
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            const SizedBox(height: 10),
-            const CircleAvatar(
-              radius: 85,
-              backgroundImage:
-                  AssetImage('assets/profile/sample-profile-picture.png'),
-            ),
-            const SizedBox(height: 40),
-            itemProfile('Name', 'Hirushan Pathirage', CupertinoIcons.person),
-            const SizedBox(height: 20),
-            itemProfile('Phone', '070-4143-401', CupertinoIcons.phone),
-            const SizedBox(height: 20),
-            itemProfile(
-                'Email', 'chamuditha.20220457@iit.ac.lk', CupertinoIcons.mail),
-            const SizedBox(height: 20),
-            itemProfile('Address', 'No 435, Galle Road, Colombo 03.',
-                CupertinoIcons.building_2_fill),
-            const SizedBox(height: 40),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context); // Close the Edit Profile page
-                  },
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.grey),
-                    shape: MaterialStateProperty.all<OutlinedBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5))),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              const SizedBox(height: 10),
+              const CircleAvatar(
+                radius: 85,
+                backgroundImage:
+                    AssetImage('assets/profile/sample-profile-picture.png'),
+              ),
+              const SizedBox(height: 40),
+              itemProfile('Name', widget.nameController, CupertinoIcons.person),
+              const SizedBox(height: 20),
+              itemProfile(
+                  'Phone', widget.phoneController, CupertinoIcons.phone),
+              const SizedBox(height: 20),
+              itemProfile('Email', widget.emailController, CupertinoIcons.mail),
+              const SizedBox(height: 20),
+              itemProfile('Address', widget.addressController,
+                  CupertinoIcons.building_2_fill),
+              const SizedBox(height: 40),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      _restoreInitialValues();
+                      Navigator.pop(context);
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.grey),
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5))),
+                    ),
+                    child: Container(
+                        width: 70,
+                        child: const Center(
+                            child: Text('Cancel',
+                                style: TextStyle(color: Colors.white)))),
                   ),
-                  child: Container(
-                      width: 70,
-                      child: const Center(
-                          child: Text('Cancel',
-                              style: TextStyle(color: Colors.white)))),
-                ),
-                const SizedBox(width: 25), // Adjust the spacing between buttons
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context); // Close the Edit Profile page
-                  },
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.blue),
-                    shape: MaterialStateProperty.all<OutlinedBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5))),
+                  const SizedBox(width: 25),
+                  ElevatedButton(
+                    onPressed: () {
+                      widget.onSave({
+                        'name': widget.nameController.text,
+                        'phone': widget.phoneController.text,
+                        'email': widget.emailController.text,
+                        'address': widget.addressController.text,
+                      });
+                      Navigator.pop(context);
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.blue),
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5))),
+                    ),
+                    child: Container(
+                        width: 70,
+                        child: const Center(
+                            child: Text('Save',
+                                style: TextStyle(color: Colors.white)))),
                   ),
-                  child: Container(
-                      width: 70,
-                      child: const Center(
-                          child: Text('Save',
-                              style: TextStyle(color: Colors.white)))),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  itemProfile(String title, String subtitle, IconData iconData) {
+  void _restoreInitialValues() {
+    setState(() {
+      widget.nameController.text = initialName;
+      widget.phoneController.text = initialPhone;
+      widget.emailController.text = initialEmail;
+      widget.addressController.text = initialAddress;
+    });
+  }
+
+  Widget itemProfile(
+      String title, TextEditingController controller, IconData iconData) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              offset: const Offset(0, 1),
-              color: Colors.blueGrey.withOpacity(.3),
-              spreadRadius: 2,
-              blurRadius: 2,
-            )
-          ]),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            offset: const Offset(0, 1),
+            color: Colors.blueGrey.withOpacity(.3),
+            spreadRadius: 2,
+            blurRadius: 2,
+          ),
+        ],
+      ),
       child: ListTile(
         title: Text(title),
-        subtitle: Text(subtitle),
+        subtitle: TextField(
+          controller: controller,
+          decoration: const InputDecoration(
+            border: InputBorder.none,
+          ),
+        ),
         leading: Icon(iconData),
         tileColor: Colors.white,
       ),
