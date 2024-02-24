@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:front_end/dashBoard.dart';
 import 'package:front_end/signupPage.dart';
 import 'helpCenter.dart';
 import 'package:front_end/components/my_textfield.dart';
@@ -146,7 +147,7 @@ class LogScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const helpCenter()));
+                                  builder: (context) => DashBoard()));
                         },
                         child: Container(
                           padding: const EdgeInsets.all(25),

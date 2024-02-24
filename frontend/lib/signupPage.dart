@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:front_end/dashBoard.dart';
 import 'audioToAsl.dart';
 
 class SignupPage extends StatelessWidget {
@@ -160,7 +161,7 @@ class SignupPage extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const audioToAsl()));
+                                  builder: (context) => DashBoard()));
                         },
                         color: const Color(
                             0xffd116a7b), // defining the shape of the sign in button
