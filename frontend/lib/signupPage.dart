@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/components/square_tile.dart';
 import 'package:front_end/components/my_textfield.dart';
-import 'audioToAsl.dart';
+import 'package:front_end/dashBoard.dart';
 
 class SignupPage extends StatelessWidget {
   SignupPage({super.key});
@@ -129,13 +129,13 @@ class SignupPage extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const audioToAsl()));
+                                  builder: (context) => DashBoard()));
                         },
                         child: Container(
                           padding: const EdgeInsets.all(25),
                           margin: const EdgeInsets.symmetric(horizontal: 25),
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(251, 0, 0, 0),
+                            color: const Color.fromARGB(251, 0, 0, 0),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: const Center(
