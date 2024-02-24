@@ -16,7 +16,7 @@ class MyButtonSign extends StatelessWidget {
             Navigator.push(
               // Navigate to LogScreen
               context,
-              MaterialPageRoute(builder: (context) => const SignupPage()),
+              MaterialPageRoute(builder: (context) => SignupPage()),
             );
           }
         },
