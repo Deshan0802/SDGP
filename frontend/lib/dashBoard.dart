@@ -159,12 +159,12 @@ class DashBoardState extends State<DashBoard> {
           CustomBlueBox(
             firstElementName: 'Audio',
             thirdElementName: 'ASL',
-            // onTap: () {
-            //   Navigator.push(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => AudioToASL()),
-            //   );
-            // },
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => audioToAsl()),
+              );
+            },
             buttonVerticalMargin: 10.0,
             buttonHorizontalMargin: 10.0,
           ),

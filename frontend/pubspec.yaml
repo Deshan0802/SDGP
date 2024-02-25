@@ -30,8 +30,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  google_sign_in: ^6.1.6
+  permission_handler: any
+  record: ^3.0.3
+  simple_ripple_animation: ^0.0.3
+  just_audio: ^0.9.29
+  provider: ^6.0.3
+  path_provider: any
+  percent_indicator: ^4.2.2
+  fluttertoast: ^8.0.8
+
 
 dev_dependencies:
   flutter_test:
@@ -56,12 +63,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/ASL1.png
-    - assets/audio1.png
-    - assets/pause.png
-    - assets/play.png
-    - assets/record.png
-    - assets/tickmark.png
+    - assets/
+    - assets/AudiotoASL_Page/
     - assets/images/facebookLogo.png
     - assets/images/twitterLogo.png
     - assets/images/googleLogo.png
