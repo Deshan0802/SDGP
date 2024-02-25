@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 void main() {
   runApp(const SignWave());
@@ -162,15 +163,24 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
       child: ListTile(
-        title: Text(title),
+        title: Text(title,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 17,
+                color: Colors.blueGrey)),
         subtitle: Text(
           controller.text,
           style: const TextStyle(
-            color: Colors.black,
             fontSize: 16,
+            fontStyle: FontStyle.italic,
+            color: Colors.blueGrey,
           ),
         ),
-        leading: Icon(iconData),
+        leading: Icon(
+          iconData,
+          size: 30,
+          color: Colors.blueGrey,
+        ),
         tileColor: Colors.white,
       ),
     );
@@ -236,20 +246,76 @@ class _EditProfilePageState extends State<EditProfilePage> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              const SizedBox(height: 10),
-              const CircleAvatar(
-                radius: 85,
-                backgroundImage:
-                    AssetImage('assets/profile/sample-profile-picture.png'),
+              Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  const CircleAvatar(
+                    radius: 85,
+                    backgroundImage:
+                        AssetImage('assets/profile/sample-profile-picture.png'),
+                  ),
+                  FloatingActionButton(
+                    onPressed: () async {
+                      final ImageSource? pickedSource =
+                          await showModalBottomSheet<ImageSource>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                            height: 150,
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 20),
+                                ListTile(
+                                  leading: const Icon(Icons.camera_alt),
+                                  title: const Text('Take a photo'),
+                                  onTap: () {
+                                    Navigator.of(context)
+                                        .pop(ImageSource.camera);
+                                  },
+                                ),
+                                ListTile(
+                                  leading: const Icon(Icons.photo_library),
+                                  title: const Text('Choose from gallery'),
+                                  onTap: () {
+                                    Navigator.of(context)
+                                        .pop(ImageSource.gallery);
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+
+                      if (pickedSource != null) {
+                        final picker = ImagePicker();
+                        final pickedImage =
+                            await picker.pickImage(source: pickedSource);
+                        if (pickedImage != null) {
+                          // Handle the picked image
+                        }
+                      }
+                    },
+
+                    backgroundColor: Colors.blue, // Change button color here
+                    mini: true,
+                    child: const Icon(
+                      Icons.edit,
+                      color: Colors.white,
+                    ), // Set to true for a smaller button
+                  ),
+                ],
               ),
               const SizedBox(height: 40),
-              itemProfile('Name', widget.nameController, CupertinoIcons.person),
-              const SizedBox(height: 20),
               itemProfile(
-                  'Phone', widget.phoneController, CupertinoIcons.phone),
-              const SizedBox(height: 20),
-              itemProfile('Email', widget.emailController, CupertinoIcons.mail),
-              const SizedBox(height: 20),
+                  'Name', widget.nameController, CupertinoIcons.person_fill),
+              const SizedBox(height: 25),
+              itemProfile(
+                  'Phone', widget.phoneController, CupertinoIcons.phone_fill),
+              const SizedBox(height: 25),
+              itemProfile(
+                  'Email', widget.emailController, CupertinoIcons.mail_solid),
+              const SizedBox(height: 25),
               itemProfile('Address', widget.addressController,
                   CupertinoIcons.building_2_fill),
               const SizedBox(height: 40),
@@ -274,7 +340,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             child: Text('Cancel',
                                 style: TextStyle(color: Colors.white)))),
                   ),
-                  const SizedBox(width: 25),
+                  const SizedBox(width: 50),
                   ElevatedButton(
                     onPressed: () {
                       widget.onSave({
@@ -325,21 +391,30 @@ class _EditProfilePageState extends State<EditProfilePage> {
         boxShadow: [
           BoxShadow(
             offset: const Offset(0, 1),
-            color: Colors.blueGrey.withOpacity(.3),
+            color: Colors.blue.withOpacity(.3),
             spreadRadius: 2,
             blurRadius: 2,
           ),
         ],
       ),
       child: ListTile(
-        title: Text(title),
+        title: Text(title,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.blueAccent,
+                fontSize: 18)),
         subtitle: TextField(
           controller: controller,
           decoration: const InputDecoration(
-            border: InputBorder.none,
+            contentPadding: EdgeInsets.zero,
+            isDense: true, // Set to true to reduce the vertical space
           ),
         ),
-        leading: Icon(iconData),
+        leading: Icon(
+          iconData,
+          color: Colors.blue,
+          size: 35,
+        ),
         tileColor: Colors.white,
       ),
     );
