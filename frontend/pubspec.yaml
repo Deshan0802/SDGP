@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   permission_handler: any
-  record: ^3.0.3
+  record: ^5.0.4
   simple_ripple_animation: ^0.0.3
   just_audio: ^0.9.29
   provider: ^6.0.3
@@ -43,14 +43,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  image_picker: ^0.8.1+4
+  image_picker: ^1.0.7
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
