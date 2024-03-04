@@ -28,5 +28,21 @@ def register_user():
     #     return ""
 
 
+@app.route("/login", methods=["POST"])
+def login():
+    if not request.is_json:
+        return jsonify({"error": "Request must be JSON"}), 400
+
+    username = request.json.get("username", "")
+    password = request.json.get("password", "")
+
+    if username == "example_username" and password == "example_password":
+       
+        token = "example_token"
+        return jsonify({"message": "Login successful", "token": token}), 200
+    else:
+        return jsonify({"error": "Invalid username or password"}), 401
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=8000)

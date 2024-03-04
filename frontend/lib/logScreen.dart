@@ -3,9 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/dashBoard.dart';
 import 'package:front_end/signupPage.dart';
-import 'helpCenter.dart';
 import 'package:front_end/components/my_textfield.dart';
 import 'package:front_end/components/square_tile.dart';
+
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class LogScreen extends StatelessWidget {
   LogScreen({super.key});
@@ -14,6 +16,26 @@ class LogScreen extends StatelessWidget {
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+
+  Future<void> login(String username, String password) async {
+    final response = await http.post(
+      Uri.parse('http://10.0.2.2:8000/login'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'username': username,
+        'password': password,
+      }),
+    );
+    if (response.statusCode == 200) {
+      // Successful login
+      print('Login successful');
+    } else {
+      // Login failed
+      print('Login failed');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -143,11 +165,16 @@ class LogScreen extends StatelessWidget {
                       MaterialButton(
                         minWidth: 250,
                         height: 60,
-                        onPressed: () {
+                        onPressed: () async {
+                          String username = usernameController.text;
+                          String password = passwordController.text;
+                          await login(username,
+                              password); // Pass the username and password to login function
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DashBoard()));
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DashBoard()),
+                          );
                         },
                         child: Container(
                           padding: const EdgeInsets.all(25),
