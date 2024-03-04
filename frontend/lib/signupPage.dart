@@ -1,9 +1,11 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 import 'package:front_end/components/square_tile.dart';
 import 'package:front_end/components/my_textfield.dart';
 import 'package:front_end/dashBoard.dart';
+
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignupPage extends StatelessWidget {
   SignupPage({super.key});
@@ -11,7 +13,40 @@ class SignupPage extends StatelessWidget {
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  final passwordController2 = TextEditingController();
+  final passwordConfirmedController = TextEditingController();
+
+  Future<void> registerUser() async {
+    const url = 'http://10.0.2.2:8000/register';
+    final headers = {'Content-Type': 'application/json'};
+    final body = jsonEncode({
+      'username': usernameController.text,
+      'password': passwordController.text,
+      'password_confirmed': passwordConfirmedController.text
+    });
+
+    final response =
+        await http.post(Uri.parse(url), headers: headers, body: body);
+
+    if (response.statusCode == 200) {
+      Fluttertoast.showToast(
+          msg: "Registration successful",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    } else {
+      Fluttertoast.showToast(
+          msg: 'Failed to register',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +150,7 @@ class SignupPage extends StatelessWidget {
                         height: 20,
                       ),
                       MyTextField(
-                        controller: passwordController2,
+                        controller: passwordConfirmedController,
                         hintText: ' Confirm Password',
                         obscureText: true,
                       ),
@@ -125,7 +160,8 @@ class SignupPage extends StatelessWidget {
                       MaterialButton(
                         minWidth: 250,
                         height: 60,
-                        onPressed: () {
+                        onPressed: () async {
+                          await registerUser();
                           Navigator.push(
                               context,
                               MaterialPageRoute(
