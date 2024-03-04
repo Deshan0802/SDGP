@@ -12,7 +12,7 @@ mysql = MySQL(app)
 @app.route("/register", methods=["POST"])
 def register_user():
     if not request.is_json:
-        return jsonify({"error": "Request must be JSON"}), 400
+        return jsonify({"message": "Request must be JSON"}), 400
     data = request.json
     username = data.get("username")
     password = data.get("password")
@@ -33,34 +33,42 @@ def register_user():
                 mysql.connection.commit()
                 cursor.close()
                 return jsonify({"message": "Registration successful"}), 200
+            else:
+                cursor.close()
+                return jsonify({"message": "Password does not match"}), 400
         else:
             cursor.close()
-            return jsonify({"error": "Username is already taken"}), 400
+            return jsonify({"message": "Username is already taken"}), 400
 
     else:
-        return jsonify({"error": "Cannot establish a connection to the database"}), 400
-    
-    
+        return (
+            jsonify({"message": "Cannot establish a connection to the database"}),
+            400,
+        )
 
-@app.route('/login', methods=['POST'])
+
+@app.route("/login", methods=["POST"])
 def login():
     if not request.is_json:
         return jsonify({"error": "Request must be JSON"}), 400
-    
+
     data = request.json
-    username = data.get('username')
-    password = data.get('password')
-    
+    username = data.get("username")
+    password = data.get("password")
+
     if mysql.connection:
         cursor = mysql.connection.cursor()
-        cursor.execute("SELECT * FROM users WHERE username = %s AND password = %s", (username, password))
+        cursor.execute(
+            "SELECT * FROM users WHERE username = %s AND password = %s",
+            (username, password),
+        )
         user = cursor.fetchone()
         cursor.close()
-        
+
         if user:
-            return jsonify({'success': True}), 200
+            return jsonify({"success": True}), 200
         else:
-            return jsonify({'error': 'Invalid username or password'}), 401
+            return jsonify({"error": "Invalid username or password"}), 401
     else:
         return jsonify({"error": "Cannot establish a connection to the database"}), 400
 

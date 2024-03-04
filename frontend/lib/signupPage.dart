@@ -15,7 +15,7 @@ class SignupPage extends StatelessWidget {
   final passwordController = TextEditingController();
   final passwordConfirmedController = TextEditingController();
 
-  Future<void> registerUser() async {
+  Future<void> registerUser(BuildContext context) async {
     const url = 'http://10.0.2.2:8000/register';
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({
@@ -36,9 +36,13 @@ class SignupPage extends StatelessWidget {
           backgroundColor: Colors.green,
           textColor: Colors.white,
           fontSize: 16.0);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => DashBoard()));
     } else {
+      final decodedResponse = json.decode(response.body);
+      final message = decodedResponse['message'];
       Fluttertoast.showToast(
-          msg: 'Failed to register',
+          msg: message,
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -161,11 +165,7 @@ class SignupPage extends StatelessWidget {
                         minWidth: 250,
                         height: 60,
                         onPressed: () async {
-                          await registerUser();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DashBoard()));
+                          await registerUser(context);
                         },
                         child: Container(
                           padding: const EdgeInsets.all(25),
