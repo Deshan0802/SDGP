@@ -8,6 +8,7 @@ import 'package:front_end/components/square_tile.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LogScreen extends StatelessWidget {
   LogScreen({super.key});
@@ -17,7 +18,8 @@ class LogScreen extends StatelessWidget {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  Future<void> login(String username, String password) async {
+  Future<void> login(
+      BuildContext context, String username, String password) async {
     final response = await http.post(
       Uri.parse('http://10.0.2.2:8000/login'),
       headers: <String, String>{
@@ -29,10 +31,31 @@ class LogScreen extends StatelessWidget {
       }),
     );
     if (response.statusCode == 200) {
-      // Successful login
-      print('Login successful');
+      Fluttertoast.showToast(
+        msg: "Login Sucessful ",
+        toastLength: Toast.LENGTH_SHORT,
+        timeInSecForIosWeb: 2,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.blue,
+        textColor: Colors.white,
+        fontSize: 12,
+      );
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DashBoard(),
+        ),
+      );
     } else {
-      // Login failed
+      Fluttertoast.showToast(
+        msg: "Login Failed ",
+        toastLength: Toast.LENGTH_SHORT,
+        timeInSecForIosWeb: 2,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.blue,
+        textColor: Colors.white,
+        fontSize: 12,
+      );
       print('Login failed');
     }
   }
@@ -168,13 +191,8 @@ class LogScreen extends StatelessWidget {
                         onPressed: () async {
                           String username = usernameController.text;
                           String password = passwordController.text;
-                          await login(username,
-                              password); // Pass the username and password to login function
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DashBoard()),
-                          );
+                          await login(context, username,
+                              password); // Pass the context, username, and password to login function
                         },
                         child: Container(
                           padding: const EdgeInsets.all(25),
