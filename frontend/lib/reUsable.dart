@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:front_end/dashBoard.dart';
+import 'package:front_end/helpCenter.dart';
 // import 'package:webview_flutter/webview_flutter.dart';
 
 class CustomHeaderText extends StatelessWidget {
@@ -129,11 +131,17 @@ class CustomNavigationBar extends StatelessWidget {
       onTap: (index) {
         switch (index) {
           case 0:
-            Navigator.pushNamed(context, '/home');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DashBoard()),
+            );
             break;
 
           case 1:
-            Navigator.pushNamed(context, '/help');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => helpCenter()),
+            );
             break;
 
           case 2:
