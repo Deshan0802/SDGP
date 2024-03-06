@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/audioToAsl.dart';
+import 'package:front_end/profile_page.dart';
 // import 'package:front_end/imageToAsl.dart';
 // import 'package:front_end/PDFToASL.dart';
 // import 'package:front_end/VideoToASL.dart';
@@ -51,12 +52,20 @@ class DashBoardState extends State<DashBoard> {
 
   List<Widget> _buildProfileRow() {
     return [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          _buildProfileIcon(),
-          _buildProfileDetails(),
-        ],
+      GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const ProfilePage()),
+          );
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            _buildProfileIcon(),
+            _buildProfileDetails(),
+          ],
+        ),
       )
     ];
   }
