@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/dashBoard.dart';
 import 'package:front_end/helpCenter.dart';
+import 'package:front_end/profile_page.dart';
 // import 'package:webview_flutter/webview_flutter.dart';
 
 class CustomHeaderText extends StatelessWidget {
@@ -145,7 +146,10 @@ class CustomNavigationBar extends StatelessWidget {
             break;
 
           case 2:
-            Navigator.pushNamed(context, '/profile');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilePage()),
+            );
             break;
         }
         // setState(() {
