@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/components/square_tile.dart';
 import 'package:front_end/components/my_textfield.dart';
-import 'package:front_end/dashBoard.dart';
+import 'package:front_end/welcomePage.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -37,7 +37,7 @@ class SignupPage extends StatelessWidget {
           textColor: Colors.white,
           fontSize: 16.0);
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => DashBoard()));
+          context, MaterialPageRoute(builder: (context) => WelcomePage()));
     } else {
       final decodedResponse = json.decode(response.body);
       final message = decodedResponse['message'];
