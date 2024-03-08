@@ -16,6 +16,7 @@ class SignupPage extends StatelessWidget {
   final passwordConfirmedController = TextEditingController();
   final lnameController = TextEditingController();
   final fnameController = TextEditingController();
+  final emailController = TextEditingController();
 
   Future<void> registerUser(BuildContext context) async {
     const url = 'http://10.0.2.2:8000/register';
@@ -156,6 +157,15 @@ class SignupPage extends StatelessWidget {
                       ),
 
                       MyTextField(
+                        controller: emailController,
+                        hintText: 'Email Address',
+                        obscureText: false,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+
+                      MyTextField(
                         controller: usernameController,
                         hintText: 'Enter Your Username',
                         obscureText: false,
@@ -189,8 +199,7 @@ class SignupPage extends StatelessWidget {
                         // Signin button
                         child: Container(
                           padding: const EdgeInsets.all(25),
-                          margin:
-                              const EdgeInsets.symmetric(horizontal: 25),
+                          margin: const EdgeInsets.symmetric(horizontal: 25),
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(251, 0, 0, 0),
                             borderRadius: BorderRadius.circular(8),
@@ -222,8 +231,7 @@ class SignupPage extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: 10.0),
+                              padding: EdgeInsets.symmetric(horizontal: 10.0),
                               child: Text('Or Sign Up With',
                                   style: TextStyle(
                                       color: Color.fromRGBO(97, 97, 97, 1))),
@@ -247,8 +255,7 @@ class SignupPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           //google
-                          SquareTile(
-                              imagePath: 'assets/images/googleLogo.png'),
+                          SquareTile(imagePath: 'assets/images/googleLogo.png'),
                           SizedBox(
                             width: 25,
                           ),

@@ -1,7 +1,9 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:front_end/dashBoard.dart';
+import 'package:front_end/forgot_pw_page.dart';
 import 'package:front_end/signupPage.dart';
 import 'package:front_end/components/my_textfield.dart';
 import 'package:front_end/components/square_tile.dart';
@@ -172,15 +174,29 @@ class LogScreen extends StatelessWidget {
 
                       //forgot password textfield
 
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 25.0),
+                       Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              'Forgot Password',
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 93, 92, 92)),
+                            GestureDetector(
+                              onTap:(){
+                                Navigator.push(
+                                  context,
+                                 MaterialPageRoute(
+                                  builder: (context){
+                                    return const ForgotPasswordPage();
+                                  }
+                                  ),
+                                );
+                              } ,
+                              child: const Text(
+                                'Forgot Password',
+                                style: TextStyle(
+                                    color: Color.fromRGBO(33, 150, 243, 1),
+                                    fontWeight: FontWeight.bold,
+                                    ),
+                              ),
                             )
                           ],
                         ),
@@ -203,6 +219,7 @@ class LogScreen extends StatelessWidget {
                             color: const Color.fromRGBO(17, 106, 123, 0.992),
                             borderRadius: BorderRadius.circular(8),
                           ),
+                          //Button
                           child: const Center(
                             child: Text(
                               "Log In",
@@ -293,7 +310,7 @@ class LogScreen extends StatelessWidget {
                             child: const Text(
                               'Register',
                               style: TextStyle(
-                                  color: Colors.blue,
+                                  color: Color.fromRGBO(33, 150, 243, 1),
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
