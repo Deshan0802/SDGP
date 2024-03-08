@@ -55,6 +55,12 @@ def login():
     data = request.json
     username = data.get("username")
     password = data.get("password")
+    
+    if not username:
+        return jsonify({"error": "Username is required"}), 400
+
+    if not password:
+        return jsonify({"error": "Password is required"}), 400
 
     if mysql.connection:
         cursor = mysql.connection.cursor()

@@ -47,8 +47,10 @@ class LogScreen extends StatelessWidget {
         ),
       );
     } else {
+      final decodedResponse = json.decode(response.body);
+      final loginmessage = decodedResponse['error'];
       Fluttertoast.showToast(
-        msg: "Login Failed ",
+        msg: loginmessage,
         toastLength: Toast.LENGTH_SHORT,
         timeInSecForIosWeb: 2,
         gravity: ToastGravity.BOTTOM,
