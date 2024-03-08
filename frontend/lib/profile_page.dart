@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:front_end/reUsable.dart';
 import 'package:front_end/settings_page.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -73,171 +74,181 @@ class _ProfilePageState extends State<ProfilePage> {
           },
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            const SizedBox(height: 5),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(75),
-                boxShadow: [
-                  BoxShadow(
-                    offset: const Offset(0, 2),
-                    blurRadius: 5,
-                    color: Colors.blueGrey.withOpacity(0.7),
-                  ),
-                ],
-              ),
-              child: const CircleAvatar(
-                radius: 75,
-                backgroundImage:
-                    AssetImage('assets/profile/sample-profile-picture.png'),
-              ),
-            ),
-            const SizedBox(height: 50),
-            itemProfile('Name', nameController, CupertinoIcons.person),
-            const SizedBox(height: 20),
-            itemProfile('Phone', phoneController, CupertinoIcons.phone),
-            const SizedBox(height: 20),
-            itemProfile('Email', emailController, CupertinoIcons.mail),
-            const SizedBox(height: 20),
-            itemProfile(
-                'Address', addressController, CupertinoIcons.building_2_fill),
-            const SizedBox(height: 50),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-                shape: MaterialStateProperty.all<OutlinedBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              const SizedBox(height: 5),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(75),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: const Offset(0, 2),
+                      blurRadius: 5,
+                      color: Colors.blueGrey.withOpacity(0.7),
+                    ),
+                  ],
+                ),
+                child: const CircleAvatar(
+                  radius: 75,
+                  backgroundImage:
+                      AssetImage('assets/profile/sample-profile-picture.png'),
                 ),
               ),
-              child: Container(
-                width: 70,
-                child: const Center(
-                  child: Text(
-                    'More',
-                    style: TextStyle(color: Colors.white),
+              const SizedBox(height: 50),
+              itemProfile('Name', nameController, CupertinoIcons.person),
+              const SizedBox(height: 20),
+              itemProfile('Phone', phoneController, CupertinoIcons.phone),
+              const SizedBox(height: 20),
+              itemProfile('Email', emailController, CupertinoIcons.mail),
+              const SizedBox(height: 20),
+              itemProfile(
+                  'Address', addressController, CupertinoIcons.building_2_fill),
+              const SizedBox(height: 50),
+              ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.blue),
+                  shape: MaterialStateProperty.all<OutlinedBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
                   ),
                 ),
-              ),
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return Container(
-                      width: double.infinity,
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: [
-                          const SizedBox(height: 15),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const SettingsPage(),
-                                ),
-                              );
-                            },
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.transparent),
-                              elevation: MaterialStateProperty.all<double>(0),
-                              shadowColor: MaterialStateProperty.all<Color>(
-                                  Colors.transparent),
-                              shape: MaterialStateProperty.all<OutlinedBorder>(
-                                  RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(0),
-                              )),
-                            ),
-                            child: const Text(
-                              'Settings',
-                              style:
-                                  TextStyle(color: Colors.blue, fontSize: 16),
-                            ),
-                          ),
-                          ElevatedButton(
-                            onPressed: () async {
-                              final result = await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => EditProfilePage(
-                                    nameController: nameController,
-                                    phoneController: phoneController,
-                                    emailController: emailController,
-                                    addressController: addressController,
-                                    onSave: (newValues) {
-                                      setState(() {
-                                        nameController.text =
-                                            newValues['name'] ??
-                                                nameController.text;
-                                        phoneController.text =
-                                            newValues['phone'] ??
-                                                phoneController.text;
-                                        emailController.text =
-                                            newValues['email'] ??
-                                                emailController.text;
-                                        addressController.text =
-                                            newValues['address'] ??
-                                                addressController.text;
-                                      });
-                                    },
+                child: Container(
+                  width: 70,
+                  child: const Center(
+                    child: Text(
+                      'More',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Container(
+                        width: double.infinity,
+                        child: ListView(
+                          shrinkWrap: true,
+                          children: [
+                            const SizedBox(height: 15),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SettingsPage(),
                                   ),
-                                ),
-                              );
-                            },
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.transparent),
-                              elevation: MaterialStateProperty.all<double>(0),
-                              shadowColor: MaterialStateProperty.all<Color>(
-                                  Colors.transparent),
-                              shape: MaterialStateProperty.all<OutlinedBorder>(
-                                  RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(0),
-                              )),
+                                );
+                              },
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.transparent),
+                                elevation: MaterialStateProperty.all<double>(0),
+                                shadowColor: MaterialStateProperty.all<Color>(
+                                    Colors.transparent),
+                                shape:
+                                    MaterialStateProperty.all<OutlinedBorder>(
+                                        RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(0),
+                                )),
+                              ),
+                              child: const Text(
+                                'Settings',
+                                style:
+                                    TextStyle(color: Colors.blue, fontSize: 16),
+                              ),
                             ),
-                            child: const Text(
-                              'Edit Profile',
-                              style:
-                                  TextStyle(color: Colors.blue, fontSize: 16),
+                            ElevatedButton(
+                              onPressed: () async {
+                                final result = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => EditProfilePage(
+                                      nameController: nameController,
+                                      phoneController: phoneController,
+                                      emailController: emailController,
+                                      addressController: addressController,
+                                      onSave: (newValues) {
+                                        setState(() {
+                                          nameController.text =
+                                              newValues['name'] ??
+                                                  nameController.text;
+                                          phoneController.text =
+                                              newValues['phone'] ??
+                                                  phoneController.text;
+                                          emailController.text =
+                                              newValues['email'] ??
+                                                  emailController.text;
+                                          addressController.text =
+                                              newValues['address'] ??
+                                                  addressController.text;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                );
+                              },
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.transparent),
+                                elevation: MaterialStateProperty.all<double>(0),
+                                shadowColor: MaterialStateProperty.all<Color>(
+                                    Colors.transparent),
+                                shape:
+                                    MaterialStateProperty.all<OutlinedBorder>(
+                                        RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(0),
+                                )),
+                              ),
+                              child: const Text(
+                                'Edit Profile',
+                                style:
+                                    TextStyle(color: Colors.blue, fontSize: 16),
+                              ),
                             ),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              // Handle "Log Out" button press
-                            },
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Colors.transparent),
-                              elevation: MaterialStateProperty.all<double>(0),
-                              shadowColor: MaterialStateProperty.all<Color>(
-                                  Colors.transparent),
-                              shape: MaterialStateProperty.all<OutlinedBorder>(
-                                  RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(0),
-                              )),
+                            ElevatedButton(
+                              onPressed: () {
+                                // Handle "Log Out" button press
+                              },
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.transparent),
+                                elevation: MaterialStateProperty.all<double>(0),
+                                shadowColor: MaterialStateProperty.all<Color>(
+                                    Colors.transparent),
+                                shape:
+                                    MaterialStateProperty.all<OutlinedBorder>(
+                                        RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(0),
+                                )),
+                              ),
+                              child: const Text(
+                                'Log Out',
+                                style:
+                                    TextStyle(color: Colors.blue, fontSize: 16),
+                              ),
                             ),
-                            child: const Text(
-                              'Log Out',
-                              style:
-                                  TextStyle(color: Colors.blue, fontSize: 16),
-                            ),
-                          ),
-                          const SizedBox(height: 15),
-                        ],
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
-          ],
+                            const SizedBox(height: 10),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
+      bottomNavigationBar: CustomNavigationBar(),
     );
   }
 
@@ -464,6 +475,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
         ),
       ),
+      bottomNavigationBar: CustomNavigationBar(),
     );
   }
 
