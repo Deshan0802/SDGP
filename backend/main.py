@@ -79,5 +79,15 @@ def login():
         return jsonify({"error": "Cannot establish a connection to the database"}), 400
 
 
+
+@app.route("/textToAsl", methods=["POST"])
+def textTOAsl():
+    data = request.form
+    text= data.get ('text')
+    print(text)
+    return jsonify({'message':"Text received"})
+
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
