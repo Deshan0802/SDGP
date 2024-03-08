@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/audioToAsl.dart';
+import 'package:front_end/pdf_to_asl_page.dart';
 import 'package:front_end/profile_page.dart';
 // import 'package:front_end/imageToAsl.dart';
 // import 'package:front_end/PDFToASL.dart';
@@ -138,16 +139,16 @@ class DashBoardState extends State<DashBoard> {
             buttonVerticalMargin: 10.0,
             buttonHorizontalMargin: 10.0,
           ),
-          _buildConversionText('Convert Document To ASL'),
+          _buildConversionText('Convert PDF To ASL'),
           CustomBlueBox(
-            firstElementName: 'Documents',
+            firstElementName: 'PDF',
             thirdElementName: 'ASL',
-            // onTap: () {
-            //   Navigator.push(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => PDFToASL()),
-            //   );
-            // },
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const pdfToAsl()),
+              );
+            },
             buttonVerticalMargin: 10.0,
             buttonHorizontalMargin: 10.0,
           ),
