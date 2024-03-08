@@ -271,7 +271,7 @@ class LogScreen extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(
-                        height: 23,
+                        height: 10,
                       ),
                       //If the  user is not Signed Yet Sign Up Now register click goes to SugnUp
                       Row(

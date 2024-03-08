@@ -14,6 +14,8 @@ class SignupPage extends StatelessWidget {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   final passwordConfirmedController = TextEditingController();
+  final lnameController = TextEditingController();
+  final fnameController = TextEditingController();
 
   Future<void> registerUser(BuildContext context) async {
     const url = 'http://10.0.2.2:8000/register';
@@ -70,55 +72,54 @@ class SignupPage extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          color: const Color.fromRGBO(194, 222, 220, 0.992),
-          height: MediaQuery.of(context).size.height,
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.black,
-                    width: 2, // Adjust the width of the border as needed
-                  ),
-                ),
-                child: ClipOval(
-                  child: Image.asset(
-                    'assets/images/Haaand.png',
-                    width: 100, // Adjust width as needed
-                    height: 100, // Adjust height as needed
-                  ),
-                ),
-              ),
-              const Column(
-                children: [
-                  Text(
-                    'Sign up',
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
+      body: Scrollbar(
+        child: SingleChildScrollView(
+          child: Container(
+            color: const Color.fromRGBO(194, 222, 220, 0.992),
+            width: double.infinity,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 2, // Adjust the width of the border as needed
                     ),
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    'Sign up to SignWave',
-                    style: TextStyle(
-                      fontSize: 15,
+                  child: ClipOval(
+                    child: Image.asset(
+                      'assets/images/Haaand.png',
+                      width: 100, // Adjust width as needed
+                      height: 100, // Adjust height as needed
                     ),
                   ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: Container(
+                ),
+                const Column(
+                  children: [
+                    Text(
+                      'Sign in',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      'Sign up to SignWave',
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -135,6 +136,24 @@ class SignupPage extends StatelessWidget {
                       ),
 
                       //text fields
+
+                      MyTextField(
+                        controller: fnameController,
+                        hintText: ' First Name',
+                        obscureText: true,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+
+                      MyTextField(
+                        controller: lnameController,
+                        hintText: ' Last Name',
+                        obscureText: true,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
 
                       MyTextField(
                         controller: usernameController,
@@ -167,9 +186,11 @@ class SignupPage extends StatelessWidget {
                         onPressed: () async {
                           await registerUser(context);
                         },
+                        // Signin button
                         child: Container(
                           padding: const EdgeInsets.all(25),
-                          margin: const EdgeInsets.symmetric(horizontal: 25),
+                          margin:
+                              const EdgeInsets.symmetric(horizontal: 25),
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(251, 0, 0, 0),
                             borderRadius: BorderRadius.circular(8),
@@ -201,7 +222,8 @@ class SignupPage extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: 10.0),
                               child: Text('Or Sign Up With',
                                   style: TextStyle(
                                       color: Color.fromRGBO(97, 97, 97, 1))),
@@ -225,7 +247,8 @@ class SignupPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           //google
-                          SquareTile(imagePath: 'assets/images/googleLogo.png'),
+                          SquareTile(
+                              imagePath: 'assets/images/googleLogo.png'),
                           SizedBox(
                             width: 25,
                           ),
@@ -241,11 +264,14 @@ class SignupPage extends StatelessWidget {
                               imagePath: 'assets/images/twitterLogo.png'),
                         ],
                       ),
+                      const SizedBox(
+                        height: 30, // Adjust the height for further scrolling
+                      ),
                     ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -29,7 +29,7 @@ class MyButtonSign extends StatelessWidget {
           ),
           child: const Center(
             child: Text(
-              "Sign In",
+              "Sign Up",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
