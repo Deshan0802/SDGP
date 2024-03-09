@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class helpCenter extends StatefulWidget {
-  const helpCenter({super.key});
+class HelpCenter extends StatefulWidget {
+  const HelpCenter({super.key});
 
   @override
-  _HelpCenterState createState() => _HelpCenterState();
+  State<HelpCenter> createState() => _HelpCenterState();
 }
 
-class _HelpCenterState extends State<helpCenter> {
+class _HelpCenterState extends State<HelpCenter> {
   final List<String> dropdownOptions = ['Option 1', 'Option 2', 'Option 3'];
   String? selectedOption;
 
@@ -190,7 +190,7 @@ class _HelpCenterState extends State<helpCenter> {
                                     Radius.circular(8.0),
                                   ),
                                   borderSide: BorderSide(
-                                    color: Color(0xffd116a7b),
+                                    color: Color(0xfc116a7b),
                                     width: 2.0,
                                   ),
                                 ),

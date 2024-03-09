@@ -3,10 +3,12 @@ import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,17 +16,20 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: audioToAsl(), // Displaying the AudioToAsl widget as the home page
+      home:
+          const AudioToAsl(), // Displaying the AudioToAsl widget as the home page
     );
   }
 }
 
-class audioToAsl extends StatefulWidget {
+class AudioToAsl extends StatefulWidget {
+  const AudioToAsl({super.key});
+
   @override
-  _AudioToAslState createState() => _AudioToAslState();
+  State<AudioToAsl> createState() => _AudioToAslState();
 }
 
-class _AudioToAslState extends State<audioToAsl> {
+class _AudioToAslState extends State<AudioToAsl> {
   bool isRecordingButtonSelected = false;
 
   @override
@@ -39,7 +44,7 @@ class _AudioToAslState extends State<audioToAsl> {
             // The back button in the app bar
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             size: 20,
             color: Colors.black,
@@ -53,27 +58,27 @@ class _AudioToAslState extends State<audioToAsl> {
           width: double.infinity,
           child: Column(
             children: [
-              Text(
+              const Text(
                 "Transform your Audio to ASL ",
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 " Record an audio ",
                 style: TextStyle(
                   fontSize: 18,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _recordingSection(), // Calling the function
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                     horizontal: 90), // Add horizontal padding
                 child: MaterialButton(
                   minWidth: 0, // Set minWidth to 0
@@ -83,6 +88,9 @@ class _AudioToAslState extends State<audioToAsl> {
                       isRecordingButtonSelected = !isRecordingButtonSelected;
                     });
                   },
+                  color: isRecordingButtonSelected
+                      ? const Color(0xFF820300)
+                      : const Color(0xFF365486),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -93,33 +101,29 @@ class _AudioToAslState extends State<audioToAsl> {
                         width: 30, // Set the width of the image
                         height: 30, // Set the height of the image
                       ),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 20),
                       Text(
                         isRecordingButtonSelected
                             ? "Stop recording"
                             : "Start recording",
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
                           fontSize: 18,
                         ),
                       ),
                     ],
-                  ),
-                  color: isRecordingButtonSelected
-                      ? Color(0xFF820300)
-                      : Color(
-                          0xFF365486), // Set button color based on the selected button
+                  ), // Set button color based on the selected button
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               _audioPlaySection(), // Calling the method to play the recording
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Expanded(
                 child: Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Color(0xFFF2F1EB),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(50),
@@ -138,7 +142,7 @@ class _AudioToAslState extends State<audioToAsl> {
   _recordingSection() {
     return RippleAnimation(
       repeat: true,
-      color: Color(0xFF365486),
+      color: const Color(0xFF365486),
       minRadius: 40,
       ripplesCount: 6,
       child: Container(
@@ -146,7 +150,7 @@ class _AudioToAslState extends State<audioToAsl> {
         height: 110,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Color(0xFF7FC7D9),
+          color: const Color(0xFF7FC7D9),
           borderRadius: BorderRadius.circular(100),
         ),
         child: Image.asset(
@@ -166,7 +170,7 @@ class _AudioToAslState extends State<audioToAsl> {
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Color(0xFF7FC7D9),
+        color: const Color(0xFF7FC7D9),
       ),
       child: Row(
         children: [

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:front_end/logScreen.dart';
+import 'package:front_end/screens/login_screen.dart';
 
 class MyButtonLog extends StatelessWidget {
   final Function()? onTap;
-  const MyButtonLog({Key? key, required this.onTap}) : super(key: key);
+  const MyButtonLog({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-   return MouseRegion(
+    return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: () {
           if (onTap != null) {
             onTap!();
-            Navigator.push( // Navigate to LogScreen
+            Navigator.push(
+              // Navigate to LogScreen
               context,
-              MaterialPageRoute(builder: (context) =>  LogScreen()),
+              MaterialPageRoute(builder: (context) => LoginPage()),
             );
           }
         },

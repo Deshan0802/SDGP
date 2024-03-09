@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:front_end/signupPage.dart';
+import 'package:front_end/screens/signup_screen.dart';
 
 class MyButtonSign extends StatelessWidget {
   final Function()? onTap;
-  const MyButtonSign({Key? key, required this.onTap}) : super(key: key);
+  const MyButtonSign({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

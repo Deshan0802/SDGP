@@ -1,19 +1,16 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:front_end/dashBoard.dart';
-import 'package:front_end/forgot_pw_page.dart';
-import 'package:front_end/signupPage.dart';
-import 'package:front_end/components/my_textfield.dart';
-import 'package:front_end/components/square_tile.dart';
+import 'package:front_end/screens/dashboard_screen.dart';
+import 'package:front_end/screens/forgot_password_screen.dart';
+import 'package:front_end/screens/signup_screen.dart';
+import 'package:front_end/widgets/my_textfield.dart';
+import 'package:front_end/widgets/square_tile.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class LogScreen extends StatelessWidget {
-  LogScreen({super.key});
+class LoginPage extends StatelessWidget {
+  LoginPage({super.key});
 
   //text editing Controllers Omen
 
@@ -45,7 +42,7 @@ class LogScreen extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => DashBoard(),
+          builder: (context) => const Dashboard(),
         ),
       );
     } else {
@@ -174,28 +171,26 @@ class LogScreen extends StatelessWidget {
 
                       //forgot password textfield
 
-                       Padding(
+                      Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 25.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             GestureDetector(
-                              onTap:(){
+                              onTap: () {
                                 Navigator.push(
                                   context,
-                                 MaterialPageRoute(
-                                  builder: (context){
+                                  MaterialPageRoute(builder: (context) {
                                     return const ForgotPasswordPage();
-                                  }
-                                  ),
+                                  }),
                                 );
-                              } ,
+                              },
                               child: const Text(
                                 'Forgot Password',
                                 style: TextStyle(
-                                    color: Color.fromRGBO(33, 150, 243, 1),
-                                    fontWeight: FontWeight.bold,
-                                    ),
+                                  color: Color.fromRGBO(33, 150, 243, 1),
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             )
                           ],

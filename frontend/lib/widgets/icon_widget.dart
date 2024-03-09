@@ -5,10 +5,10 @@ class IconWidget extends StatelessWidget {
   final Color color;
 
   const IconWidget({
-    Key? key,
+    super.key,
     required this.icon,
     required this.color,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) => Container(

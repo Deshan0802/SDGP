@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'splashScreen.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
-import 'package:front_end/settings_page.dart';
+import 'package:front_end/screens/settings_screen.dart';
+import 'package:front_end/screens/splash_screen.dart';
 
 void main() async {
   await Settings.init(cacheProvider: SharePreferenceCache());
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
                       primaryColor: Colors.teal,
                     )
                   : ThemeData.light().copyWith(primaryColor: Colors.green),
-              home: splashScreen(),
+              home: const SplashScreen(),
             ));
   }
 }

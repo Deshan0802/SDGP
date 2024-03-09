@@ -1,53 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:front_end/audioToAsl.dart';
-import 'package:front_end/pdf_to_asl_page.dart';
-import 'package:front_end/profile_page.dart';
-// import 'package:front_end/imageToAsl.dart';
-// import 'package:front_end/PDFToASL.dart';
-// import 'package:front_end/VideoToASL.dart';
-import 'package:front_end/reUsable.dart';
-import 'package:front_end/textToASL.dart';
-// import 'package:mytest/ASLToText.dart';
+import 'package:front_end/reusable.dart';
+import 'package:front_end/screens/audio_to_asl_screen.dart';
+import 'package:front_end/screens/pdf_to_asl_screen.dart';
+import 'package:front_end/screens/profile_screen.dart';
+import 'package:front_end/screens/text_to_asl_screen.dart';
 
-class DashBoard extends StatefulWidget {
+class Dashboard extends StatefulWidget {
+  const Dashboard({super.key});
+
   @override
-  DashBoardState createState() => DashBoardState();
+  DashboardState createState() => DashboardState();
 }
 
-class DashBoardState extends State<DashBoard> {
+class DashboardState extends State<Dashboard> {
   // int currentIndex = 0; moved to ReUsable
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(217, 217, 217, 1),
+      backgroundColor: const Color.fromRGBO(217, 217, 217, 1),
       body: ListView(
         children: [
           Container(
-            margin: EdgeInsets.all(20.0),
+            margin: const EdgeInsets.all(20.0),
             child: Column(
               children: <Widget>[
-                CustomHeaderText(headerText: 'DashBoard', headerTextSize: 48.0),
+                const CustomHeaderText(
+                    headerText: 'DashBoard', headerTextSize: 48.0),
                 CustomWhiteBox(
                   whiteBox: _buildProfileRow(),
-                  VerticalMargin: 10.0,
-                  HorizontalMargin: 0.0,
-                  VerticalPadding: 16.0,
-                  HorizontalPadding: 16.0,
+                  verticalMargin: 10.0,
+                  horizontalMargin: 0.0,
+                  verticalPadding: 16.0,
+                  horizontalPadding: 16.0,
                 ),
                 CustomWhiteBox(
                   whiteBox: _buildConversionOptions(),
-                  VerticalMargin: 10.0,
-                  HorizontalMargin: 0.0,
-                  VerticalPadding: 16.0,
-                  HorizontalPadding: 16.0,
+                  verticalMargin: 10.0,
+                  horizontalMargin: 0.0,
+                  verticalPadding: 16.0,
+                  horizontalPadding: 16.0,
                 )
               ],
             ),
           ),
         ],
       ),
-      bottomNavigationBar: CustomNavigationBar(),
+      bottomNavigationBar: const CustomNavigationBar(),
     );
   }
 
@@ -73,12 +72,12 @@ class DashBoardState extends State<DashBoard> {
 
   Widget _buildProfileIcon() {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Color.fromRGBO(0, 47, 122, 1),
+        color: const Color.fromRGBO(0, 47, 122, 1),
         borderRadius: BorderRadius.circular(60.0),
       ),
-      child: Icon(
+      child: const Icon(
         Icons.person,
         size: 75,
         color: Colors.white,
@@ -93,7 +92,7 @@ class DashBoardState extends State<DashBoard> {
           color: Colors.white,
           child: Column(
             children: <Widget>[
-              Text(
+              const Text(
                 'Welcome,',
                 style: TextStyle(
                   fontSize: 16.0,
@@ -103,11 +102,11 @@ class DashBoardState extends State<DashBoard> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(0, 47, 122, 1),
+                  color: const Color.fromRGBO(0, 47, 122, 1),
                   borderRadius: BorderRadius.circular(30.0),
                 ),
-                padding: EdgeInsets.fromLTRB(24, 8, 24, 8),
-                child: Text(
+                padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
+                child: const Text(
                   'Username',
                   style: TextStyle(
                       fontSize: 16.0,
@@ -133,7 +132,7 @@ class DashBoardState extends State<DashBoard> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => TextToASL()),
+                MaterialPageRoute(builder: (context) => const TextToASL()),
               );
             },
             buttonVerticalMargin: 10.0,
@@ -146,14 +145,14 @@ class DashBoardState extends State<DashBoard> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const pdfToAsl()),
+                MaterialPageRoute(builder: (context) => const PdfToAsl()),
               );
             },
             buttonVerticalMargin: 10.0,
             buttonHorizontalMargin: 10.0,
           ),
           _buildConversionText('Convert Image To ASL'),
-          CustomBlueBox(
+          const CustomBlueBox(
             firstElementName: 'Image',
             thirdElementName: 'ASL',
             // onTap: () {
@@ -172,14 +171,14 @@ class DashBoardState extends State<DashBoard> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => audioToAsl()),
+                MaterialPageRoute(builder: (context) => const AudioToAsl()),
               );
             },
             buttonVerticalMargin: 10.0,
             buttonHorizontalMargin: 10.0,
           ),
           _buildConversionText('Convert Video To ASL'),
-          CustomBlueBox(
+          const CustomBlueBox(
             firstElementName: 'Video',
             thirdElementName: 'ASL',
             // onTap: () {
@@ -192,7 +191,7 @@ class DashBoardState extends State<DashBoard> {
             buttonHorizontalMargin: 10.0,
           ),
           _buildConversionText('Convert ASL To Text'),
-          CustomBlueBox(
+          const CustomBlueBox(
             firstElementName: 'ASL',
             thirdElementName: 'Text',
             // onTap: () {
@@ -212,7 +211,7 @@ class DashBoardState extends State<DashBoard> {
   Widget _buildConversionText(String text) {
     return Text(
       text,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 16.0,
         fontWeight: FontWeight.normal,
         color: Color.fromRGBO(0, 47, 122, 1),

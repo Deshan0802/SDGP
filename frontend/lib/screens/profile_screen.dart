@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:front_end/reUsable.dart';
-import 'package:front_end/settings_page.dart';
+import 'package:front_end/reusable.dart';
+import 'package:front_end/screens/settings_screen.dart';
 import 'package:image_picker/image_picker.dart';
 
 void main() {
@@ -9,7 +9,7 @@ void main() {
 }
 
 class SignWave extends StatelessWidget {
-  const SignWave({Key? key}) : super(key: key);
+  const SignWave({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +24,10 @@ class SignWave extends StatelessWidget {
 }
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
@@ -117,9 +117,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                 ),
-                child: Container(
+                child: const SizedBox(
                   width: 70,
-                  child: const Center(
+                  child: Center(
                     child: Text(
                       'More',
                       style: TextStyle(color: Colors.white),
@@ -130,7 +130,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   showModalBottomSheet(
                     context: context,
                     builder: (BuildContext context) {
-                      return Container(
+                      return SizedBox(
                         width: double.infinity,
                         child: ListView(
                           shrinkWrap: true,
@@ -248,7 +248,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-      bottomNavigationBar: CustomNavigationBar(),
+      bottomNavigationBar: const CustomNavigationBar(),
     );
   }
 
@@ -300,16 +300,16 @@ class EditProfilePage extends StatefulWidget {
   final Function(Map<String, String>) onSave;
 
   const EditProfilePage({
-    Key? key,
+    super.key,
     required this.nameController,
     required this.phoneController,
     required this.emailController,
     required this.addressController,
     required this.onSave,
-  }) : super(key: key);
+  });
 
   @override
-  _EditProfilePageState createState() => _EditProfilePageState();
+  State<EditProfilePage> createState() => _EditProfilePageState();
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
@@ -365,7 +365,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           await showModalBottomSheet<ImageSource>(
                         context: context,
                         builder: (BuildContext context) {
-                          return Container(
+                          return SizedBox(
                             height: 150,
                             child: Column(
                               children: [
@@ -439,9 +439,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5))),
                     ),
-                    child: Container(
+                    child: const SizedBox(
                         width: 70,
-                        child: const Center(
+                        child: Center(
                             child: Text('Cancel',
                                 style: TextStyle(color: Colors.white)))),
                   ),
@@ -463,9 +463,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5))),
                     ),
-                    child: Container(
+                    child: const SizedBox(
                         width: 70,
-                        child: const Center(
+                        child: Center(
                             child: Text('Save',
                                 style: TextStyle(color: Colors.white)))),
                   ),
@@ -475,7 +475,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
         ),
       ),
-      bottomNavigationBar: CustomNavigationBar(),
+      bottomNavigationBar: const CustomNavigationBar(),
     );
   }
 

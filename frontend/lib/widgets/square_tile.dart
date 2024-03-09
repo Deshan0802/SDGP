@@ -1,10 +1,8 @@
-// ignore_for_file: avoid_unnecessary_containers
-
 import 'package:flutter/material.dart';
 
 class SquareTile extends StatelessWidget {
   final String imagePath;
-  const SquareTile({Key? key, required this.imagePath}) : super(key: key);
+  const SquareTile({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {

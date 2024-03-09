@@ -1,8 +1,6 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
-import 'package:front_end/components/login_button.dart';
-import 'package:front_end/components/signin_button.dart';
+import 'package:front_end/widgets/login_button.dart';
+import 'package:front_end/widgets/signin_button.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});

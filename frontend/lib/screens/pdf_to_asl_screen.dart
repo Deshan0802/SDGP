@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:front_end/reUsable.dart';
+import 'package:front_end/reusable.dart';
 import 'package:file_picker/file_picker.dart';
 
-class pdfToAsl extends StatelessWidget {
-  const pdfToAsl({Key? key}) : super(key: key);
+class PdfToAsl extends StatelessWidget {
+  const PdfToAsl({super.key});
 
   Future<void> _openFileExplorer(BuildContext context) async {
     try {
@@ -114,7 +114,7 @@ class pdfToAsl extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: CustomNavigationBar(),
+      bottomNavigationBar: const CustomNavigationBar(),
     );
   }
 }

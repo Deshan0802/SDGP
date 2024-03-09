@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -79,9 +78,9 @@ class PlayAudioProvider extends ChangeNotifier {
   }
 
   get currentLoadingStatus {
-    final _currentTime = (_currentAudioPlaying /
+    final currentTime = (_currentAudioPlaying /
         (_audioPlayer.duration?.inMicroseconds.ceilToDouble() ?? 1.0));
 
-    return _currentTime > 1.0 ? 1.0 : _currentTime;
+    return currentTime > 1.0 ? 1.0 : currentTime;
   }
 }

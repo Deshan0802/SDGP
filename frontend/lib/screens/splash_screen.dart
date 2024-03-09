@@ -1,17 +1,15 @@
-// ignore_for_file: file_names
-
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:front_end/welcomePage.dart';
+import 'package:front_end/screens/welcome_screen.dart';
 
-class splashScreen extends StatefulWidget {
-  const splashScreen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<splashScreen> createState() => _splashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _splashScreenState extends State<splashScreen> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
-import 'package:front_end/icon_widget.dart';
-import 'package:front_end/utils.dart';
+import 'package:front_end/widgets/icon_widget.dart';
+import 'package:front_end/widgets/utils.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -83,7 +83,7 @@ class _SettingsPageState extends State<SettingsPage> {
         settingKey: SettingsPage.keyLanguage,
         title: 'Language',
         selected: 1,
-        values: <int, String>{
+        values: const <int, String>{
           1: 'English',
           2: 'Chinese',
           3: 'Portuguese',

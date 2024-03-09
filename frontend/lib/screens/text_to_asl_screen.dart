@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'reUsable.dart';
+import 'package:front_end/reusable.dart';
 import 'package:http/http.dart' as http;
 
 class TextToASL extends StatefulWidget {
+  const TextToASL({super.key});
+
   @override
   TextToASLState createState() => TextToASLState();
 }
 
 class TextToASLState extends State<TextToASL> {
-  TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController _textEditingController = TextEditingController();
 
   Future<void> _sendTextToBackend(String text) async {
     var url = Uri.parse('http://10.0.2.2:8000/textToAsl');
@@ -25,13 +27,13 @@ class TextToASLState extends State<TextToASL> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(217, 217, 217, 1),
+      backgroundColor: const Color.fromRGBO(217, 217, 217, 1),
       body: SafeArea(
         child: Container(
-          margin: EdgeInsets.all(20.0),
+          margin: const EdgeInsets.all(20.0),
           child: Column(
             children: <Widget>[
-              Row(
+              const Row(
                 children: [
                   CustomBackButton(),
                   Expanded(
@@ -46,13 +48,13 @@ class TextToASLState extends State<TextToASL> {
                   ),
                 ],
               ),
-              CustomBlueBox(
+              const CustomBlueBox(
                 firstElementName: 'English',
                 thirdElementName: 'ASL',
                 buttonVerticalMargin: 10.0,
                 buttonHorizontalMargin: 0.0,
               ),
-              CustomWhiteBox(
+              const CustomWhiteBox(
                 whiteBox: <Widget>[
                   CustomPointlessButton(
                     borderRaduis: 10.0,
@@ -64,12 +66,12 @@ class TextToASLState extends State<TextToASL> {
                     maxLines: 5,
                   ),
                 ],
-                VerticalMargin: 10.0,
-                HorizontalMargin: 0.0,
-                VerticalPadding: 16.0,
-                HorizontalPadding: 16.0,
+                verticalMargin: 10.0,
+                horizontalMargin: 0.0,
+                verticalPadding: 16.0,
+                horizontalPadding: 16.0,
               ),
-              CustomWhiteBox(
+              const CustomWhiteBox(
                 whiteBox: <Widget>[
                   CustomPointlessButton(
                     borderRaduis: 10.0,
@@ -78,10 +80,10 @@ class TextToASLState extends State<TextToASL> {
                     buttonName: 'ASL',
                   ),
                 ],
-                VerticalMargin: 10.0,
-                HorizontalMargin: 0.0,
-                VerticalPadding: 16.0,
-                HorizontalPadding: 16.0,
+                verticalMargin: 10.0,
+                horizontalMargin: 0.0,
+                verticalPadding: 16.0,
+                horizontalPadding: 16.0,
               ),
               ElevatedButton(
                 onPressed: () {
@@ -91,14 +93,14 @@ class TextToASLState extends State<TextToASL> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     vertical: 10.0,
                     horizontal: 20.0,
                   ),
                   backgroundColor:
-                      Color.fromRGBO(0, 47, 122, 1), // Background color
+                      const Color.fromRGBO(0, 47, 122, 1), // Background color
                 ),
-                child: Text(
+                child: const Text(
                   'Convert',
                   style: TextStyle(
                     color: Colors.white, // Text color
@@ -109,7 +111,7 @@ class TextToASLState extends State<TextToASL> {
           ),
         ),
       ),
-      bottomNavigationBar: CustomNavigationBar(),
+      bottomNavigationBar: const CustomNavigationBar(),
     );
   }
 }
