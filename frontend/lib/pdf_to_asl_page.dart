@@ -47,7 +47,7 @@ class pdfToAsl extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment:
-                MainAxisAlignment.start, // Align children to the top
+                MainAxisAlignment.start, //Align children to the top
             children: [
               const SizedBox(height: 40),
               ElevatedButton(
@@ -82,14 +82,14 @@ class pdfToAsl extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: () {
-                  // Handle conversion logic
+                  //Handle conversion logic
                 },
                 icon: const Icon(Icons.refresh),
                 label: const Text("Convert"),
               ),
               const SizedBox(height: 50),
 
-              // ASL section
+              //ASL section
               Container(
                 height: 275,
                 width: 300,
@@ -105,7 +105,7 @@ class pdfToAsl extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: () {
-                  // Handle play logic
+                  //Handle play logic
                 },
                 icon: const Icon(Icons.play_arrow),
                 label: const Text("Play"),
