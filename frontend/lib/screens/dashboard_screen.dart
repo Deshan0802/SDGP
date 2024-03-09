@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:front_end/reusable.dart';
 import 'package:front_end/screens/audio_to_asl_screen.dart';
 import 'package:front_end/screens/pdf_to_asl_screen.dart';
 import 'package:front_end/screens/profile_screen.dart';
 import 'package:front_end/screens/text_to_asl_screen.dart';
+import 'package:front_end/widgets/reusable.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});

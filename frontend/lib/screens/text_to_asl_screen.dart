@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_end/reusable.dart';
+import 'package:front_end/widgets/reusable.dart';
 import 'package:http/http.dart' as http;
 
 class TextToASL extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:front_end/reusable.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:front_end/widgets/reusable.dart';
 
 class PdfToAsl extends StatelessWidget {
   const PdfToAsl({super.key});
@@ -100,7 +100,8 @@ class PdfToAsl extends StatelessWidget {
                     width: 2,
                   ),
                 ),
-                child: Image.asset('assets/model.png'),
+                child: Image.asset(
+                    'assets/images/document-to-asl-screen/model.png'),
               ),
               const SizedBox(height: 20),
               ElevatedButton.icon(

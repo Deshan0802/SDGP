@@ -91,7 +91,7 @@ class SignupPage extends StatelessWidget {
                   ),
                   child: ClipOval(
                     child: Image.asset(
-                      'assets/images/Haaand.png',
+                      'assets/images/signup-login-screens/signwave-logo.png',
                       width: 100, // Adjust width as needed
                       height: 100, // Adjust height as needed
                     ),
@@ -255,20 +255,24 @@ class SignupPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           //google
-                          SquareTile(imagePath: 'assets/images/googleLogo.png'),
+                          SquareTile(
+                              imagePath:
+                                  'assets/images/signup-login-screens/google-logo.png'),
                           SizedBox(
                             width: 25,
                           ),
 
                           //Facebook
                           SquareTile(
-                              imagePath: 'assets/images/facebookLogo.png'),
+                              imagePath:
+                                  'assets/images/signup-login-screens/facebook-logo.png'),
                           SizedBox(
                             width: 25,
                           ),
                           //Twitter,
                           SquareTile(
-                              imagePath: 'assets/images/twitterLogo.png'),
+                              imagePath:
+                                  'assets/images/signup-login-screens/twitter-logo.png'),
                         ],
                       ),
                       const SizedBox(

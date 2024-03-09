@@ -58,7 +58,8 @@ class WelcomePage extends StatelessWidget {
                 height: MediaQuery.of(context).size.height / 3,
                 decoration: const BoxDecoration(
                     image: DecorationImage(
-                  image: AssetImage("assets/ASL1.png"),
+                  image:
+                      AssetImage("assets/images/welcome-screen/background.png"),
                 )),
               ),
               Column(

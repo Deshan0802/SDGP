@@ -96,8 +96,8 @@ class _AudioToAslState extends State<AudioToAsl> {
                     children: [
                       Image.asset(
                         isRecordingButtonSelected
-                            ? 'assets/AudiotoASL_Page/stopicon.png'
-                            : 'assets/AudiotoASL_Page/audio1.png',
+                            ? 'assets/images/audio-to-asl-screen/stopicon.png'
+                            : 'assets/images/audio-to-asl-screen/audio.png',
                         width: 30, // Set the width of the image
                         height: 30, // Set the height of the image
                       ),
@@ -154,7 +154,7 @@ class _AudioToAslState extends State<AudioToAsl> {
           borderRadius: BorderRadius.circular(100),
         ),
         child: Image.asset(
-          'assets/AudiotoASL_Page/audio1.png',
+          'assets/images/audio-to-asl-screen/audio.png',
           width: 50,
           height: 50,
         ),

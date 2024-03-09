@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:front_end/reusable.dart';
 import 'package:front_end/screens/settings_screen.dart';
+import 'package:front_end/widgets/reusable.dart';
 import 'package:image_picker/image_picker.dart';
 
 void main() {
@@ -93,8 +93,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 child: const CircleAvatar(
                   radius: 75,
-                  backgroundImage:
-                      AssetImage('assets/profile/sample-profile-picture.png'),
+                  backgroundImage: AssetImage(
+                      'assets/images/profile-screen/sample-profile-picture.png'),
                 ),
               ),
               const SizedBox(height: 50),

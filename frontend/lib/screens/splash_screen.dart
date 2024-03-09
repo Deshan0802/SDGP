@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       0.5, // Adjust the height as needed
                   child: ClipOval(
                     child: Image.asset(
-                      'assets/images/Haaand.png',
+                      'assets/images/signup-login-screens/signwave-logo.png',
                       fit: BoxFit.cover,
                     ),
                   ),
