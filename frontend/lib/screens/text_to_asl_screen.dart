@@ -18,7 +18,7 @@ class TextToASLState extends State<TextToASL> {
   late Future<void> _initializeVideoPlayerFuture;
 
   Future<void> _sendTextToBackend(String text) async {
-    var url = Uri.parse('http://10.0.2.2:8000/textToAsl');
+    var url = Uri.parse('http://10.0.2.2:8000/text_to_asl');
     var response = await http.post(url, body: {'text': text});
     if (response.statusCode == 200) {
       // Successfully sent text to the backend
@@ -32,8 +32,8 @@ class TextToASLState extends State<TextToASL> {
   @override
   void initState() {
     super.initState();
-    _videoController = VideoPlayerController.network(
-      'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+    _videoController = VideoPlayerController.asset(
+      'assets/videos/after.mp4',
     );
     _initializeVideoPlayerFuture = _videoController.initialize();
   }

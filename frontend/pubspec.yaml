@@ -74,6 +74,7 @@ flutter:
     - assets/images/profile-screen/
     - assets/images/signup-login-screens/
     - assets/images/welcome-screen/
+    - assets/videos/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
