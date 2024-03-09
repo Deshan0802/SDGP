@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:front_end/widgets/reusable.dart';
 
 class PdfToAsl extends StatelessWidget {
-  const PdfToAsl({super.key});
+  const PdfToAsl({Key? key});
 
   Future<void> _openFileExplorer(BuildContext context) async {
     try {
@@ -18,6 +19,15 @@ class PdfToAsl extends StatelessWidget {
       }
     } catch (e) {
       print('Error picking file: $e');
+    }
+  }
+
+  Future<void> _openCamera(BuildContext context) async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.pickImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      // Do something with the picked image
+      print('Image picked: ${pickedImage.path}');
     }
   }
 
@@ -50,34 +60,78 @@ class PdfToAsl extends StatelessWidget {
                 MainAxisAlignment.start, //Align children to the top
             children: [
               const SizedBox(height: 40),
-              ElevatedButton(
-                onPressed: () => _openFileExplorer(context),
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  backgroundColor: Colors.white,
-                  side: const BorderSide(color: Colors.redAccent, width: 2),
-                ),
-                child: const SizedBox(
-                  height: 90,
-                  width: 300,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.picture_as_pdf,
-                        color: Colors.red,
-                        size: 50,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => _openFileExplorer(context),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                      SizedBox(width: 30),
-                      Text(
-                        "Select file to convert",
-                        style: TextStyle(fontSize: 17, color: Colors.black),
+                      backgroundColor: Colors.white,
+                      side: const BorderSide(color: Colors.redAccent, width: 2),
+                    ),
+                    child: const SizedBox(
+                      height: 75,
+                      width: 100,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Icon(
+                            Icons.picture_as_pdf,
+                            color: Colors.red,
+                            size: 30,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            "Select file",
+                            style: TextStyle(fontSize: 10, color: Colors.black),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                  ElevatedButton(
+                    onPressed: () => _openCamera(context),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      backgroundColor: Colors.white,
+                      side: const BorderSide(color: Colors.redAccent, width: 2),
+                    ),
+                    child: const SizedBox(
+                      height: 75,
+                      width: 100,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Icon(
+                            Icons.camera_alt,
+                            color: Colors.red,
+                            size: 30,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            "Scan",
+                            style: TextStyle(fontSize: 10, color: Colors.black),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
               ElevatedButton.icon(
