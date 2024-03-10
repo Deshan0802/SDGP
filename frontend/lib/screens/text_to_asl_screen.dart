@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:front_end/widgets/reusable.dart';
 import 'package:http/http.dart' as http;
 import 'package:video_player/video_player.dart';
-import 'dart:io';
 
 class TextToASL extends StatefulWidget {
-  const TextToASL({super.key});
+  const TextToASL({Key? key}) : super(key: key);
 
   @override
   TextToASLState createState() => TextToASLState();
@@ -48,63 +47,49 @@ class TextToASLState extends State<TextToASL> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(217, 217, 217, 1),
+      appBar: AppBar(
+        title: const Text(
+          'Text to ASL',
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: Colors.blueGrey,
+          ),
+        ),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined,
+              color: Colors.blueGrey),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
             margin: const EdgeInsets.all(20.0),
             child: Column(
               children: <Widget>[
-                const Row(
-                  children: [
-                    CustomBackButton(),
-                    Expanded(
-                        child: Align(
-                            alignment: Alignment.center,
-                            child: CustomHeaderText(
-                              headerText: 'Translator',
-                              headerTextSize: 32.0,
-                            ))),
-                    SizedBox(
-                      width: 60.0,
-                    ),
-                  ],
-                ),
-                const CustomBlueBox(
-                  firstElementName: 'English',
-                  thirdElementName: 'ASL',
-                  buttonVerticalMargin: 10.0,
-                  buttonHorizontalMargin: 0.0,
-                ),
-                const CustomWhiteBox(
+                const SizedBox(height: 15),
+                CustomWhiteBox(
+                  // Removed const keyword
                   whiteBox: <Widget>[
-                    CustomPointlessButton(
+                    const CustomPointlessButton(
                       borderRaduis: 10.0,
                       buttonHeight: 10.0,
                       buttonLength: 20.0,
                       buttonName: 'English',
                     ),
                     TextField(
-                      maxLines: 5,
+                      controller: _textEditingController,
+                      maxLines: 3,
                     ),
                   ],
                   verticalMargin: 10.0,
                   horizontalMargin: 0.0,
-                  verticalPadding: 16.0,
-                  horizontalPadding: 16.0,
-                ),
-                const CustomWhiteBox(
-                  whiteBox: <Widget>[
-                    CustomPointlessButton(
-                      borderRaduis: 10.0,
-                      buttonHeight: 10.0,
-                      buttonLength: 20.0,
-                      buttonName: 'ASL',
-                    ),
-                  ],
-                  verticalMargin: 10.0,
-                  horizontalMargin: 0.0,
-                  verticalPadding: 16.0,
-                  horizontalPadding: 16.0,
+                  verticalPadding: 15.0,
+                  horizontalPadding: 15.0,
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -128,19 +113,25 @@ class TextToASLState extends State<TextToASL> {
                     ),
                   ),
                 ),
-                FutureBuilder(
-                  future: _initializeVideoPlayerFuture,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      return AspectRatio(
-                        aspectRatio: _videoController.value.aspectRatio,
-                        child: VideoPlayer(_videoController),
-                      );
-                    } else {
-                      return CircularProgressIndicator();
-                    }
-                  },
+                const SizedBox(height: 20),
+                SizedBox(
+                  height: 300,
+                  width: 290,
+                  child: FutureBuilder(
+                    future: _initializeVideoPlayerFuture,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return AspectRatio(
+                          aspectRatio: _videoController.value.aspectRatio,
+                          child: VideoPlayer(_videoController),
+                        );
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    },
+                  ),
                 ),
+                const SizedBox(height: 10),
                 FloatingActionButton(
                   onPressed: () {
                     setState(() {
@@ -151,6 +142,9 @@ class TextToASLState extends State<TextToASL> {
                       }
                     });
                   },
+                  backgroundColor: const Color.fromRGBO(0, 47, 122, 1),
+                  foregroundColor: Colors.white,
+                  mini: true,
                   child: Icon(
                     _videoController.value.isPlaying
                         ? Icons.pause
