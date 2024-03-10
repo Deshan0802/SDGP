@@ -356,8 +356,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 children: [
                   const CircleAvatar(
                     radius: 85,
-                    backgroundImage:
-                        AssetImage('assets/profile/sample-profile-picture.png'),
+                    backgroundImage: AssetImage(
+                        'assets/images/profile-screen/sample-profile-picture.png'),
                   ),
                   FloatingActionButton(
                     onPressed: () async {

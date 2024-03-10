@@ -55,7 +55,8 @@ class _SettingsPageState extends State<SettingsPage> {
         children: [
           CircleAvatar(
             radius: 80,
-            backgroundImage: AssetImage('assets/profile_image.png'),
+            backgroundImage: AssetImage(
+                'assets/images/profile-screen/sample-profile-picture.png'),
           ),
           SizedBox(height: 8),
           Text(
