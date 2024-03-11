@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/screens/dashboard_screen.dart';
 import 'package:front_end/screens/forgot_password_screen.dart';
-import 'package:front_end/screens/signup_screen.dart';
+import 'package:front_end/screens/sign_up_screen.dart';
 import 'package:front_end/widgets/my_textfield.dart';
 import 'package:front_end/widgets/square_tile.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_end/screens/signup_screen.dart';
+import 'package:front_end/screens/sign_up_screen.dart';
 
 class MyButtonSign extends StatelessWidget {
   final Function()? onTap;

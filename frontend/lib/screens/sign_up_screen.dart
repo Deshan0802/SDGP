@@ -19,9 +19,12 @@ class SignupPage extends StatelessWidget {
   final emailController = TextEditingController();
 
   Future<void> registerUser(BuildContext context) async {
-    const url = 'http://10.0.2.2:8000/register';
+    const url = 'http://10.0.2.2:8000/sign-up';
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({
+      'first_name': fnameController.text,
+      'last_name': lnameController.text,
+      'email': emailController.text,
       'username': usernameController.text,
       'password': passwordController.text,
       'password_confirmed': passwordConfirmedController.text
