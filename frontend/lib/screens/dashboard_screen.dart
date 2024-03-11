@@ -1,221 +1,221 @@
 import 'package:flutter/material.dart';
-import 'package:front_end/screens/audio_to_asl_screen.dart';
-import 'package:front_end/screens/pdf_to_asl_screen.dart';
-import 'package:front_end/screens/profile_screen.dart';
-import 'package:front_end/screens/text_to_asl_screen.dart';
-import 'package:front_end/widgets/reusable.dart';
+import 'package:front_end/screens/newTextToASL.dart';
+import 'package:front_end/screens/ReUsable.dart';
+import 'package:front_end/screens/newTextToASL.dart';
+// import 'package:mytest/newVideoToASL.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
-
-  @override
-  DashboardState createState() => DashboardState();
-}
-
-class DashboardState extends State<Dashboard> {
-  // int currentIndex = 0; moved to ReUsable
-
+class newDashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(217, 217, 217, 1),
-      body: ListView(
-        children: [
-          Container(
-            margin: const EdgeInsets.all(20.0),
-            child: Column(
-              children: <Widget>[
-                const CustomHeaderText(
-                    headerText: 'DashBoard', headerTextSize: 48.0),
-                CustomWhiteBox(
-                  whiteBox: _buildProfileRow(),
-                  verticalMargin: 10.0,
-                  horizontalMargin: 0.0,
-                  verticalPadding: 16.0,
-                  horizontalPadding: 16.0,
-                ),
-                CustomWhiteBox(
-                  whiteBox: _buildConversionOptions(),
-                  verticalMargin: 10.0,
-                  horizontalMargin: 0.0,
-                  verticalPadding: 16.0,
-                  horizontalPadding: 16.0,
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: const CustomNavigationBar(),
-    );
-  }
-
-  List<Widget> _buildProfileRow() {
-    return [
-      GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const ProfilePage()),
-          );
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            _buildProfileIcon(),
-            _buildProfileDetails(),
-          ],
-        ),
-      )
-    ];
-  }
-
-  Widget _buildProfileIcon() {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: const Color.fromRGBO(0, 47, 122, 1),
-        borderRadius: BorderRadius.circular(60.0),
-      ),
-      child: const Icon(
-        Icons.person,
-        size: 75,
-        color: Colors.white,
-      ),
-    );
-  }
-
-  Widget _buildProfileDetails() {
-    return Column(
-      children: <Widget>[
-        Container(
-          color: Colors.white,
-          child: Column(
-            children: <Widget>[
-              const Text(
-                'Welcome,',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromRGBO(0, 47, 122, 1),
+      body: Container(
+        // margin: EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            WelocmeSection(),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 20.0,),
+                child: ListView(
+                  children: [
+                    Row(
+                      children: [
+                        FeatureSection(
+                            color: Colors.tealAccent.shade400,
+                            iconType: Icons.handshake,
+                            featureName: "Text To ASL",
+                            featureDescription: 'Converts Inputed into ASL',
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => newTextToASL()),
+                                );
+                            },
+                        ),
+                        FeatureSection(
+                            color: Colors.purple.shade300,
+                            iconType: Icons.picture_as_pdf_outlined,
+                            featureName: "Documents",
+                            featureDescription: 'Converts Documnets into ASL',)
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        FeatureSection(
+                            color: Colors.yellowAccent.shade700,
+                            featureName: "Audio To ASL",
+                            iconType: Icons.audio_file_outlined,
+                            featureDescription: 'Converts Audio files into ASL',),
+                        FeatureSection(
+                            color: Colors.redAccent.shade400,
+                            featureName: "ASL To Text",
+                            iconType: Icons.text_fields,
+                            featureDescription: "Converts ASL Guestures into redable Text",)
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        FeatureSection(
+                            color: Colors.deepPurple.shade400,
+                            featureName: "Image To ASL",
+                            iconType: Icons.image,
+                            featureDescription: "Converts an Image into ASL",),
+                        FeatureSection(
+                            color: Colors.deepOrange,
+                            featureName: "Video To ASL",
+                            iconType: Icons.video_camera_back_outlined,
+                            featureDescription: "Converts Video into ASL",
+                            // onTap: () {
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(builder: (context) => newVideoToASL()),
+                            //     );
+                            // },
+                            )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        FeatureSection(
+                            color: Colors.blue.shade300,
+                            featureName: "Image To ASL",
+                            iconType: Icons.image,
+                            featureDescription: "Converts an Image into ASL",),
+                        FeatureSection(
+                            color: Colors.greenAccent.shade400,
+                            featureName: "Video To ASL",
+                            iconType: Icons.video_camera_back_outlined,
+                            featureDescription: "Converts Video into ASL",)
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(0, 47, 122, 1),
-                  borderRadius: BorderRadius.circular(30.0),
+            ),
+          ],
+        ),
+      ),
+      // bottomNavigationBar: CustomNavigationBar(),
+    );
+  }
+}
+
+class WelocmeSection extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.5), // Shadow color
+              blurRadius: 10.0, // Spread radius
+              offset: Offset(0, 3), // Shadow offset
+            ),
+          ],
+        ),
+      // margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+      padding: EdgeInsets.all(20.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'DashBoard',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
                 ),
-                padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
-                child: const Text(
-                  'Username',
-                  style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
+              ),
+              Text(
+                'Welcome User',
+                style: TextStyle(
+                  fontSize: 15.0,
                 ),
               ),
             ],
           ),
-        ),
-      ],
-    );
-  }
-
-  List<Widget> _buildConversionOptions() {
-    return [
-      Column(
-        children: [
-          _buildConversionText('Convert Text To ASL'),
-          CustomBlueBox(
-            firstElementName: 'Text',
-            thirdElementName: 'ASL',
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const TextToASL()),
-              );
-            },
-            buttonVerticalMargin: 10.0,
-            buttonHorizontalMargin: 10.0,
-          ),
-          _buildConversionText('Convert PDF To ASL'),
-          CustomBlueBox(
-            firstElementName: 'PDF',
-            thirdElementName: 'ASL',
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const PdfToAsl()),
-              );
-            },
-            buttonVerticalMargin: 10.0,
-            buttonHorizontalMargin: 10.0,
-          ),
-          _buildConversionText('Convert Image To ASL'),
-          const CustomBlueBox(
-            firstElementName: 'Image',
-            thirdElementName: 'ASL',
-            // onTap: () {
-            //   Navigator.push(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => ImageToASL()),
-            //   );
-            // },
-            buttonVerticalMargin: 10.0,
-            buttonHorizontalMargin: 10.0,
-          ),
-          _buildConversionText('Convert Audio To ASL'),
-          CustomBlueBox(
-            firstElementName: 'Audio',
-            thirdElementName: 'ASL',
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AudioToAsl()),
-              );
-            },
-            buttonVerticalMargin: 10.0,
-            buttonHorizontalMargin: 10.0,
-          ),
-          _buildConversionText('Convert Video To ASL'),
-          const CustomBlueBox(
-            firstElementName: 'Video',
-            thirdElementName: 'ASL',
-            // onTap: () {
-            //   Navigator.push(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => VideoToASL()),
-            //   );
-            // },
-            buttonVerticalMargin: 10.0,
-            buttonHorizontalMargin: 10.0,
-          ),
-          _buildConversionText('Convert ASL To Text'),
-          const CustomBlueBox(
-            firstElementName: 'ASL',
-            thirdElementName: 'Text',
-            // onTap: () {
-            //   Navigator.push(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => ASLToText()),
-            //   );
-            // },
-            buttonVerticalMargin: 10.0,
-            buttonHorizontalMargin: 10.0,
+          Container(
+            width: 60.0,
+            height: 60.0,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.grey.shade800,
+            ),
+            child: Icon(
+              Icons.person_2_outlined,
+              color: Colors.white,
+            ),
           ),
         ],
       ),
-    ];
+    );
   }
+}
 
-  Widget _buildConversionText(String text) {
-    return Text(
-      text,
-      style: const TextStyle(
-        fontSize: 16.0,
-        fontWeight: FontWeight.normal,
-        color: Color.fromRGBO(0, 47, 122, 1),
-      ),
+class FeatureSection extends StatelessWidget {
+  late Color color;
+  final String featureName;
+  final String featureDescription;
+  final IconData iconType;
+
+  final VoidCallback? onTap;
+  
+  FeatureSection(
+      {required this.color, required this.featureName, required this.iconType, required this.featureDescription, this.onTap,});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Expanded(
+        child: Container(
+        margin: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0.0),
+        padding: EdgeInsets.all(20.0),
+        height: 170,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(20.0), // Adjust the radius as needed
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.5), // Shadow color
+              blurRadius: 10.0, // Spread radius
+              offset: Offset(0, 3), // Shadow offset
+              spreadRadius: -2,
+            ),
+          ],
+        ),
+        child: InkWell(
+          onTap: onTap,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Icon(
+                iconType,
+                color: Colors.white,
+                size: 40.0,
+              ),
+              Text(
+                featureDescription,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 10.0,
+                ),
+              ),
+              Text(
+                featureName,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            ],
+          ),
+        ),
+      )),
     );
   }
 }
