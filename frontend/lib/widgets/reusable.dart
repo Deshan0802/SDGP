@@ -138,7 +138,7 @@ class CustomNavigationBar extends StatelessWidget {
           case 0:
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const Dashboard()),
+              MaterialPageRoute(builder: (context) => newDashBoard()),
             );
             break;
 
