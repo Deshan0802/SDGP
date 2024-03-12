@@ -1,7 +1,7 @@
 import assemblyai as aai
-from app import config
+from config import Config
 
-aai.settings.api_key = aai.settings.api_key = config.ASSEMBLYAI_API_KEY
+aai.settings.api_key = aai.settings.api_key = Config.ASSEMBLYAI_API_KEY
 
 
 def transcribe_file(file_url):
