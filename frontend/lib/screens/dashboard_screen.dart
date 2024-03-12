@@ -1,160 +1,170 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/screens/newTextToASL.dart';
-import 'package:front_end/screens/ReUsable.dart';
-import 'package:front_end/screens/newTextToASL.dart';
-// import 'package:mytest/newVideoToASL.dart';
+import 'package:front_end/screens/pdf_to_asl_screen.dart';
+import 'package:front_end/screens/profile_screen.dart';
+import 'package:front_end/widgets/reusable.dart';
 
 class newDashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        // margin: EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            WelocmeSection(),
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 20.0,),
-                child: ListView(
+      body: Column(
+        children: [
+          Container(
+            height: 160,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.3), // Shadow color
+                  blurRadius: 8, // Spread radius
+                  offset: const Offset(0, 3), // Shadow offset
+                ),
+              ],
+            ),
+            // margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        FeatureSection(
-                            color: Colors.tealAccent.shade400,
-                            iconType: Icons.handshake,
-                            featureName: "Text To ASL",
-                            featureDescription: 'Converts Inputed into ASL',
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => newTextToASL()),
-                                );
-                            },
-                        ),
-                        FeatureSection(
-                            color: Colors.purple.shade300,
-                            iconType: Icons.picture_as_pdf_outlined,
-                            featureName: "Documents",
-                            featureDescription: 'Converts Documnets into ASL',)
-                      ],
+                    SizedBox(
+                      height: 45,
                     ),
-                    Row(
-                      children: [
-                        FeatureSection(
-                            color: Colors.yellowAccent.shade700,
-                            featureName: "Audio To ASL",
-                            iconType: Icons.audio_file_outlined,
-                            featureDescription: 'Converts Audio files into ASL',),
-                        FeatureSection(
-                            color: Colors.redAccent.shade400,
-                            featureName: "ASL To Text",
-                            iconType: Icons.text_fields,
-                            featureDescription: "Converts ASL Guestures into redable Text",)
-                      ],
+                    Text(
+                      'DashBoard',
+                      style: TextStyle(
+                        fontSize: 33,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    Row(
-                      children: [
-                        FeatureSection(
-                            color: Colors.deepPurple.shade400,
-                            featureName: "Image To ASL",
-                            iconType: Icons.image,
-                            featureDescription: "Converts an Image into ASL",),
-                        FeatureSection(
-                            color: Colors.deepOrange,
-                            featureName: "Video To ASL",
-                            iconType: Icons.video_camera_back_outlined,
-                            featureDescription: "Converts Video into ASL",
-                            // onTap: () {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(builder: (context) => newVideoToASL()),
-                            //     );
-                            // },
-                            )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        FeatureSection(
-                            color: Colors.blue.shade300,
-                            featureName: "Image To ASL",
-                            iconType: Icons.image,
-                            featureDescription: "Converts an Image into ASL",),
-                        FeatureSection(
-                            color: Colors.greenAccent.shade400,
-                            featureName: "Video To ASL",
-                            iconType: Icons.video_camera_back_outlined,
-                            featureDescription: "Converts Video into ASL",)
-                      ],
+                    Text(
+                      'Welcome User!',
+                      style: TextStyle(
+                        fontSize: 17,
+                      ),
                     ),
                   ],
                 ),
-              ),
+                Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 40, 20, 0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ProfilePage()),
+                        );
+                      },
+                      child: Container(
+                        width: 75,
+                        height: 75,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.grey.shade800,
+                        ),
+                        child: const Icon(
+                          Icons.person_2_outlined,
+                          color: Colors.white,
+                        ),
+                      ),
+                    )),
+              ],
             ),
-          ],
-        ),
-      ),
-      // bottomNavigationBar: CustomNavigationBar(),
-    );
-  }
-}
-
-class WelocmeSection extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.5), // Shadow color
-              blurRadius: 10.0, // Spread radius
-              offset: Offset(0, 3), // Shadow offset
-            ),
-          ],
-        ),
-      // margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
-      padding: EdgeInsets.all(20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'DashBoard',
-                style: TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                'Welcome User',
-                style: TextStyle(
-                  fontSize: 15.0,
-                ),
-              ),
-            ],
           ),
-          Container(
-            width: 60.0,
-            height: 60.0,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.grey.shade800,
-            ),
-            child: Icon(
-              Icons.person_2_outlined,
-              color: Colors.white,
+          Expanded(
+            child: Container(
+              margin: const EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: ListView(
+                children: [
+                  Row(
+                    children: [
+                      FeatureSection(
+                        color: Colors.tealAccent.shade400,
+                        iconType: Icons.translate,
+                        featureName: "Text To ASL",
+                        featureDescription: 'Converts English Text Into ASL',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => newTextToASL()),
+                          );
+                        },
+                      ),
+                      FeatureSection(
+                        color: Colors.purple.shade300,
+                        iconType: Icons.picture_as_pdf_outlined,
+                        featureName: "Documents",
+                        featureDescription: 'Converts Documnets Into ASL',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const PdfToAsl()),
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      FeatureSection(
+                        color: Colors.yellowAccent.shade700,
+                        featureName: "Audio To ASL",
+                        iconType: Icons.audio_file_outlined,
+                        featureDescription: 'Converts Audio Files Into ASL',
+                      ),
+                      FeatureSection(
+                        color: Colors.redAccent.shade400,
+                        featureName: "ASL To Text",
+                        iconType: Icons.sign_language,
+                        featureDescription:
+                            "Converts ASL Guestures Into Redable Text",
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      FeatureSection(
+                        color: Colors.blue.shade300,
+                        featureName: "ASL For Videos",
+                        iconType: Icons.video_camera_back_outlined,
+                        featureDescription: "Generate ASL Captions For Videos",
+                        // onTap: () {
+                        //   Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(builder: (context) => newVideoToASL()),
+                        //     );
+                        // },
+                      ),
+                      FeatureSection(
+                        color: Colors.greenAccent.shade400,
+                        featureName: "ASL For YouTube",
+                        iconType: Icons.play_circle_fill,
+                        featureDescription: "Generate ASL Captions For YouTube",
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                ],
+              ),
             ),
           ),
         ],
       ),
+      bottomNavigationBar: const CustomNavigationBar(),
     );
   }
 }
 
+// Feature Section
 class FeatureSection extends StatelessWidget {
   late Color color;
   final String featureName;
@@ -162,26 +172,32 @@ class FeatureSection extends StatelessWidget {
   final IconData iconType;
 
   final VoidCallback? onTap;
-  
-  FeatureSection(
-      {required this.color, required this.featureName, required this.iconType, required this.featureDescription, this.onTap,});
+
+  FeatureSection({
+    required this.color,
+    required this.featureName,
+    required this.iconType,
+    required this.featureDescription,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Expanded(
-        child: Container(
-        margin: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0.0),
-        padding: EdgeInsets.all(20.0),
-        height: 170,
+          child: Container(
+        margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+        padding: const EdgeInsets.all(20.0),
+        height: 180,
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(20.0), // Adjust the radius as needed
+          borderRadius:
+              BorderRadius.circular(17), // Adjust the radius as needed
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.5), // Shadow color
-              blurRadius: 10.0, // Spread radius
-              offset: Offset(0, 3), // Shadow offset
+              blurRadius: 10, // Spread radius
+              offset: const Offset(0, 3), // Shadow offset
               spreadRadius: -2,
             ),
           ],
@@ -195,20 +211,26 @@ class FeatureSection extends StatelessWidget {
               Icon(
                 iconType,
                 color: Colors.white,
-                size: 40.0,
+                size: 42,
+              ),
+              const SizedBox(
+                height: 5,
               ),
               Text(
                 featureDescription,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 10.0,
+                  fontSize: 9,
                 ),
+              ),
+              const SizedBox(
+                height: 5,
               ),
               Text(
                 featureName,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 20.0,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               )
