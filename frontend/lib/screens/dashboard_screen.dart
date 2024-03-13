@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:front_end/screens/pdf_to_asl_screen.dart';
+import 'package:front_end/screens/documet_to_asl_screen.dart';
 import 'package:front_end/screens/profile_screen.dart';
 import 'package:front_end/screens/text_to_asl_screen.dart';
 import 'package:front_end/widgets/reusable.dart';
@@ -84,7 +84,7 @@ class newDashBoard extends StatelessWidget {
                   Row(
                     children: [
                       FeatureSection(
-                        color: Colors.tealAccent.shade400,
+                        color: Color.fromARGB(255, 25, 217, 169),
                         iconType: Icons.translate,
                         featureName: "Text To ASL",
                         featureDescription: 'Converts English Text Into ASL',
