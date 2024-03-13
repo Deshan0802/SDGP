@@ -3,25 +3,70 @@ import 'package:front_end/screens/dashboard_screen.dart';
 import 'package:front_end/screens/help_center_screen.dart';
 import 'package:front_end/screens/profile_screen.dart';
 
-class CustomHeaderText extends StatelessWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String headerText;
-  final double headerTextSize;
+  final String bottomSheetContent;
 
-  const CustomHeaderText({
-    super.key,
+  const CustomAppBar({
+    Key? key,
     required this.headerText,
-    required this.headerTextSize,
-  });
+    required this.bottomSheetContent,
+  }) : super(key: key);
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      headerText,
-      style: TextStyle(
-        fontSize: headerTextSize,
-        fontWeight: FontWeight.bold,
-        color: const Color.fromRGBO(0, 47, 122, 1),
+    return AppBar(
+      title: Text(
+        headerText,
+        style: const TextStyle(
+          fontSize: 27,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+        ),
       ),
+      centerTitle: true,
+      leading: IconButton(
+        icon:
+            const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.black),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+      actions: <Widget>[
+        IconButton(
+          icon: const Icon(
+            Icons.info_outline,
+            color: Colors.black,
+            size: 26,
+          ),
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return SizedBox(
+                  height: 100,
+                  child: SizedBox.expand(
+                    child: Center(
+                        child: SizedBox(
+                      width: 300,
+                      child: Text(
+                        bottomSheetContent,
+                        style: const TextStyle(fontSize: 16),
+                        textAlign: TextAlign.center,
+                      ),
+                    )),
+                  ),
+                );
+              },
+            );
+          },
+        ),
+      ],
+      elevation: 1, //AppBar shadow
+      shadowColor: Colors.black,
     );
   }
 }

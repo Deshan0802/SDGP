@@ -34,23 +34,10 @@ class PdfToAsl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'PDF to ASL',
-          style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-            color: Colors.blueGrey,
-          ),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_outlined,
-              color: Colors.blueGrey),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+      appBar: const CustomAppBar(
+        headerText: 'Documents to ASL',
+        bottomSheetContent:
+            ('Translate PDF Documents Or Scanned Images Into ASL'),
       ),
       body: Center(
         child: Padding(
@@ -70,7 +57,7 @@ class PdfToAsl extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       backgroundColor: Colors.white,
-                      side: const BorderSide(color: Colors.redAccent, width: 2),
+                      side: const BorderSide(color: Colors.black, width: 2),
                     ),
                     child: const SizedBox(
                       height: 75,
@@ -83,7 +70,7 @@ class PdfToAsl extends StatelessWidget {
                           ),
                           Icon(
                             Icons.picture_as_pdf,
-                            color: Colors.red,
+                            color: Colors.black,
                             size: 30,
                           ),
                           SizedBox(
@@ -104,7 +91,7 @@ class PdfToAsl extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       backgroundColor: Colors.white,
-                      side: const BorderSide(color: Colors.redAccent, width: 2),
+                      side: const BorderSide(color: Colors.black, width: 2),
                     ),
                     child: const SizedBox(
                       height: 75,
@@ -117,7 +104,7 @@ class PdfToAsl extends StatelessWidget {
                           ),
                           Icon(
                             Icons.camera_alt,
-                            color: Colors.red,
+                            color: Colors.black,
                             size: 30,
                           ),
                           SizedBox(
@@ -140,7 +127,12 @@ class PdfToAsl extends StatelessWidget {
                 },
                 icon: const Icon(Icons.refresh),
                 label: const Text("Convert"),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black, // Background color
+                  foregroundColor: Colors.white, // Text color
+                ),
               ),
+
               const SizedBox(height: 50),
 
               //ASL section
@@ -150,7 +142,7 @@ class PdfToAsl extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
-                    color: Colors.redAccent,
+                    color: Colors.black,
                     width: 2,
                   ),
                 ),
@@ -158,12 +150,17 @@ class PdfToAsl extends StatelessWidget {
                     'assets/images/document-to-asl-screen/model.png'),
               ),
               const SizedBox(height: 20),
+
               ElevatedButton.icon(
                 onPressed: () {
-                  //Handle play logic
+                  //Handle conversion logic
                 },
                 icon: const Icon(Icons.play_arrow),
                 label: const Text("Play"),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black, // Background color
+                  foregroundColor: Colors.white, // Text color
+                ),
               ),
             ],
           ),

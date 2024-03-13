@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:front_end/screens/newTextToASL.dart';
 import 'package:front_end/screens/pdf_to_asl_screen.dart';
 import 'package:front_end/screens/profile_screen.dart';
+import 'package:front_end/screens/text_to_asl_screen.dart';
 import 'package:front_end/widgets/reusable.dart';
 
 class newDashBoard extends StatelessWidget {
@@ -92,7 +92,7 @@ class newDashBoard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => newTextToASL()),
+                                builder: (context) => const TextToASL()),
                           );
                         },
                       ),

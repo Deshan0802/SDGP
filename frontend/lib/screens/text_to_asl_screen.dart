@@ -46,24 +46,10 @@ class TextToASLState extends State<TextToASL> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(217, 217, 217, 1),
-      appBar: AppBar(
-        title: const Text(
-          'Text to ASL',
-          style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-            color: Colors.blueGrey,
-          ),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_outlined,
-              color: Colors.blueGrey),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+      backgroundColor: Color.fromARGB(255, 220, 220, 220),
+      appBar: const CustomAppBar(
+        headerText: 'Text to ASL',
+        bottomSheetContent: ('Converts Input Text Into ASL'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -71,86 +57,102 @@ class TextToASLState extends State<TextToASL> {
             margin: const EdgeInsets.all(20.0),
             child: Column(
               children: <Widget>[
-                const SizedBox(height: 15),
-                CustomWhiteBox(
-                  // Removed const keyword
-                  whiteBox: <Widget>[
-                    const CustomPointlessButton(
-                      borderRaduis: 10.0,
-                      buttonHeight: 10.0,
-                      buttonLength: 20.0,
-                      buttonName: 'English',
+                const SizedBox(height: 10),
+
+                //ASL output section
+                Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(17),
+                      child: SizedBox(
+                        height: 300,
+                        width: 290,
+                        child: FutureBuilder(
+                          future: _initializeVideoPlayerFuture,
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              return AspectRatio(
+                                aspectRatio: _videoController.value.aspectRatio,
+                                child: VideoPlayer(_videoController),
+                              );
+                            } else {
+                              return const CircularProgressIndicator();
+                            }
+                          },
+                        ),
+                      ),
                     ),
-                    TextField(
-                      controller: _textEditingController,
-                      maxLines: 3,
+                    const SizedBox(height: 10),
+                    FloatingActionButton(
+                      onPressed: () {
+                        setState(() {
+                          if (_videoController.value.isPlaying) {
+                            _videoController.pause();
+                          } else {
+                            _videoController.play();
+                          }
+                        });
+                      },
+                      backgroundColor: Colors.black,
+                      foregroundColor: Colors.white,
+                      mini: true,
+                      child: Icon(
+                        _videoController.value.isPlaying
+                            ? Icons.pause
+                            : Icons.play_arrow,
+                      ),
                     ),
                   ],
-                  verticalMargin: 10.0,
-                  horizontalMargin: 0.0,
-                  verticalPadding: 15.0,
-                  horizontalPadding: 15.0,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    _sendTextToBackend(_textEditingController.text);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10.0,
-                      horizontal: 20.0,
-                    ),
-                    backgroundColor:
-                        const Color.fromRGBO(0, 47, 122, 1), // Background color
-                  ),
-                  child: const Text(
-                    'Convert',
-                    style: TextStyle(
-                      color: Colors.white, // Text color
-                    ),
-                  ),
                 ),
                 const SizedBox(height: 20),
-                SizedBox(
-                  height: 300,
-                  width: 290,
-                  child: FutureBuilder(
-                    future: _initializeVideoPlayerFuture,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        return AspectRatio(
-                          aspectRatio: _videoController.value.aspectRatio,
-                          child: VideoPlayer(_videoController),
-                        );
-                      } else {
-                        return const CircularProgressIndicator();
-                      }
-                    },
-                  ),
+
+                //English text input section
+                Column(
+                  children: [
+                    CustomWhiteBox(
+                      whiteBox: <Widget>[
+                        Container(
+                          height: 35,
+                          width: 90,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.black,
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'English',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        TextField(
+                          controller: _textEditingController,
+                          maxLines: 3,
+                        ),
+                      ],
+                      verticalMargin: 10.0,
+                      horizontalMargin: 0.0,
+                      verticalPadding: 15.0,
+                      horizontalPadding: 15.0,
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        _sendTextToBackend(_textEditingController.text);
+                      },
+                      icon: const Icon(Icons.refresh),
+                      label: const Text("Convert"),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black, // Background color
+                        foregroundColor: Colors.white, // Text color
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 10),
-                FloatingActionButton(
-                  onPressed: () {
-                    setState(() {
-                      if (_videoController.value.isPlaying) {
-                        _videoController.pause();
-                      } else {
-                        _videoController.play();
-                      }
-                    });
-                  },
-                  backgroundColor: const Color.fromRGBO(0, 47, 122, 1),
-                  foregroundColor: Colors.white,
-                  mini: true,
-                  child: Icon(
-                    _videoController.value.isPlaying
-                        ? Icons.pause
-                        : Icons.play_arrow,
-                  ),
-                ),
+                const SizedBox(height: 20),
               ],
             ),
           ),
