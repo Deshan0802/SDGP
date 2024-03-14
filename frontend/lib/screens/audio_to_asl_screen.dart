@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:path_provider/path_provider.dart';
@@ -7,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Audio Recorder',
+      title: 'Audio To ASL',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -23,10 +24,8 @@ class AudioToAsl extends StatefulWidget {
 
 class _AudioRecorderState extends State<AudioToAsl> {
   FlutterSoundRecorder _recorder = FlutterSoundRecorder();
-  FlutterSoundPlayer _player = FlutterSoundPlayer();
 
   bool _isRecording = false;
-  bool _isPlaying = false;
   String _filePath = '';
 
   @override
@@ -37,7 +36,6 @@ class _AudioRecorderState extends State<AudioToAsl> {
 
   Future<void> _init() async {
     await _recorder.openAudioSession();
-    await _player.openAudioSession();
     _filePath = (await getTemporaryDirectory()).path + '/test.aac';
     print('File path: $_filePath');
     await _requestMicrophonePermission();
@@ -53,47 +51,28 @@ class _AudioRecorderState extends State<AudioToAsl> {
   @override
   void dispose() {
     _recorder.closeAudioSession();
-    _player.closeAudioSession();
     super.dispose();
   }
 
-  Future<void> _startRecording() async {
-    try {
-      await _recorder.startRecorder(toFile: _filePath);
-      setState(() {
-        _isRecording = true;
-      });
-    } catch (e) {
-      print('Failed to start recording: $e');
-    }
-  }
-
-  Future<void> _stopRecording() async {
-    try {
-      await _recorder.stopRecorder();
-    } catch (e) {
-      print('Failed to stop recording: $e');
-    }
-
-    setState(() {
-      _isRecording = false;
-    });
-  }
-
-  Future<void> _playRecording() async {
-    try {
-      await _player.startPlayer(
-          fromURI: _filePath,
-          whenFinished: () {
-            setState(() {
-              _isPlaying = false;
-            });
-          });
-      setState(() {
-        _isPlaying = true;
-      });
-    } catch (e) {
-      print('Failed to play recording: $e');
+  Future<void> _toggleRecording() async {
+    if (!_isRecording) {
+      try {
+        await _recorder.startRecorder(toFile: _filePath);
+        setState(() {
+          _isRecording = true;
+        });
+      } catch (e) {
+        print('Failed to start recording: $e');
+      }
+    } else {
+      try {
+        await _recorder.stopRecorder();
+        setState(() {
+          _isRecording = false;
+        });
+      } catch (e) {
+        print('Failed to stop recording: $e');
+      }
     }
   }
 
@@ -101,23 +80,214 @@ class _AudioRecorderState extends State<AudioToAsl> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Audio Recorder'),
+        title: const Text('Audio to ASL'),
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: _isRecording ? null : _startRecording,
-              child: Text('Start Recording'),
+          children: [
+            const SizedBox(
+              height: 40,
             ),
-            ElevatedButton(
-              onPressed: _isRecording ? _stopRecording : null,
-              child: Text('Stop Recording'),
+            Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                border: Border.all(
+                  color: Colors.black,
+                  width: 2,
+                ),
+              ),
+              child: const Center(child: Text('ASL Translation')),
             ),
-            ElevatedButton(
-              onPressed: _isPlaying ? null : _playRecording,
-              child: Text('Play Recording'),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton.icon(
+              onPressed: () {
+                //Handle play logic
+              },
+              icon: const Icon(Icons.play_arrow),
+              label: const Text("Play"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black, // Background color
+                foregroundColor: Colors.white, // Text color
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+
+            //Input section
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    try {
+                      FilePickerResult? result =
+                          await FilePicker.platform.pickFiles(
+                        type: FileType.audio,
+                        allowMultiple: false,
+                      );
+                      if (result != null) {
+                        // Handle selected file
+                        PlatformFile file = result.files.first;
+                        String? filePath = file.path;
+                        if (filePath != null) {
+                          // Do something with the selected file path
+                          print('Selected file path: $filePath');
+                        }
+                      }
+                    } catch (e) {
+                      print('Error picking audio file: $e');
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    backgroundColor: Colors.white,
+                    side: const BorderSide(color: Colors.black, width: 2),
+                  ),
+                  child: const SizedBox(
+                    height: 75,
+                    width: 100,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Icon(
+                          Icons.audio_file,
+                          color: Colors.black,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "Select file",
+                          style: TextStyle(fontSize: 10, color: Colors.black),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (BuildContext context) {
+                        return SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: 400,
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Column(
+                              children: [
+                                const Text(
+                                  'Record Your Audio Here',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 50,
+                                ),
+                                SizedBox(
+                                  height: 150,
+                                  width: 150,
+                                  child: ElevatedButton(
+                                    onPressed: _toggleRecording,
+                                    style: ElevatedButton.styleFrom(
+                                      padding: const EdgeInsets.all(20),
+                                      shape: const CircleBorder(),
+                                      backgroundColor: _isRecording
+                                          ? Colors.red
+                                          : Colors.blue,
+                                    ),
+                                    child: Icon(
+                                      _isRecording ? Icons.stop : Icons.mic,
+                                      size: 50,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 50,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Logic for selecting audio file
+                                    Navigator.pop(
+                                        context); // Close the bottom sheet
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    side: const BorderSide(
+                                        color: Colors.black, width: 2),
+                                    textStyle: const TextStyle(fontSize: 13),
+                                  ),
+                                  child: const Text(
+                                    'Select This Recording',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    backgroundColor: Colors.white,
+                    side: const BorderSide(color: Colors.black, width: 2),
+                  ),
+                  child: const SizedBox(
+                    height: 75,
+                    width: 100,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Icon(
+                          Icons.mic,
+                          color: Colors.black,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "Record",
+                          style: TextStyle(fontSize: 10, color: Colors.black),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 30),
+            ElevatedButton.icon(
+              onPressed: () {
+                //Handle conversion logic (Send audio file to backend)
+              },
+              icon: const Icon(Icons.refresh),
+              label: const Text("Convert"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black, // Background color
+                foregroundColor: Colors.white, // Text color
+              ),
             ),
           ],
         ),

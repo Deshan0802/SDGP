@@ -46,7 +46,39 @@ class PdfToAsl extends StatelessWidget {
             mainAxisAlignment:
                 MainAxisAlignment.start, //Align children to the top
             children: [
-              const SizedBox(height: 40),
+              const SizedBox(height: 50),
+              //ASL section
+              Container(
+                height: 275,
+                width: 300,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 2,
+                  ),
+                ),
+                child: Image.asset(
+                    'assets/images/document-to-asl-screen/model.png'),
+              ),
+
+              const SizedBox(height: 20),
+
+              ElevatedButton.icon(
+                onPressed: () {
+                  //Handle conversion logic
+                },
+                icon: const Icon(Icons.play_arrow),
+                label: const Text("Play"),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black, // Background color
+                  foregroundColor: Colors.white, // Text color
+                ),
+              ),
+
+              const SizedBox(height: 60),
+
+              //Input section
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -127,36 +159,6 @@ class PdfToAsl extends StatelessWidget {
                 },
                 icon: const Icon(Icons.refresh),
                 label: const Text("Convert"),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black, // Background color
-                  foregroundColor: Colors.white, // Text color
-                ),
-              ),
-
-              const SizedBox(height: 50),
-
-              //ASL section
-              Container(
-                height: 275,
-                width: 300,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(
-                    color: Colors.black,
-                    width: 2,
-                  ),
-                ),
-                child: Image.asset(
-                    'assets/images/document-to-asl-screen/model.png'),
-              ),
-              const SizedBox(height: 20),
-
-              ElevatedButton.icon(
-                onPressed: () {
-                  //Handle conversion logic
-                },
-                icon: const Icon(Icons.play_arrow),
-                label: const Text("Play"),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black, // Background color
                   foregroundColor: Colors.white, // Text color

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_end/screens/audio_to_asl_screen.dart';
 import 'package:front_end/screens/documet_to_asl_screen.dart';
 import 'package:front_end/screens/profile_screen.dart';
 import 'package:front_end/screens/text_to_asl_screen.dart';
@@ -118,6 +119,13 @@ class newDashBoard extends StatelessWidget {
                         featureName: "Audio To ASL",
                         iconType: Icons.audio_file_outlined,
                         featureDescription: 'Converts Audio Files Into ASL',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AudioToAsl()),
+                          );
+                        },
                       ),
                       FeatureSection(
                         color: Colors.redAccent.shade400,
