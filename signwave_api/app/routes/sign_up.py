@@ -35,4 +35,4 @@ def sign_up():
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({"message": "TEST: PASS"}), 200
+    return jsonify({"message": "Registration successful "}), 200
