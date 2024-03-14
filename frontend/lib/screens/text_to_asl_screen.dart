@@ -17,7 +17,7 @@ class TextToASLState extends State<TextToASL> {
   late Future<void> _initializeVideoPlayerFuture;
 
   Future<void> _sendTextToBackend(String text) async {
-    var url = Uri.parse('http://10.0.2.2:8000/text-to-asl');
+    var url = Uri.parse('http://signwave.pythonanywhere.com/text-to-asl');
     var response = await http.post(url, body: {'text': text});
     if (response.statusCode == 200) {
       // Successfully sent text to the backend

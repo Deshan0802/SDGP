@@ -20,7 +20,7 @@ class LoginPage extends StatelessWidget {
   Future<void> login(
       BuildContext context, String username, String password) async {
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:8000/login'),
+      Uri.parse('http://signwave.pythonanywhere.com/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
