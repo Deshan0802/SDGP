@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_end/widgets/reusable.dart';
 
 class HelpCenter extends StatefulWidget {
   const HelpCenter({super.key});
@@ -230,6 +231,7 @@ class _HelpCenterState extends State<HelpCenter> {
           ),
         ),
       ),
+      bottomNavigationBar: const CustomNavigationBar(),
     );
   }
 }

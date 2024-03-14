@@ -168,7 +168,7 @@ class TextToASLState extends State<TextToASL> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextField(
                               controller: _textEditingController,
-                              maxLines: 2,
+                              maxLines: 3,
                             ),
                           ),
                         ],

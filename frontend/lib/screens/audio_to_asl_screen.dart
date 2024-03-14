@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
+import 'package:front_end/widgets/reusable.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -79,9 +80,9 @@ class _AudioRecorderState extends State<AudioToAsl> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Audio to ASL'),
-      ),
+      appBar: const CustomAppBar(
+          headerText: 'Audio To ASL',
+          bottomSheetContent: 'Converts Audio Files Or Voice Clips Into ASL'),
       body: Center(
         child: Column(
           children: [
@@ -292,6 +293,7 @@ class _AudioRecorderState extends State<AudioToAsl> {
           ],
         ),
       ),
+      bottomNavigationBar: const CustomNavigationBar(),
     );
   }
 }

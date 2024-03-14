@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front_end/screens/asl_to_text_screen.dart';
 import 'package:front_end/screens/audio_to_asl_screen.dart';
 import 'package:front_end/screens/documet_to_asl_screen.dart';
 import 'package:front_end/screens/profile_screen.dart';
@@ -132,7 +133,14 @@ class newDashBoard extends StatelessWidget {
                         featureName: "ASL To Text",
                         iconType: Icons.sign_language,
                         featureDescription:
-                            "Converts ASL Guestures Into Redable Text",
+                            "Converts ASL Guestures Into English Language",
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ASLToText()),
+                          );
+                        },
                       )
                     ],
                   ),
