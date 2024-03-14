@@ -21,19 +21,24 @@ class MyButtonLog extends StatelessWidget {
           }
         },
         child: Container(
-          padding: const EdgeInsets.all(25),
+          width: 210, // Adjust width as needed
+          height: 60, // Adjust height as needed
+          padding: const EdgeInsets.symmetric(
+              vertical: 10, horizontal: 25), // Adjust padding as needed
           margin: const EdgeInsets.symmetric(horizontal: 25),
           decoration: BoxDecoration(
-            color: Colors.black,
+            color: Colors.white, // Background color white
             borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+                color: Color.fromRGBO(0, 74, 173, 0.992)), // Border color black
           ),
-          child: const Center(
+          child: Center(
             child: Text(
               "Log In",
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black, // Text color black
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: 18,
               ),
             ),
           ),

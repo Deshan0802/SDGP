@@ -32,8 +32,8 @@ class _SplashScreenState extends State<SplashScreen> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color.fromRGBO(17, 106, 123, 0.992),
-                Color.fromRGBO(194, 222, 220, 0.992)
+                Color.fromRGBO(93, 224, 230, 0.992),
+                Color.fromRGBO(0, 74, 173, 0.992)
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomLeft,
@@ -42,15 +42,11 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              // Image Widget for the Logo (Circular Positioned)
               Positioned(
-                top: MediaQuery.of(context).size.height *
-                    0.3, // Adjust the value as needed
+                top: MediaQuery.of(context).size.height * 0.3,
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width *
-                      0.5, // Adjust the width as needed
-                  height: MediaQuery.of(context).size.width *
-                      0.5, // Adjust the height as needed
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: MediaQuery.of(context).size.width * 0.5,
                   child: ClipOval(
                     child: Image.asset(
                       'assets/images/signup-login-screens/signwave-logo.png',
@@ -77,10 +73,10 @@ class _SplashScreenState extends State<SplashScreen> {
                     ),
                     SizedBox(height: 40),
                     Text(
-                      'Beyond Words, Within Reach',
+                      'Beyond Words | Within Reach',
                       style: TextStyle(
-                        color: Color.fromARGB(255, 0, 0, 0),
-                        fontSize: 18,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontSize: 20,
                       ),
                     ),
                   ],

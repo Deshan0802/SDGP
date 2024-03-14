@@ -44,7 +44,7 @@ class WelcomePage extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    "This app converts videos into ASL etc.",
+                    "Lets get going!",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.grey[700],
@@ -54,13 +54,16 @@ class WelcomePage extends StatelessWidget {
                 ],
               ),
               Container(
-                // Inserting the image to the page
-                height: MediaQuery.of(context).size.height / 3,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                  image:
-                      AssetImage("assets/images/welcome-screen/background.png"),
-                )),
+                height: 350, // Adjust height as needed
+                width: 350, // Adjust width as needed
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                        "assets/images/welcome-screen/welcomepage-background-image.png"),
+                    fit: BoxFit
+                        .cover, // Ensure the image covers the entire container
+                  ),
+                ),
               ),
               Column(
                 children: <Widget>[

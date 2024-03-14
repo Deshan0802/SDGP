@@ -20,20 +20,27 @@ class MyButtonSign extends StatelessWidget {
             );
           }
         },
-        child: Container(
-          padding: const EdgeInsets.all(25),
-          margin: const EdgeInsets.symmetric(horizontal: 25),
+        child: DecoratedBox(
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 48, 141, 130),
+            gradient: LinearGradient(
+              colors: [
+                Color.fromRGBO(93, 224, 230, 0.992),
+                Color.fromRGBO(0, 74, 173, 0.992)
+              ],
+            ),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const Center(
-            child: Text(
-              "Sign Up",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
+          child: Container(
+            width: 210, // Adjust width as needed
+            height: 60, // Adjust height as needed
+            child: Center(
+              child: Text(
+                "Sign Up",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
               ),
             ),
           ),
