@@ -68,8 +68,8 @@ class LoginPage extends StatelessWidget {
       appBar: AppBar(
         //Creating the appbar
         elevation: 0,
-        backgroundColor: const Color.fromARGB(
-            252, 194, 222, 220), // Setting the background color of the appbar
+        backgroundColor: Color.fromRGBO(
+            93, 224, 230, 0.992), // Setting the background color of the appbar
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -83,49 +83,40 @@ class LoginPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
-          color: const Color.fromARGB(252, 194, 222, 220),
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromRGBO(93, 224, 230, 0.992),
+                Color.fromRGBO(0, 74, 173, 0.992)
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomLeft,
+            ),
+          ),
           height: MediaQuery.of(context).size.height,
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(
+                height: 20,
+              ),
               Container(
+                width: 220, // Adjust width as needed
+                height: 90, // Adjust height as needed
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.black,
-                    width: 2, // Adjust the width of the border as needed
-                  ),
-                ),
-                child: ClipOval(
-                  child: Image.asset(
-                    'assets/images/signup-login-screens/signwave-logo.png',
-                    width: 100, // Adjust width as needed
-                    height: 100, // Adjust height as needed
+                  image: DecorationImage(
+                    image: AssetImage(
+                        'assets/images/signup-login-screens/signwave-wordmark-logo.png'),
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+
               const Column(
                 children: [
-                  Text(
-                    'Beyond Words,Within Reach',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
                   SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Login Page',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    height: 30,
                   ),
                 ],
               ),
@@ -148,7 +139,7 @@ class LoginPage extends StatelessWidget {
                     children: [
                       const SizedBox(
                         //White Box Size
-                        height: 40,
+                        height: 30,
                       ),
 
                       MyTextField(
@@ -166,7 +157,7 @@ class LoginPage extends StatelessWidget {
                         obscureText: true,
                       ),
                       const SizedBox(
-                        height: 15,
+                        height: 20,
                       ),
 
                       //forgot password textfield
@@ -197,7 +188,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
 
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 25),
                       MaterialButton(
                         minWidth: 250,
                         height: 60,
@@ -208,20 +199,29 @@ class LoginPage extends StatelessWidget {
                               password); // Pass the context, username, and password to login function
                         },
                         child: Container(
-                          padding: const EdgeInsets.all(25),
+                          width: 210,
+                          height: 60,
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12,
+                              horizontal: 25), // Adjust padding as needed
                           margin: const EdgeInsets.symmetric(horizontal: 25),
                           decoration: BoxDecoration(
-                            color: const Color.fromRGBO(17, 106, 123, 0.992),
+                            gradient: LinearGradient(
+                              colors: [
+                                Color.fromRGBO(93, 224, 230, 0.992),
+                                Color.fromRGBO(0, 74, 173, 0.992)
+                              ],
+                            ),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          //Button
-                          child: const Center(
+                          // Button
+                          child: Center(
                             child: Text(
-                              "Log In",
+                              "Login",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: 16, // Adjust font size as needed
                               ),
                             ),
                           ),
@@ -259,7 +259,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 25,
                       ),
 
                       //google + facebook +twitter buttons
@@ -289,7 +289,7 @@ class LoginPage extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
                       //If the  user is not Signed Yet Sign Up Now register click goes to SugnUp
                       Row(

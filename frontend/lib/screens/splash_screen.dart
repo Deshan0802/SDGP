@@ -49,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: MediaQuery.of(context).size.width * 0.5,
                   child: ClipOval(
                     child: Image.asset(
-                      'assets/images/signup-login-screens/signwave-logo.png',
+                      'assets/images/signup-login-screens/signwave-icon.png',
                       fit: BoxFit.cover,
                     ),
                   ),
