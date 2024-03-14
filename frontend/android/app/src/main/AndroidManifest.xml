@@ -9,7 +9,7 @@
     <application
         android:label="SignWave"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/signwave_logo">
         <activity
             android:name=".MainActivity"
             android:exported="true"
