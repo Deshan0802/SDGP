@@ -64,7 +64,7 @@ class SignupPage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color.fromARGB(252, 194, 222, 220),
+        backgroundColor: Color.fromRGBO(93, 224, 230, 0.992),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -79,49 +79,33 @@ class SignupPage extends StatelessWidget {
       body: Scrollbar(
         child: SingleChildScrollView(
           child: Container(
-            color: const Color.fromRGBO(194, 222, 220, 0.992),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color.fromRGBO(93, 224, 230, 0.992),
+                  Color.fromRGBO(0, 74, 173, 0.992)
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomLeft,
+              ),
+            ),
             width: double.infinity,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
+                  width: 220, // Adjust width as needed
+                  height: 90, // Adjust height as needed
                   decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 2, // Adjust the width of the border as needed
+                    image: DecorationImage(
+                      image: AssetImage(
+                          'assets/images/signup-login-screens/signwave-wordmark-logo.png'),
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  child: ClipOval(
-                    child: Image.asset(
-                      'assets/images/signup-login-screens/signwave-logo.png',
-                      width: 100, // Adjust width as needed
-                      height: 100, // Adjust height as needed
-                    ),
-                  ),
-                ),
-                const Column(
-                  children: [
-                    Text(
-                      'Sign in',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'Sign up to SignWave',
-                      style: TextStyle(
-                        fontSize: 15,
-                      ),
-                    ),
-                  ],
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 65,
                 ),
                 Container(
                   width: double.infinity,
@@ -191,7 +175,7 @@ class SignupPage extends StatelessWidget {
                         obscureText: true,
                       ),
                       const SizedBox(
-                        height: 15,
+                        height: 25,
                       ),
                       MaterialButton(
                         minWidth: 250,
@@ -201,26 +185,37 @@ class SignupPage extends StatelessWidget {
                         },
                         // Signin button
                         child: Container(
-                          padding: const EdgeInsets.all(25),
+                          width: 210,
+                          height: 60,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 12,
+                            horizontal: 25,
+                          ), // Adjust padding as needed
                           margin: const EdgeInsets.symmetric(horizontal: 25),
                           decoration: BoxDecoration(
-                            color: const Color.fromARGB(251, 0, 0, 0),
+                            gradient: LinearGradient(
+                              colors: [
+                                Color.fromRGBO(93, 224, 230, 0.992),
+                                Color.fromRGBO(0, 74, 173, 0.992)
+                              ],
+                            ),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: const Center(
+                          // Button
+                          child: Center(
                             child: Text(
-                              "Sign In",
+                              "Sign Up",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: 16, // Adjust font size as needed
                               ),
                             ),
                           ),
                         ),
                       ),
                       const SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
                       //Or continue with message
                       const Padding(
@@ -249,7 +244,7 @@ class SignupPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 25,
                       ),
 
                       //google + facebook +twitter buttons

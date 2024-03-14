@@ -217,7 +217,7 @@ class LoginPage extends StatelessWidget {
                           // Button
                           child: Center(
                             child: Text(
-                              "Login",
+                              "Log In",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -289,7 +289,7 @@ class LoginPage extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       //If the  user is not Signed Yet Sign Up Now register click goes to SugnUp
                       Row(
