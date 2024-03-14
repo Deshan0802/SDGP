@@ -56,7 +56,7 @@ class WelcomePage extends StatelessWidget {
               Container(
                 height: 350, // Adjust height as needed
                 width: 350, // Adjust width as needed
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(
                         "assets/images/welcome-screen/welcomepage-background-image.png"),

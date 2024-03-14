@@ -64,7 +64,7 @@ class SignupPage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color.fromRGBO(93, 224, 230, 0.992),
+        backgroundColor: const Color.fromRGBO(93, 224, 230, 0.992),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -96,7 +96,7 @@ class SignupPage extends StatelessWidget {
                 Container(
                   width: 220, // Adjust width as needed
                   height: 90, // Adjust height as needed
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(
                           'assets/images/signup-login-screens/signwave-wordmark-logo.png'),

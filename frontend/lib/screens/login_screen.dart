@@ -68,7 +68,7 @@ class LoginPage extends StatelessWidget {
       appBar: AppBar(
         //Creating the appbar
         elevation: 0,
-        backgroundColor: Color.fromRGBO(
+        backgroundColor: const Color.fromRGBO(
             93, 224, 230, 0.992), // Setting the background color of the appbar
         leading: IconButton(
           onPressed: () {
@@ -98,13 +98,13 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
                 width: 220, // Adjust width as needed
                 height: 90, // Adjust height as needed
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(
                         'assets/images/signup-login-screens/signwave-wordmark-logo.png'),
@@ -206,7 +206,7 @@ class LoginPage extends StatelessWidget {
                               horizontal: 25), // Adjust padding as needed
                           margin: const EdgeInsets.symmetric(horizontal: 25),
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                               colors: [
                                 Color.fromRGBO(93, 224, 230, 0.992),
                                 Color.fromRGBO(0, 74, 173, 0.992)
@@ -215,7 +215,7 @@ class LoginPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           // Button
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               "Log In",
                               style: TextStyle(
