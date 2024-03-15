@@ -1,8 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:front_end/screens/welcome_screen.dart';
 import 'package:front_end/widgets/my_textfield.dart';
-import 'package:front_end/widgets/square_tile.dart';
-
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -193,7 +193,7 @@ class SignupPage extends StatelessWidget {
                           ), // Adjust padding as needed
                           margin: const EdgeInsets.symmetric(horizontal: 25),
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                               colors: [
                                 Color.fromRGBO(93, 224, 230, 0.992),
                                 Color.fromRGBO(0, 74, 173, 0.992)
@@ -202,7 +202,7 @@ class SignupPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           // Button
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               "Sign Up",
                               style: TextStyle(
@@ -217,62 +217,12 @@ class SignupPage extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      //Or continue with message
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 25.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Divider(
-                                thickness: 0.5,
-                                color: Color.fromRGBO(189, 189, 189, 1),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              child: Text('Or Sign Up With',
-                                  style: TextStyle(
-                                      color: Color.fromRGBO(97, 97, 97, 1))),
-                            ),
-                            Expanded(
-                              child: Divider(
-                                thickness: 0.5,
-                                color: Color.fromRGBO(189, 189, 189, 1),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                     
                       const SizedBox(
                         height: 25,
                       ),
 
-                      //google + facebook +twitter buttons
-
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          //google
-                          SquareTile(
-                              imagePath:
-                                  'assets/images/signup-login-screens/google-logo.png'),
-                          SizedBox(
-                            width: 25,
-                          ),
-
-                          //Facebook
-                          SquareTile(
-                              imagePath:
-                                  'assets/images/signup-login-screens/facebook-logo.png'),
-                          SizedBox(
-                            width: 25,
-                          ),
-                          //Twitter,
-                          SquareTile(
-                              imagePath:
-                                  'assets/images/signup-login-screens/twitter-logo.png'),
-                        ],
-                      ),
+                     
                       const SizedBox(
                         height: 30, // Adjust the height for further scrolling
                       ),

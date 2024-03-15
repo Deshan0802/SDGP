@@ -40,13 +40,13 @@ dependencies:
   fluttertoast: ^8.0.8
   flutter_settings_screens: ^0.3.3-null-safety+2
   cupertino_icons: ^1.0.2
-  firebase_auth: ^4.16.0
   file_picker: ^6.2.0
   http: any
   image_picker: ^1.0.7
   video_player: ^2.8.3
   flutter_sound: ^8.1.4
-
+  firebase_auth: ^4.17.9
+  firebase_core: ^2.27.1
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +74,7 @@ flutter:
     - assets/images/document-to-asl-screen/
     - assets/images/profile-screen/
     - assets/images/signup-login-screens/
+    - assets/images/signup-login-screens/google-logo.png
     - assets/images/welcome-screen/
     - assets/images/asl-to-text-screen/
 
