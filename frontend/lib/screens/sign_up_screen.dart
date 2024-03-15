@@ -1,8 +1,7 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:front_end/screens/welcome_screen.dart';
 import 'package:front_end/widgets/my_textfield.dart';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -217,12 +216,36 @@ class SignupPage extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                     
+                      //Or continue with message
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Divider(
+                                thickness: 0.5,
+                                color: Color.fromRGBO(189, 189, 189, 1),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Text('Or Sign Up With',
+                                  style: TextStyle(
+                                      color: Color.fromRGBO(97, 97, 97, 1))),
+                            ),
+                            Expanded(
+                              child: Divider(
+                                thickness: 0.5,
+                                color: Color.fromRGBO(189, 189, 189, 1),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                       const SizedBox(
                         height: 25,
                       ),
 
-                     
                       const SizedBox(
                         height: 30, // Adjust the height for further scrolling
                       ),
