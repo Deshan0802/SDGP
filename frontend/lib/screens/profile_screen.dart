@@ -109,7 +109,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           child: const Text(
                             'Settings',
-                            style: TextStyle(color: Colors.blue, fontSize: 16),
+                            style: TextStyle(color: Colors.blue, fontSize: 17),
                           ),
                         ),
                         ElevatedButton(
@@ -154,7 +154,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           child: const Text(
                             'Edit Profile',
-                            style: TextStyle(color: Colors.blue, fontSize: 16),
+                            style: TextStyle(color: Colors.blue, fontSize: 17),
                           ),
                         ),
                         ElevatedButton(
@@ -174,7 +174,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           child: const Text(
                             'Log Out',
-                            style: TextStyle(color: Colors.blue, fontSize: 16),
+                            style: TextStyle(color: Colors.blue, fontSize: 17),
                           ),
                         ),
                         const SizedBox(height: 10),

@@ -65,7 +65,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
         ),
       ],
-      elevation: 1, //AppBar shadow
+      // flexibleSpace: Container(
+      //   decoration: const BoxDecoration(
+      //     gradient: LinearGradient(
+      //       colors: [
+      //         Color.fromRGBO(100, 245, 250, 0.900), // Light Blue
+      //         Color.fromRGBO(102, 204, 255, 0.990), // Lighter Sky Blue
+      //         Color.fromRGBO(51, 153, 255, 0.900), // Sky Blue
+      //       ],
+      //       begin: Alignment.centerLeft,
+      //       end: Alignment.centerRight,
+      //     ),
+      //   ),
+      // ),
+      elevation: 2, //AppBar shadow
       shadowColor: Colors.black,
     );
   }

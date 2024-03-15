@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:front_end/widgets/reusable.dart';
 
-class ASLToText extends StatelessWidget {
-  const ASLToText({super.key});
+class VideoToASL extends StatelessWidget {
+  const VideoToASL({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(
-        headerText: 'ASL to Text',
-        bottomSheetContent:
-            'Easily Translate ASL Into English By Using Your Camera.',
+        headerText: 'ASL For Videos',
+        bottomSheetContent: 'Generate ASL Translations For Videos',
       ),
       body: Center(
         child: Container(
@@ -36,7 +35,7 @@ class ASLToText extends StatelessWidget {
                       children: [
                         const Center(
                           child: Text(
-                            '"ASL to Text" functionality is currently being enhanced.',
+                            '"ASL For Videos" functionality is currently being enhanced.',
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w400,
