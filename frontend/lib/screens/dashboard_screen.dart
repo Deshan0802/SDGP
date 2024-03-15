@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:front_end/screens/asl_to_text_screen.dart';
+import 'package:front_end/screens/audio_to_asl_screen.dart';
 import 'package:front_end/screens/documet_to_asl_screen.dart';
 import 'package:front_end/screens/profile_screen.dart';
 import 'package:front_end/screens/text_to_asl_screen.dart';
+import 'package:front_end/screens/video_to_asl_screen.dart';
+import 'package:front_end/screens/ytb_to_asl_screen.dart';
 import 'package:front_end/widgets/reusable.dart';
 
 class newDashBoard extends StatelessWidget {
@@ -11,7 +15,7 @@ class newDashBoard extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: 160,
+            height: 167,
             decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
@@ -31,25 +35,29 @@ class newDashBoard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 45,
+                      height: 37,
+                    ),
+                    Text(
+                      'SignWave',
+                      style: TextStyle(
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 9,
                     ),
                     Text(
                       'DashBoard',
                       style: TextStyle(
-                        fontSize: 33,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'Welcome User!',
-                      style: TextStyle(
-                        fontSize: 17,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ],
                 ),
                 Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 40, 20, 0),
+                    padding: const EdgeInsets.fromLTRB(0, 38, 15, 0),
                     child: GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -59,8 +67,8 @@ class newDashBoard extends StatelessWidget {
                         );
                       },
                       child: Container(
-                        width: 75,
-                        height: 75,
+                        width: 80,
+                        height: 80,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.grey.shade800,
@@ -84,7 +92,7 @@ class newDashBoard extends StatelessWidget {
                   Row(
                     children: [
                       FeatureSection(
-                        color: Color.fromARGB(255, 25, 217, 169),
+                        color: const Color.fromARGB(255, 25, 217, 169),
                         iconType: Icons.translate,
                         featureName: "Text To ASL",
                         featureDescription: 'Converts English Text Into ASL',
@@ -118,13 +126,27 @@ class newDashBoard extends StatelessWidget {
                         featureName: "Audio To ASL",
                         iconType: Icons.audio_file_outlined,
                         featureDescription: 'Converts Audio Files Into ASL',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AudioToAsl()),
+                          );
+                        },
                       ),
                       FeatureSection(
                         color: Colors.redAccent.shade400,
                         featureName: "ASL To Text",
                         iconType: Icons.sign_language,
                         featureDescription:
-                            "Converts ASL Guestures Into Redable Text",
+                            "Converts ASL Guestures Into English Language",
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ASLToText()),
+                          );
+                        },
                       )
                     ],
                   ),
@@ -135,18 +157,26 @@ class newDashBoard extends StatelessWidget {
                         featureName: "ASL For Videos",
                         iconType: Icons.video_camera_back_outlined,
                         featureDescription: "Generate ASL Captions For Videos",
-                        // onTap: () {
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(builder: (context) => newVideoToASL()),
-                        //     );
-                        // },
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const VideoToASL()),
+                          );
+                        },
                       ),
                       FeatureSection(
                         color: Colors.greenAccent.shade400,
                         featureName: "ASL For YouTube",
                         iconType: Icons.play_circle_fill,
                         featureDescription: "Generate ASL Captions For YouTube",
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ASLForYtb()),
+                          );
+                        },
                       )
                     ],
                   ),

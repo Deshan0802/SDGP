@@ -13,12 +13,9 @@ class SignWave extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'My Profile',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const ProfilePage(),
+      home: ProfilePage(),
     );
   }
 }
@@ -62,17 +59,135 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         title: const Text('My Profile',
             style: TextStyle(
-                fontSize: 25,
+                fontSize: 27,
                 fontWeight: FontWeight.bold,
-                color: Colors.blueGrey)),
+                color: Colors.black)),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_outlined,
-              color: Colors.blueGrey),
+              color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.more_vert,
+              color: Colors.black,
+              size: 26,
+            ),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return SizedBox(
+                    width: double.infinity,
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: [
+                        const SizedBox(height: 15),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SettingsPage(),
+                              ),
+                            );
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Colors.transparent),
+                            elevation: MaterialStateProperty.all<double>(0),
+                            shadowColor: MaterialStateProperty.all<Color>(
+                                Colors.transparent),
+                            shape: MaterialStateProperty.all<OutlinedBorder>(
+                                RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(0),
+                            )),
+                          ),
+                          child: const Text(
+                            'Settings',
+                            style: TextStyle(color: Colors.blue, fontSize: 17),
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () async {
+                            final result = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditProfilePage(
+                                  nameController: nameController,
+                                  phoneController: phoneController,
+                                  emailController: emailController,
+                                  addressController: addressController,
+                                  onSave: (newValues) {
+                                    setState(() {
+                                      nameController.text = newValues['name'] ??
+                                          nameController.text;
+                                      phoneController.text =
+                                          newValues['phone'] ??
+                                              phoneController.text;
+                                      emailController.text =
+                                          newValues['email'] ??
+                                              emailController.text;
+                                      addressController.text =
+                                          newValues['address'] ??
+                                              addressController.text;
+                                    });
+                                  },
+                                ),
+                              ),
+                            );
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Colors.transparent),
+                            elevation: MaterialStateProperty.all<double>(0),
+                            shadowColor: MaterialStateProperty.all<Color>(
+                                Colors.transparent),
+                            shape: MaterialStateProperty.all<OutlinedBorder>(
+                                RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(0),
+                            )),
+                          ),
+                          child: const Text(
+                            'Edit Profile',
+                            style: TextStyle(color: Colors.blue, fontSize: 17),
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            // Handle "Log Out" button press
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Colors.transparent),
+                            elevation: MaterialStateProperty.all<double>(0),
+                            shadowColor: MaterialStateProperty.all<Color>(
+                                Colors.transparent),
+                            shape: MaterialStateProperty.all<OutlinedBorder>(
+                                RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(0),
+                            )),
+                          ),
+                          child: const Text(
+                            'Log Out',
+                            style: TextStyle(color: Colors.blue, fontSize: 17),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ],
+        elevation: 1, //AppBar shadow
+        shadowColor: Colors.black,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -107,143 +222,6 @@ class _ProfilePageState extends State<ProfilePage> {
               itemProfile(
                   'Address', addressController, CupertinoIcons.building_2_fill),
               const SizedBox(height: 50),
-              ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.blue),
-                  shape: MaterialStateProperty.all<OutlinedBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                  ),
-                ),
-                child: const SizedBox(
-                  width: 70,
-                  child: Center(
-                    child: Text(
-                      'More',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return SizedBox(
-                        width: double.infinity,
-                        child: ListView(
-                          shrinkWrap: true,
-                          children: [
-                            const SizedBox(height: 15),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const SettingsPage(),
-                                  ),
-                                );
-                              },
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.transparent),
-                                elevation: MaterialStateProperty.all<double>(0),
-                                shadowColor: MaterialStateProperty.all<Color>(
-                                    Colors.transparent),
-                                shape:
-                                    MaterialStateProperty.all<OutlinedBorder>(
-                                        RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(0),
-                                )),
-                              ),
-                              child: const Text(
-                                'Settings',
-                                style:
-                                    TextStyle(color: Colors.blue, fontSize: 16),
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: () async {
-                                final result = await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => EditProfilePage(
-                                      nameController: nameController,
-                                      phoneController: phoneController,
-                                      emailController: emailController,
-                                      addressController: addressController,
-                                      onSave: (newValues) {
-                                        setState(() {
-                                          nameController.text =
-                                              newValues['name'] ??
-                                                  nameController.text;
-                                          phoneController.text =
-                                              newValues['phone'] ??
-                                                  phoneController.text;
-                                          emailController.text =
-                                              newValues['email'] ??
-                                                  emailController.text;
-                                          addressController.text =
-                                              newValues['address'] ??
-                                                  addressController.text;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                );
-                              },
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.transparent),
-                                elevation: MaterialStateProperty.all<double>(0),
-                                shadowColor: MaterialStateProperty.all<Color>(
-                                    Colors.transparent),
-                                shape:
-                                    MaterialStateProperty.all<OutlinedBorder>(
-                                        RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(0),
-                                )),
-                              ),
-                              child: const Text(
-                                'Edit Profile',
-                                style:
-                                    TextStyle(color: Colors.blue, fontSize: 16),
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                // Handle "Log Out" button press
-                              },
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.transparent),
-                                elevation: MaterialStateProperty.all<double>(0),
-                                shadowColor: MaterialStateProperty.all<Color>(
-                                    Colors.transparent),
-                                shape:
-                                    MaterialStateProperty.all<OutlinedBorder>(
-                                        RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(0),
-                                )),
-                              ),
-                              child: const Text(
-                                'Log Out',
-                                style:
-                                    TextStyle(color: Colors.blue, fontSize: 16),
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
             ],
           ),
         ),

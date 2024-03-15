@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> login(
       BuildContext context, String username, String password) async {
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:8000/login'),
+      Uri.parse('http://signwave.pythonanywhere.com/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -239,8 +239,8 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.circular(8),
                           ),
 
-                          // Login Button
 
+                          // Login Button
                           child: const Center(
                             child: Text(
                               "Login",

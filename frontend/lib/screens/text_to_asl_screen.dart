@@ -17,7 +17,7 @@ class TextToASLState extends State<TextToASL> {
   late Future<void> _initializeVideoPlayerFuture;
 
   Future<void> _sendTextToBackend(String text) async {
-    var url = Uri.parse('http://10.0.2.2:8000/text-to-asl');
+    var url = Uri.parse('http://signwave.pythonanywhere.com/text-to-asl');
     var response = await http.post(url, body: {'text': text});
     if (response.statusCode == 200) {
       // Successfully sent text to the backend
@@ -137,7 +137,7 @@ class TextToASLState extends State<TextToASL> {
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 2,
                             blurRadius: 7,
-                            offset: Offset(0, 2),
+                            offset: const Offset(0, 2),
                           ),
                         ],
                       ),
@@ -168,7 +168,7 @@ class TextToASLState extends State<TextToASL> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextField(
                               controller: _textEditingController,
-                              maxLines: 2,
+                              maxLines: 3,
                             ),
                           ),
                         ],
