@@ -53,35 +53,26 @@ class _LoginPageState extends State<LoginPage> {
         'password': password,
       }),
     );
+
+    final decodedResponse = json.decode(response.body);
+    final loginMessage = decodedResponse['message'];
+    Fluttertoast.showToast(
+      msg: loginMessage,
+      toastLength: Toast.LENGTH_SHORT,
+      timeInSecForIosWeb: 2,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: Colors.blue,
+      textColor: Colors.white,
+      fontSize: 12,
+    );
+
     if (response.statusCode == 200) {
-      Fluttertoast.showToast(
-        msg: "Login Successful ",
-        toastLength: Toast.LENGTH_SHORT,
-        timeInSecForIosWeb: 2,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.blue,
-        textColor: Colors.white,
-        fontSize: 12,
-      );
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => newDashBoard(),
         ),
       );
-    } else {
-      final decodedResponse = json.decode(response.body);
-      final loginmessage = decodedResponse['error'];
-      Fluttertoast.showToast(
-        msg: loginmessage,
-        toastLength: Toast.LENGTH_SHORT,
-        timeInSecForIosWeb: 2,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.blue,
-        textColor: Colors.white,
-        fontSize: 12,
-      );
-      print('Login failed');
     }
   }
 
@@ -238,7 +229,6 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             borderRadius: BorderRadius.circular(8),
                           ),
-
 
                           // Login Button
                           child: const Center(
