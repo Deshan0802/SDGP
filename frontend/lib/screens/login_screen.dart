@@ -1,21 +1,45 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously, library_private_types_in_public_api, overridden_fields
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:front_end/screens/dashboard_screen.dart';
 import 'package:front_end/screens/forgot_password_screen.dart';
 import 'package:front_end/screens/sign_up_screen.dart';
 import 'package:front_end/widgets/my_textfield.dart';
-import 'package:front_end/widgets/square_tile.dart';
-
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  @override
+  final Key? key; // Accepting Key as a parameter
 
+  const LoginPage({this.key})
+      : super(key: key); // Passing the key to the super constructor
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   //text editing Controllers Omen
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  late FirebaseAuth auth;
+  User? user;
+
+  @override
+  void initState() {
+    super.initState();
+    auth = FirebaseAuth.instance;
+    auth.authStateChanges().listen((event) {
+      setState(() {
+        user = event;
+      });
+    });
+  }
 
   Future<void> login(
       BuildContext context, String username, String password) async {
@@ -31,7 +55,7 @@ class LoginPage extends StatelessWidget {
     );
     if (response.statusCode == 200) {
       Fluttertoast.showToast(
-        msg: "Login Sucessful ",
+        msg: "Login Successful ",
         toastLength: Toast.LENGTH_SHORT,
         timeInSecForIosWeb: 2,
         gravity: ToastGravity.BOTTOM,
@@ -68,7 +92,7 @@ class LoginPage extends StatelessWidget {
       appBar: AppBar(
         //Creating the appbar
         elevation: 0,
-        backgroundColor: Color.fromRGBO(
+        backgroundColor: const Color.fromRGBO(
             93, 224, 230, 0.992), // Setting the background color of the appbar
         leading: IconButton(
           onPressed: () {
@@ -98,13 +122,13 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
                 width: 220, // Adjust width as needed
                 height: 90, // Adjust height as needed
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(
                         'assets/images/signup-login-screens/signwave-wordmark-logo.png'),
@@ -206,7 +230,7 @@ class LoginPage extends StatelessWidget {
                               horizontal: 25), // Adjust padding as needed
                           margin: const EdgeInsets.symmetric(horizontal: 25),
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(
+                            gradient: const LinearGradient(
                               colors: [
                                 Color.fromRGBO(93, 224, 230, 0.992),
                                 Color.fromRGBO(0, 74, 173, 0.992)
@@ -214,10 +238,12 @@ class LoginPage extends StatelessWidget {
                             ),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          // Button
-                          child: Center(
+
+                          // Login Button
+
+                          child: const Center(
                             child: Text(
-                              "Log In",
+                              "Login",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -246,7 +272,7 @@ class LoginPage extends StatelessWidget {
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
-                              child: Text('Or Continue With',
+                              child: Text('Or',
                                   style: TextStyle(color: Colors.grey[700])),
                             ),
                             Expanded(
@@ -262,40 +288,56 @@ class LoginPage extends StatelessWidget {
                         height: 25,
                       ),
 
-                      //google + facebook +twitter buttons
+                      //google Sign in buttons
 
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      Row(
                         children: [
-                          //google
-                          SquareTile(
-                              imagePath:
-                                  'assets/images/signup-login-screens/google-logo.png'),
-                          SizedBox(
-                            width: 25,
+                          Expanded(
+                            child: Center(
+                              child: ElevatedButton(
+                                onPressed: handleGoogleSignIn,
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: const Color.fromARGB(
+                                      255, 0, 0, 0), // Text color of button
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        20), // Rounded corners
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/signup-login-screens/google-logo.png', // Replace this with your Google logo asset
+                                        height: 24.0,
+                                      ),
+                                      const SizedBox(
+                                          width:
+                                              10), // Space between text and logo
+                                      const Text(
+                                          'Continue With Google'), // Text of the button
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-
-                          //Facebook
-                          SquareTile(
-                              imagePath:
-                                  'assets/images/signup-login-screens/facebook-logo.png'),
-                          SizedBox(
-                            width: 25,
-                          ),
-                          //Twitter,
-                          SquareTile(
-                              imagePath:
-                                  'assets/images/signup-login-screens/twitter-logo.png'),
                         ],
                       ),
                       const SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
                       //If the  user is not Signed Yet Sign Up Now register click goes to SugnUp
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Not a Member?'),
+                          const Text('Not a Member?',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 111, 109, 109),
+                                  fontWeight: FontWeight.w500)),
                           const SizedBox(
                             width: 5,
                           ),
@@ -324,5 +366,25 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void handleGoogleSignIn() async {
+    try {
+      GoogleAuthProvider googleAuthProvider = GoogleAuthProvider();
+      // auth.signInWithProvider(googleAuthProvider);
+      final UserCredential userCredential =
+          await auth.signInWithProvider(googleAuthProvider);
+      // Access user data using userCredential.user
+      print("Google Sign-In Successful: ${userCredential.user!.displayName}");
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              newDashBoard(), // Navigate to Dashboard after successful sign-in
+        ),
+      );
+    } catch (error) {
+      print("Error signing in with Google: $error");
+    }
   }
 }
