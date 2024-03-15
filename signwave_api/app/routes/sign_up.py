@@ -23,7 +23,7 @@ def sign_up():
         return jsonify({"message": "Username is already taken"}), 400
 
     if password != password_confirmed:
-        return jsonify({"message": "Passwords do not match"}), 400
+        return jsonify({"message": "Passwords do not match."}), 400
 
     new_user = User(
         first_name=first_name,
@@ -35,4 +35,4 @@ def sign_up():
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({"message": "TEST PASS"}), 200
+    return jsonify({"message": "Registration Successful"}), 200
