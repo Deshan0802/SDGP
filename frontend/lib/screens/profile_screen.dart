@@ -4,10 +4,6 @@ import 'package:front_end/screens/settings_screen.dart';
 import 'package:front_end/widgets/reusable.dart';
 import 'package:image_picker/image_picker.dart';
 
-void main() {
-  runApp(const SignWave());
-}
-
 class SignWave extends StatelessWidget {
   const SignWave({super.key});
 
@@ -28,28 +24,25 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  late TextEditingController nameController;
-  late TextEditingController phoneController;
+  late TextEditingController firstNameController;
+  late TextEditingController lastNameController;
   late TextEditingController emailController;
-  late TextEditingController addressController;
 
   @override
   void initState() {
     super.initState();
-    nameController = TextEditingController(text: 'Hirushan Pathirage');
-    phoneController = TextEditingController(text: '070-4143-401');
+    firstNameController = TextEditingController(text: 'Hirushan Pathirage');
+    lastNameController = TextEditingController(text: 'Pathirage');
     emailController =
         TextEditingController(text: 'chamuditha.20220457@iit.ac.lk');
-    addressController =
-        TextEditingController(text: 'No 435, Galle Road, Colombo 03.');
   }
 
   @override
   void dispose() {
-    nameController.dispose();
-    phoneController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
     emailController.dispose();
-    addressController.dispose();
+
     super.dispose();
   }
 
@@ -118,23 +111,20 @@ class _ProfilePageState extends State<ProfilePage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => EditProfilePage(
-                                  nameController: nameController,
-                                  phoneController: phoneController,
+                                  firstNameController: firstNameController,
+                                  lastNameController: lastNameController,
                                   emailController: emailController,
-                                  addressController: addressController,
                                   onSave: (newValues) {
                                     setState(() {
-                                      nameController.text = newValues['name'] ??
-                                          nameController.text;
-                                      phoneController.text =
-                                          newValues['phone'] ??
-                                              phoneController.text;
+                                      firstNameController.text =
+                                          newValues['name'] ??
+                                              firstNameController.text;
+                                      lastNameController.text =
+                                          newValues['lastName'] ??
+                                              lastNameController.text;
                                       emailController.text =
                                           newValues['email'] ??
                                               emailController.text;
-                                      addressController.text =
-                                          newValues['address'] ??
-                                              addressController.text;
                                     });
                                   },
                                 ),
@@ -213,15 +203,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               const SizedBox(height: 50),
-              itemProfile('Name', nameController, CupertinoIcons.person),
+              itemProfile('Name', firstNameController, CupertinoIcons.person),
               const SizedBox(height: 20),
-              itemProfile('Phone', phoneController, CupertinoIcons.phone),
+              itemProfile(
+                  'Last Name', lastNameController, CupertinoIcons.person),
               const SizedBox(height: 20),
               itemProfile('Email', emailController, CupertinoIcons.mail),
               const SizedBox(height: 20),
-              itemProfile(
-                  'Address', addressController, CupertinoIcons.building_2_fill),
-              const SizedBox(height: 50),
             ],
           ),
         ),
@@ -271,18 +259,17 @@ class _ProfilePageState extends State<ProfilePage> {
 }
 
 class EditProfilePage extends StatefulWidget {
-  final TextEditingController nameController;
-  final TextEditingController phoneController;
+  final TextEditingController firstNameController;
+  final TextEditingController lastNameController;
   final TextEditingController emailController;
-  final TextEditingController addressController;
+
   final Function(Map<String, String>) onSave;
 
   const EditProfilePage({
     super.key,
-    required this.nameController,
-    required this.phoneController,
+    required this.firstNameController,
+    required this.lastNameController,
     required this.emailController,
-    required this.addressController,
     required this.onSave,
   });
 
@@ -292,17 +279,16 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   late String initialName;
-  late String initialPhone;
+  late String initialLastName;
   late String initialEmail;
   late String initialAddress;
 
   @override
   void initState() {
     super.initState();
-    initialName = widget.nameController.text;
-    initialPhone = widget.phoneController.text;
+    initialName = widget.firstNameController.text;
+    initialLastName = widget.lastNameController.text;
     initialEmail = widget.emailController.text;
-    initialAddress = widget.addressController.text;
   }
 
   @override
@@ -390,18 +376,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ],
               ),
               const SizedBox(height: 40),
-              itemProfile(
-                  'Name', widget.nameController, CupertinoIcons.person_fill),
+              itemProfile('Name', widget.firstNameController,
+                  CupertinoIcons.person_fill),
               const SizedBox(height: 25),
-              itemProfile(
-                  'Phone', widget.phoneController, CupertinoIcons.phone_fill),
+              itemProfile('Last Name', widget.lastNameController,
+                  CupertinoIcons.phone_fill),
               const SizedBox(height: 25),
               itemProfile(
                   'Email', widget.emailController, CupertinoIcons.mail_solid),
               const SizedBox(height: 25),
-              itemProfile('Address', widget.addressController,
-                  CupertinoIcons.building_2_fill),
-              const SizedBox(height: 40),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -427,10 +410,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ElevatedButton(
                     onPressed: () {
                       widget.onSave({
-                        'name': widget.nameController.text,
-                        'phone': widget.phoneController.text,
+                        'name': widget.firstNameController.text,
+                        'LastName': widget.lastNameController.text,
                         'email': widget.emailController.text,
-                        'address': widget.addressController.text,
                       });
                       Navigator.pop(context);
                     },
@@ -459,10 +441,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   void _restoreInitialValues() {
     setState(() {
-      widget.nameController.text = initialName;
-      widget.phoneController.text = initialPhone;
+      widget.firstNameController.text = initialName;
+      widget.lastNameController.text = initialLastName;
       widget.emailController.text = initialEmail;
-      widget.addressController.text = initialAddress;
     });
   }
 
