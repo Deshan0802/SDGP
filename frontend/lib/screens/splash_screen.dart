@@ -43,15 +43,15 @@ class _SplashScreenState extends State<SplashScreen> {
             alignment: Alignment.center,
             children: [
               Positioned(
-                top: MediaQuery.of(context).size.height * 0.3,
+                top: MediaQuery.of(context).size.height * 0.26,
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  height: MediaQuery.of(context).size.width * 0.5,
-                  child: ClipOval(
-                    child: Image.asset(
-                      'assets/images/signup-login-screens/signwave-icon.png',
-                      fit: BoxFit.cover,
-                    ),
+                  width: MediaQuery.of(context).size.width *
+                      0.7, // Adjust width here
+                  height: MediaQuery.of(context).size.width *
+                      0.7, // Adjust height here
+                  child: Image.asset(
+                    'assets/images/signup-login-screens/signwave-logo.png',
+                    fit: BoxFit.cover, // Ensure the image covers the widget
                   ),
                 ),
               ),

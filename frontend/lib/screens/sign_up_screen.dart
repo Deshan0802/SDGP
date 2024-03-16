@@ -127,7 +127,7 @@ class SignupPage extends StatelessWidget {
                       MyTextField(
                         controller: fnameController,
                         hintText: ' First Name',
-                        obscureText: true,
+                        obscureText: false,
                       ),
                       const SizedBox(
                         height: 15,
@@ -136,7 +136,7 @@ class SignupPage extends StatelessWidget {
                       MyTextField(
                         controller: lnameController,
                         hintText: ' Last Name',
-                        obscureText: true,
+                        obscureText: false,
                       ),
                       const SizedBox(
                         height: 15,
