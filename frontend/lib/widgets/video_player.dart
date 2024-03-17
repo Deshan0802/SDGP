@@ -29,7 +29,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     // print("update");
     super.didUpdateWidget(oldWidget);
     if (widget.api != '' && widget.api != oldWidget.api) {
-      // print("update trigger");
+      print("update trigger");
       setState(() {
         _api = widget.api;
       });
@@ -39,8 +39,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   void _initializeVideoPlayer(String api) {
     if (api != '') {
-      // print("vid widget : " + api);
+      print("vid widget : " + api);
       _controller = VideoPlayerController.networkUrl(Uri.parse(api));
+      // _controller = VideoPlayerController.asset("assets/video/video.mp4");
       _initializeVideoPlayerFuture = _controller.initialize();
       _controller.setLooping(true);
     } else {
