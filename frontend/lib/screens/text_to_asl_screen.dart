@@ -13,8 +13,8 @@ class TextToASL extends StatefulWidget {
 
 class TextToASLState extends State<TextToASL> {
   String _textFieldValue = '';
-  String _baseApiURL = 'http://ip_address:5000/textToASL';
-  // String _baseApiURL = 'http://127.0.0.1:5000/textToASL';
+  // String _baseApiURL = 'http://ip_address_backend:5000/textToASL';
+  String _baseApiURL = 'http://127.0.0.1:5000/textToASL';
   String _api = '';
 
   void _resetApi() {
