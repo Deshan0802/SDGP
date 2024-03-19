@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:front_end/screens/settings_screen.dart';
 import 'package:front_end/widgets/reusable.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class SignWave extends StatelessWidget {
   const SignWave({super.key});
@@ -29,21 +31,40 @@ class _ProfilePageState extends State<ProfilePage> {
   late TextEditingController emailController;
 
   @override
-  void initState() {
-    super.initState();
-    firstNameController = TextEditingController(text: 'Hirushan Pathirage');
-    lastNameController = TextEditingController(text: 'Pathirage');
-    emailController =
-        TextEditingController(text: 'chamuditha.20220457@iit.ac.lk');
-  }
-
-  @override
   void dispose() {
     firstNameController.dispose();
     lastNameController.dispose();
     emailController.dispose();
-
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    firstNameController = TextEditingController();
+    lastNameController = TextEditingController();
+    emailController = TextEditingController();
+    fetchUserDetails();
+  }
+
+  Future<void> fetchUserDetails() async {
+    var url = Uri.parse('http://10.0.2.2:8000/profile');
+
+    try {
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+        setState(() {
+          firstNameController.text = data['user_details']['first_name'];
+          lastNameController.text = data['user_details']['last_name'];
+          emailController.text = data['user_details']['email'];
+        });
+      } else {
+        print('Failed to fetch user details: ${response.body}');
+      }
+    } catch (e) {
+      print('Error fetching user details: $e');
+    }
   }
 
   @override
@@ -257,6 +278,8 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
+
+// EDIT PROFILE  PART
 
 class EditProfilePage extends StatefulWidget {
   final TextEditingController firstNameController;

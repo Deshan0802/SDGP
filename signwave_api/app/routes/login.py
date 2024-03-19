@@ -1,8 +1,7 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify,session
 from app.models import User
 
 login_bp = Blueprint("login", __name__)
-
 
 @login_bp.route("/login", methods=["POST"])
 def login():
@@ -22,6 +21,20 @@ def login():
     user = User.query.filter_by(username=username, password=password).first()
 
     if user:
-        return jsonify({"message": "Login Successful, Welcome back!"}), 200
+        session['first_name'] = user.first_name
+        session['last_name'] = user.last_name
+        session['email'] = user.email
+        print("Session Data Set Successfully:", session)
+
+        return jsonify({
+            "message": "Login Successful, Welcome back!",
+            "user_details": {
+                "first_name": user.first_name,
+                "last_name": user.last_name,
+                "email": user.email
+            }
+        
+        }), 200
+        
     else:
         return jsonify({"message": "Invalid username or password"}), 401
