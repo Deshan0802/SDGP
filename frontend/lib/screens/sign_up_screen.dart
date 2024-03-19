@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:front_end/screens/dashboard_screen.dart';
 import 'package:front_end/screens/welcome_screen.dart';
 import 'package:front_end/widgets/my_textfield.dart';
 
@@ -6,16 +8,40 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends StatefulWidget {
   SignupPage({super.key});
-  //text editing Controllers Omen
 
+  @override
+  State<SignupPage> createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+  //text editing Controllers Omen
   final usernameController = TextEditingController();
+
   final passwordController = TextEditingController();
+
   final passwordConfirmedController = TextEditingController();
+
   final lnameController = TextEditingController();
+
   final fnameController = TextEditingController();
+
   final emailController = TextEditingController();
+  late FirebaseAuth auth;
+  User? user;
+
+  @override
+  void initState() {
+    super.initState();
+    auth = FirebaseAuth.instance;
+    auth.authStateChanges().listen((event) {
+      setState(() {
+        user = event;
+      });
+    });
+  }
+
 
   Future<void> registerUser(BuildContext context) async {
     const url = 'http://signwave.pythonanywhere.com/sign-up';
@@ -229,7 +255,7 @@ class SignupPage extends StatelessWidget {
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              child: Text('Or Sign Up With',
+                              child: Text('Or',
                                   style: TextStyle(
                                       color: Color.fromRGBO(97, 97, 97, 1))),
                             ),
@@ -241,6 +267,49 @@ class SignupPage extends StatelessWidget {
                             )
                           ],
                         ),
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+
+                      //google Sign in buttons
+
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Center(
+                              child: ElevatedButton(
+                                onPressed: handleGoogleSignIn,
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: const Color.fromARGB(
+                                      255, 0, 0, 0), // Text color of button
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        20), // Rounded corners
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/signup-login-screens/google-logo.png', // Replace this with your Google logo asset
+                                        height: 24.0,
+                                      ),
+                                      const SizedBox(
+                                          width:
+                                              10), // Space between text and logo
+                                      const Text(
+                                          'Continue With Google'), // Text of the button
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(
                         height: 25,
@@ -258,5 +327,25 @@ class SignupPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void handleGoogleSignIn() async {
+    try {
+      GoogleAuthProvider googleAuthProvider = GoogleAuthProvider();
+      // auth.signInWithProvider(googleAuthProvider);
+      final UserCredential userCredential =
+          await auth.signInWithProvider(googleAuthProvider);
+      // Access user data using userCredential.user
+      print("Google Sign-In Successful: ${userCredential.user!.displayName}");
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              newDashBoard(), // Navigate to Dashboard after successful sign-in
+        ),
+      );
+    } catch (error) {
+      print("Error signing in with Google: $error");
+    }
   }
 }
