@@ -2,7 +2,6 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:front_end/screens/dashboard_screen.dart';
 import 'package:front_end/screens/forgot_password_screen.dart';
 import 'package:front_end/screens/sign_up_screen.dart';
