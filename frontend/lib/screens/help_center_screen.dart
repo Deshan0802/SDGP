@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:front_end/widgets/reusable.dart';
 
 class HelpCenter extends StatefulWidget {
-  const HelpCenter({super.key});
+  const HelpCenter({Key? key}) : super(key: key);
 
   @override
   State<HelpCenter> createState() => _HelpCenterState();
@@ -15,13 +15,12 @@ class _HelpCenterState extends State<HelpCenter> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromRGBO(93, 224, 230, 0.992),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromRGBO(93, 224, 230, 0.992),
         leading: IconButton(
           onPressed: () {
-            // The back button in the app bar
             Navigator.pop(context);
           },
           icon: const Icon(
@@ -33,86 +32,66 @@ class _HelpCenterState extends State<HelpCenter> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          color: Colors.white,
+          color: const Color.fromRGBO(
+              93, 224, 230, 0.992), // Change the color to match the app bar
           height: MediaQuery.of(context).size.height,
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Column(
-                children: [
-                  Text(
-                    'Help Center ',
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
+              Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color.fromRGBO(93, 224, 230, 0.992),
+                      Color.fromRGBO(93, 224, 230, 0.992)
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomLeft,
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'How can we help you today?',
-                    style: TextStyle(
-                      fontSize: 17,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 40),
-              const Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment.start, // Align children to the left
-                children: [
-                  Text(
-                    'Frequently Asked',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),
-              SingleChildScrollView(
-                scrollDirection:
-                    Axis.horizontal, // Setting the scroll direction vertically
-                child: Row(
-                  children: List.generate(
-                    10,
-                    (index) {
-                      Color boxColor;
-                      if (index % 4 == 0) {
-                        boxColor = const Color(
-                            0xFF86A7FC); // Changing the colors of the boxes one after the other
-                      } else if (index % 4 == 1) {
-                        boxColor = const Color(0xFFC499F3);
-                      } else if (index % 4 == 2) {
-                        boxColor = const Color(0xFFF875AA);
-                      } else {
-                        boxColor = const Color(0xFF99BC85);
-                      }
-
-                      return Container(
-                        width:
-                            120, // Return the boxes with selected height and width
-                        height: 150,
-                        color: boxColor, // Setting color of the boxes
-                        margin: const EdgeInsets.all(8.0),
-                      );
-                    },
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5),
+                    topRight: Radius.circular(5),
                   ),
                 ),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10),
+                    const Column(
+                      children: [
+                        Text(
+                          'Help Center ',
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 150,
+                      height: 150,
+                      child: Image.asset(
+                        'assets/images/help-center-screen/technical_face.png',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(
+                height: 10,
+              ),
               Expanded(
                 child: Container(
                   width: double.infinity,
                   decoration: const BoxDecoration(
-                    color: Color(0xFFF2F1EB),
+                    color: Colors.white, // Change the color to white
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50),
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
                     ),
                   ),
                   child: Column(
@@ -121,63 +100,34 @@ class _HelpCenterState extends State<HelpCenter> {
                         height: 35,
                       ),
                       const Column(
-                        crossAxisAlignment: CrossAxisAlignment
-                            .start, // Align children to the left
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'What type of problem do you have?',
                             style: TextStyle(
-                              fontSize: 18,
-                            ),
+                                fontSize: 18,
+                                color: Color.fromARGB(255, 0, 0, 0),
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
                       const SizedBox(
                         height: 20,
                       ),
-                      // Dropdown for selecting options
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 250,
-                            margin: const EdgeInsets.only(
-                                left: 35), // Adjust the left margin as needed
-                            child: DropdownButtonFormField<String>(
-                              value: selectedOption,
-                              onChanged: (String? value) {
-                                setState(() {
-                                  selectedOption = value;
-                                });
-                              },
-                              items: dropdownOptions.map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: SizedBox(
-                                    width:
-                                        200, // Adjust the width of the dropdown items if needed
-                                    child: Text(value),
-                                  ),
-                                );
-                              }).toList(),
-                              hint: const Text('Select an option'),
-                            ),
-                          ),
-                        ],
-                      ),
+
                       const SizedBox(
-                        height: 30,
+                        height: 20,
                       ),
 
                       const Column(
-                        crossAxisAlignment: CrossAxisAlignment
-                            .start, // Align children to the left
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'Problem Description',
                             style: TextStyle(
-                              fontSize: 18,
-                            ),
+                                fontSize: 18,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: 20,
@@ -185,6 +135,9 @@ class _HelpCenterState extends State<HelpCenter> {
                           SizedBox(
                             width: 350,
                             child: TextField(
+                              style: TextStyle(
+                                  color: Colors
+                                      .black), // Changed font color to black
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(
@@ -196,7 +149,7 @@ class _HelpCenterState extends State<HelpCenter> {
                                   ),
                                 ),
                                 contentPadding: EdgeInsets.symmetric(
-                                  vertical: 30.0,
+                                  vertical: 70.0,
                                   horizontal: 15.0,
                                 ),
                               ),
@@ -206,20 +159,39 @@ class _HelpCenterState extends State<HelpCenter> {
                       ),
 
                       const SizedBox(height: 15),
+
+                      // this is the Submit button
                       MaterialButton(
-                        minWidth: 200,
-                        height: 40,
-                        onPressed: () {},
-                        color: const Color(0xFF99BC85),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: const Text(
-                          "Submit",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
+                        minWidth: 250,
+                        height: 60,
+                        onPressed: () async {},
+                        child: Container(
+                          width: 210,
+                          height: 60,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 12,
+                            horizontal: 25,
+                          ), // Adjust padding as needed
+                          margin: const EdgeInsets.symmetric(horizontal: 25),
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [
+                                Color.fromRGBO(93, 224, 230, 0.992),
+                                Color.fromRGBO(0, 74, 173, 0.992)
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          // Button
+                          child: const Center(
+                            child: Text(
+                              "Submit",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16, // Adjust font size as needed
+                              ),
+                            ),
                           ),
                         ),
                       ),
