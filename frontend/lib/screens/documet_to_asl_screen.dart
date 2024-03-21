@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:front_end/widgets/reusable.dart';
+import 'package:http/http.dart' as http;
+import 'dart:io';
 
 class PdfToAsl extends StatelessWidget {
   const PdfToAsl({Key? key});
@@ -14,11 +16,33 @@ class PdfToAsl extends StatelessWidget {
       );
 
       if (result != null) {
-        // File selected, you can handle it here
         print('File picked: ${result.files.single.path}');
+        final file = File(result.files.single.path!);
+        await _uploadFile(file, context);
       }
     } catch (e) {
       print('Error picking file: $e');
+    }
+  }
+
+  Future<void> _uploadFile(File file, BuildContext context) async {
+    try {
+      var uri = Uri.parse('http://10.0.2.2:8000/document-to-asl');
+      var request = http.MultipartRequest('POST', uri)
+        ..files.add(await http.MultipartFile.fromPath(
+          'file',
+          file.path,
+        ));
+
+      var response = await request.send();
+
+      if (response.statusCode == 200) {
+        print('File uploaded successfully');
+      } else {
+        print('Failed to upload file');
+      }
+    } catch (e) {
+      print('Error uploading file: $e');
     }
   }
 

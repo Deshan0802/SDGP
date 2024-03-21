@@ -1,28 +1,32 @@
-from flask import Blueprint, request, jsonify
-import pypdf
+from flask import Flask, Blueprint, request, jsonify
+from pypdf import PdfReader
+import io
 
 document_to_asl_bp = Blueprint("document-to-asl", __name__)
 
-
 @document_to_asl_bp.route("/document-to-asl", methods=["POST"])
-def pdf_to_text(pdf_path):
+def pdf_to_text():
+    if 'file' not in request.files:
+        return jsonify({"error": "No file part"}), 400
+
+    file = request.files['file']
+
+    if file.filename == '':
+        return jsonify({"error": "No selected file"}), 400
+
+    if not file.filename.endswith('.pdf'):
+        return jsonify({"error": "Unsupported file format"}), 400
+
     try:
-
-        with open(pdf_path, "rb") as pdf_file:
-            pdf_reader = pypdf.PdfReader(pdf_file)
-            text = ""
-
-            for page_number in range(len(pdf_reader.pages)):
-                page = pdf_reader.pages[page_number]
-                text += page.extract_text()
-
-            return text
-
+        file_stream = io.BytesIO(file.read())
+        pdf_reader = PdfReader(file_stream)
+        text = ""
+        for page in pdf_reader.pages:
+            page_text = page.extract_text() or ""
+            print(f"Page Text: {page_text}")  
+            text += page_text + "\n"
+        
+        print(f"Extracted Text: {text}")  
+        return jsonify({"extracted_text": text}), 200
     except Exception as e:
-        print(f"An error occurred: {e}")
-        return None
-
-
-pdf_path = r"path/to/pdf-file"
-extracted_text = pdf_to_text(pdf_path)
-print(extracted_text)
+        return jsonify({"error": str(e)}), 500
