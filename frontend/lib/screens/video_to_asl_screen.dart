@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:front_end/widgets/reusable.dart';
 import 'package:video_player/video_player.dart';
 
@@ -42,39 +43,65 @@ class _VideoToASLState extends State<VideoToASL> {
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
                     color: Colors.black,
-                    width: 2,
+                    width: 1,
                   ),
                 ),
-                child: Stack(
-                  children: [
-                    if (_videoController != null &&
-                        _videoController!.value.isInitialized)
-                      FittedBox(
-                        fit: BoxFit.cover,
-                        child: SizedBox(
-                          width: _videoController!.value.size.width,
-                          height: _videoController!.value.size.height,
-                          child: AspectRatio(
-                            aspectRatio: _videoController!.value.aspectRatio,
-                            child: VideoPlayer(_videoController!),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(14),
+                  child: Stack(
+                    children: [
+                      if (_videoController != null &&
+                          _videoController!.value.isInitialized)
+                        FittedBox(
+                          fit: BoxFit.cover,
+                          child: SizedBox(
+                            width:
+                                325, // Adjusted width to match the container's width
+                            height:
+                                400, // Adjusted height to match the container's height
+                            child: AspectRatio(
+                              aspectRatio: _videoController!.value.aspectRatio,
+                              child: VideoPlayer(_videoController!),
+                            ),
                           ),
                         ),
-                      ),
-                    if (_videoController != null &&
-                        _videoController!.value.isInitialized &&
-                        !_videoController!.value.isPlaying &&
-                        _showPlayButton)
-                      Align(
-                        alignment: Alignment.center,
-                        child: ElevatedButton.icon(
-                          onPressed: () {
-                            _openFullScreenVideo();
-                          },
-                          icon: const Icon(Icons.play_arrow),
-                          label: const Text("Play"),
+                      if ((_videoController == null ||
+                              !_videoController!.value.isInitialized) &&
+                          !_showPlayButton)
+                        Center(
+                          child: ColorFiltered(
+                            colorFilter: ColorFilter.mode(
+                              Colors.white.withOpacity(
+                                  0.7), // Change the opacity value as needed
+                              BlendMode
+                                  .srcOver, // Adjust blend mode if necessary
+                            ),
+                            child: Image.asset(
+                              'assets/images/video-to-asl-screen/video_icon.jpg',
+                              height: 200,
+                              width: 200,
+                            ),
+                          ),
                         ),
-                      ),
-                  ],
+                      if (_videoController != null &&
+                          _videoController!.value.isInitialized &&
+                          _showPlayButton)
+                        Align(
+                          alignment: Alignment.center,
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              _openFullScreenVideo();
+                            },
+                            icon: const Icon(Icons.play_arrow),
+                            label: const Text("Play"),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black, // Background color
+                              foregroundColor: Colors.white, // Text color
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(
@@ -144,8 +171,6 @@ class _VideoToASLState extends State<VideoToASL> {
               const SizedBox(height: 25),
               ElevatedButton.icon(
                 onPressed: () {
-                  // Handle conversion logic
-                  // For demonstration, I'm setting ASL Translation to the video file path
                   if (_videoController != null) {
                     _videoController!.pause();
                     // Display the video file path in ASL Translation Box
@@ -154,8 +179,26 @@ class _VideoToASLState extends State<VideoToASL> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: const Text('ASL Translation'),
-                          content: Text(_videoController!.dataSource ??
-                              'No video selected'),
+                          content: Text(_videoController!.dataSource),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    // Handle case where _videoController is null
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('ASL Translation'),
+                          content: const Text('No video selected'),
                           actions: [
                             TextButton(
                               onPressed: () {
@@ -193,7 +236,7 @@ class _VideoToASLState extends State<VideoToASL> {
             appBar: AppBar(
               title: const Text(
                 'Selected Video',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 27),
               ),
             ),
             body: Center(

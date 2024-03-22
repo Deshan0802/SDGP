@@ -44,6 +44,7 @@ dependencies:
   http: any
   image_picker: ^1.0.7
   video_player: ^2.8.3
+  youtube_player_flutter: ^9.0.0
   flutter_sound: ^8.1.4
   firebase_auth: ^4.17.9
   firebase_core: ^2.27.1
@@ -78,6 +79,7 @@ flutter:
     - assets/images/welcome-screen/
     - assets/images/asl-to-text-screen/
     - assets/images/help-center-screen/
+    - assets/images/video-to-asl-screen/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
