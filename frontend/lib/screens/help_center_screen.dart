@@ -14,67 +14,93 @@ class _HelpCenterState extends State<HelpCenter> {
 
   @override
   Widget build(BuildContext context) {
+    String headerText = "Help center";
+    String bottomSheetContent =
+        "This is the help center page. Contact us for any isssues!";
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(93, 224, 230, 0.992),
       appBar: AppBar(
-        elevation: 0,
         backgroundColor: const Color.fromRGBO(93, 224, 230, 0.992),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            size: 20,
+        title: Text(
+          headerText,
+          style: const TextStyle(
+            fontSize: 27,
+            fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
         ),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined,
+              color: Colors.black),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.info_outline,
+              color: Colors.black,
+              size: 26,
+            ),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return SizedBox(
+                    height: 100,
+                    child: SizedBox.expand(
+                      child: Center(
+                        child: SizedBox(
+                          width: 300,
+                          child: Text(
+                            bottomSheetContent,
+                            style: const TextStyle(fontSize: 16),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ],
+        elevation: 2, //AppBar shadow
+        shadowColor: Colors.black,
       ),
       body: SingleChildScrollView(
         child: Container(
-          color: const Color.fromRGBO(
-              93, 224, 230, 0.992), // Change the color to match the app bar
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromRGBO(93, 224, 230, 0.992),
+                Color.fromRGBO(0, 74, 173, 0.992)
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomLeft,
+            ),
+          ),
           height: MediaQuery.of(context).size.height,
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color.fromRGBO(93, 224, 230, 0.992),
-                      Color.fromRGBO(93, 224, 230, 0.992)
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomLeft,
-                  ),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    topRight: Radius.circular(5),
-                  ),
-                ),
                 child: Column(
                   children: [
                     const SizedBox(height: 10),
                     const Column(
                       children: [
-                        Text(
-                          'Help Center ',
-                          style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
                         SizedBox(height: 10),
                       ],
                     ),
                     SizedBox(
-                      width: 150,
-                      height: 150,
+                      width: 250,
+                      height: 250,
                       child: Image.asset(
-                        'assets/images/help-center-screen/technical_face.png',
+                        'assets/images/help-center-screen/Help_center_image.png',
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -82,7 +108,7 @@ class _HelpCenterState extends State<HelpCenter> {
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 40,
               ),
               Expanded(
                 child: Container(
@@ -103,9 +129,9 @@ class _HelpCenterState extends State<HelpCenter> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'What type of problem do you have?',
+                            'How can we help you?',
                             style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 22,
                                 color: Color.fromARGB(255, 0, 0, 0),
                                 fontWeight: FontWeight.bold),
                           ),
@@ -125,9 +151,9 @@ class _HelpCenterState extends State<HelpCenter> {
                           Text(
                             'Problem Description',
                             style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
+                              fontSize: 18,
+                              color: Colors.black,
+                            ),
                           ),
                           SizedBox(
                             height: 20,
@@ -166,8 +192,8 @@ class _HelpCenterState extends State<HelpCenter> {
                         height: 60,
                         onPressed: () async {},
                         child: Container(
-                          width: 210,
-                          height: 60,
+                          width: 160,
+                          height: 50,
                           padding: const EdgeInsets.symmetric(
                             vertical: 12,
                             horizontal: 25,
