@@ -10,9 +10,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Audio To ASL',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: AudioToAsl(),
     );
   }
@@ -208,7 +205,7 @@ class _AudioRecorderState extends State<AudioToAsl> {
                                       shape: const CircleBorder(),
                                       backgroundColor: _isRecording
                                           ? Colors.red
-                                          : Colors.blue,
+                                          : Colors.black,
                                     ),
                                     child: Icon(
                                       _isRecording ? Icons.stop : Icons.mic,

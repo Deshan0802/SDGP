@@ -45,6 +45,7 @@ dependencies:
   image_picker: ^1.0.7
   video_player: ^2.8.3
   youtube_player_flutter: ^9.0.0
+  chewie: ^1.7.5
   flutter_sound: ^8.1.4
   firebase_auth: ^4.17.9
   firebase_core: ^2.27.1

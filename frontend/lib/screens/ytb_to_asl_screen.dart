@@ -39,12 +39,7 @@ class _ASLForYtbState extends State<ASLForYtb> {
     if (videoId != null) {
       setState(() {
         _videoId = videoId;
-        _controller = YoutubePlayerController(
-          initialVideoId: videoId,
-          flags: const YoutubePlayerFlags(
-            autoPlay: false,
-          ),
-        );
+        _controller.load(videoId); // Load the new video
       });
       // Remove focus from text field to dismiss keyboard
       _focusNode.unfocus();
