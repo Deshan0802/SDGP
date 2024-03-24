@@ -6,8 +6,10 @@ list(APPEND FLUTTER_PLUGIN_LIST
   file_selector_windows
   firebase_auth
   firebase_core
+  media_kit_video
   permission_handler_windows
   record_windows
+  screen_brightness_windows
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

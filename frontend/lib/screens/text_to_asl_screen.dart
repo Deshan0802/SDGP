@@ -25,7 +25,12 @@ class TextToASLState extends State<TextToASL> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      bottomNavigationBar: CustomNavigationBar(),
+      // resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(
+        // bottomNavigationBar: CustomNavigationBar(),
+        physics: BouncingScrollPhysics(),
+        child: Container(
         margin: EdgeInsets.all(10.0),
         child: Column(
           children: [
@@ -76,7 +81,8 @@ class TextToASLState extends State<TextToASL> {
           ],
         ),
       ),
-      bottomNavigationBar: CustomNavigationBar(),
+      
+      )
     );
   }
 }

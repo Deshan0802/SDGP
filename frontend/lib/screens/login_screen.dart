@@ -206,11 +206,19 @@ class _LoginPageState extends State<LoginPage> {
                       MaterialButton(
                         minWidth: 250,
                         height: 60,
-                        onPressed: () async {
-                          String username = usernameController.text;
-                          String password = passwordController.text;
-                          await login(context, username,
-                              password); // Pass the context, username, and password to login function
+                        // onPressed: () async {
+                        //   String username = usernameController.text;
+                        //   String password = passwordController.text;
+                        //   await login(context, username,
+                        //       password); // Pass the context, username, and password to login function
+                        // },
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => newDashBoard(),
+                            ),
+                          );
                         },
                         child: Container(
                           width: 210,
