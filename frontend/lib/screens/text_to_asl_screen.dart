@@ -13,7 +13,7 @@ class TextToASL extends StatefulWidget {
 
 class TextToASLState extends State<TextToASL> {
   String _textFieldValue = '';
-  String _baseApiURL = 'http://10.0.2.2:8000/textToASL';
+  String _baseApiURL = 'http://10.0.2.2:5000/textToASL';
   String _api = '';
 
   void _resetApi() {
@@ -25,64 +25,61 @@ class TextToASLState extends State<TextToASL> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomNavigationBar(),
-      // resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        // bottomNavigationBar: CustomNavigationBar(),
-        physics: BouncingScrollPhysics(),
-        child: Container(
-        margin: EdgeInsets.all(10.0),
-        child: Column(
-          children: [
-            newHeader(
-              headerTextInfo: 'Converts Input Text Into ASL',
-              headerText: 'Text To ASL',
-            ),
-            Transform.scale(
-              scale: 1,
-              child: VideoPlayerScreen(
-                api: _api,
-                resetApi: _resetApi,
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(10.0),
-              child: TextField(
-                maxLines: 1,
-                onChanged: (value) {
-                  setState(() {
-                    _textFieldValue = value;
-                  });
-                },
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                color: Colors.blue.shade400,
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              child: InkWell(
-                onTap: () {
-                  // Perform any desired action with _textFieldValue
-                  setState(() {
-                    _api = _baseApiURL + '?inputText=' + _textFieldValue;
-                  });
-                  print(_api);
-                },
-                child: Text(
-                  'Generate',
-                  style: TextStyle(
-                    color: Colors.white,
+      appBar: const CustomAppBar(
+          headerText: "Text To ASL",
+          bottomSheetContent: 'Converts Input Text Into ASL.'),
+        bottomNavigationBar: CustomNavigationBar(),
+        // resizeToAvoidBottomInset: false,
+        body: SingleChildScrollView(
+          // bottomNavigationBar: CustomNavigationBar(),
+          physics: BouncingScrollPhysics(),
+          child: Container(
+            margin: EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                Transform.scale(
+                  scale: 1,
+                  child: VideoPlayerScreen(
+                    api: _api,
+                    resetApi: _resetApi,
                   ),
                 ),
-              ),
+                Container(
+                  margin: EdgeInsets.all(10.0),
+                  child: TextField(
+                    maxLines: 1,
+                    onChanged: (value) {
+                      setState(() {
+                        _textFieldValue = value;
+                      });
+                    },
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                    color: Colors.blue.shade400,
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      // Perform any desired action with _textFieldValue
+                      setState(() {
+                        _api = _baseApiURL + '?inputText=' + _textFieldValue;
+                      });
+                      print(_api);
+                    },
+                    child: Text(
+                      'Generate',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-      
-      )
-    );
+          ),
+        ));
   }
 }

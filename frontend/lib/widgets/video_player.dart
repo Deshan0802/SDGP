@@ -29,6 +29,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   void initState() {
     super.initState();
     _api = widget.api;
+    // _controller = n
+    _controller = VideoPlayerController.networkUrl(Uri.parse(''));
   }
 
   @override
@@ -41,7 +43,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         _isError = false;
       });
       processAndCreateASLVideo(_api);
-      
     }
   }
 
@@ -52,9 +53,10 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         // parse the JSON.
         final data = jsonDecode(response.body);
         // Do something with the data
-        _initializeVideoPlayer("http://10.0.2.2:5000/getASLVideo?videoName=video.mp4");
+        _initializeVideoPlayer(
+            "http://10.0.2.2:5000/getASLVideo?videoName=video.mp4");
         setState(() {
-          _isRequestInProgress =false;
+          _isRequestInProgress = false;
         });
       } else {
         // If the server did not return a 200 OK response,
@@ -171,20 +173,22 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     return _api != ''
         ? Column(
             children: [
-              _isRequestInProgress && !_isError? 
-              CircularProgressIndicator() : Container(),
-
-              !_isRequestInProgress && _isError? 
-              Text("Prompted text was unable to be Translated") : Container(),
-
+              _isRequestInProgress && !_isError
+                  ? CircularProgressIndicator()
+                  : Container(),
+              !_isRequestInProgress && _isError
+                  ? Text("Prompted text was unable to be Translated")
+                  : Container(),
               Container(
-                      child: _controller.value.isInitialized && !_isRequestInProgress && !_isError
-                          ? AspectRatio(
-                              aspectRatio: _controller.value.aspectRatio,
-                              child: VideoPlayer(_controller),
-                            )
-                          : Container(),
-                    ),
+                child: _controller.value.isInitialized &&
+                        !_isRequestInProgress &&
+                        !_isError
+                    ? AspectRatio(
+                        aspectRatio: _controller.value.aspectRatio,
+                        child: VideoPlayer(_controller),
+                      )
+                    : Container(),
+              ),
               FloatingActionButton(
                 onPressed: () {
                   setState(() {
