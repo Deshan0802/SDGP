@@ -3,7 +3,7 @@ import 'package:chewie/chewie.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:front_end/widgets/reusable.dart';
-import 'package:front_end/widgets/video_player.dart';
+import 'package:front_end/widgets/vid_widget.dart';
 import 'package:video_player/video_player.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,12 +21,12 @@ class _VideoToASLState extends State<VideoToASL> {
 
   String uploadFileUrl = 'http://10.0.2.2:8000/upload-video';
   String downloadTranslationUrl = 'http://10.0.2.2:8000/download-translation';
-  String _api = '';
+  String _url = '';
   String? filePath;
 
-  void _resetApi() {
+  void _resetUrl() {
     setState(() {
-      _api = '';
+      _url = '';
     });
   }
 
@@ -107,9 +107,9 @@ class _VideoToASLState extends State<VideoToASL> {
                 child: Center(
                   child: Transform.scale(
                     scale: 1,
-                    child: VideoPlayerScreen(
-                      api: _api,
-                      resetApi: _resetApi,
+                    child: VideoPlayerWidget(
+                      url: _url,
+                      resetUrl: _resetUrl,
                     ),
                   ),
                 ),
@@ -190,7 +190,7 @@ class _VideoToASLState extends State<VideoToASL> {
                   var response = await request.send();
                   if (response.statusCode == 200) {
                     setState(() {
-                      _api = downloadTranslationUrl;
+                      _url = downloadTranslationUrl;
                     });
                   }
                 },
