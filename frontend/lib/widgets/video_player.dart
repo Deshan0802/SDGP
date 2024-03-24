@@ -43,6 +43,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       _controller = VideoPlayerController.networkUrl(Uri.parse(api));
       // _controller = VideoPlayerController.asset("assets/video/video.mp4");
       _initializeVideoPlayerFuture = _controller.initialize();
+      _controller.play();
       _controller.setLooping(true);
     } else {
       widget.resetApi();
@@ -75,20 +76,20 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   }
                 },
               ),
-              FloatingActionButton(
-                onPressed: () {
-                  setState(() {
-                    if (_controller.value.isPlaying) {
-                      _controller.pause();
-                    } else {
-                      _controller.play();
-                    }
-                  });
-                },
-                child: Icon(
-                  _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-                ),
-              ),
+              // FloatingActionButton(
+              //   onPressed: () {
+              //     setState(() {
+              //       if (_controller.value.isPlaying) {
+              //         _controller.pause();
+              //       } else {
+              //         _controller.play();
+              //       }
+              //     });
+              //   },
+              //   child: Icon(
+              //     _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+              //   ),
+              // ),
             ],
           )
         : Text("Type & Generate");

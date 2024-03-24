@@ -3,7 +3,9 @@ import 'package:chewie/chewie.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:front_end/widgets/reusable.dart';
+import 'package:front_end/widgets/video_player.dart';
 import 'package:video_player/video_player.dart';
+import 'package:http/http.dart' as http;
 
 class VideoToASL extends StatefulWidget {
   const VideoToASL({Key? key}) : super(key: key);
@@ -16,6 +18,17 @@ class _VideoToASLState extends State<VideoToASL> {
   late VideoPlayerController _videoController;
   ChewieController? _chewieController;
   bool _showPlayButton = false;
+
+  String uploadFileUrl = 'http://10.0.2.2:8000/upload-video';
+  String downloadTranslationUrl = 'http://10.0.2.2:8000/download-translation';
+  String _api = '';
+  String? filePath;
+
+  void _resetApi() {
+    setState(() {
+      _api = '';
+    });
+  }
 
   @override
   void initState() {
@@ -91,7 +104,15 @@ class _VideoToASLState extends State<VideoToASL> {
                     width: 2,
                   ),
                 ),
-                child: const Center(child: Text('ASL Translations')),
+                child: Center(
+                  child: Transform.scale(
+                    scale: 1,
+                    child: VideoPlayerScreen(
+                      api: _api,
+                      resetApi: _resetApi,
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 50,
@@ -107,10 +128,10 @@ class _VideoToASLState extends State<VideoToASL> {
                     if (result != null) {
                       // Handle selected file
                       PlatformFile file = result.files.first;
-                      String? filePath = file.path;
+                      filePath = file.path;
                       if (filePath != null) {
                         _videoController =
-                            VideoPlayerController.file(File(filePath));
+                            VideoPlayerController.file(File(filePath!));
                         await _videoController.initialize();
                         _chewieController = ChewieController(
                           videoPlayerController: _videoController,
@@ -161,46 +182,16 @@ class _VideoToASLState extends State<VideoToASL> {
               ),
               const SizedBox(height: 15),
               ElevatedButton.icon(
-                onPressed: () {
-                  if (_videoController.value.isInitialized) {
-                    _videoController.pause();
-                    // Display the video file path in ASL Translation Box
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('ASL Translation'),
-                          content: Text(_videoController.dataSource!),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  } else {
-                    // Handle case where _videoController is not initialized
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('ASL Translation'),
-                          content: const Text('No video selected'),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
+                onPressed: () async {
+                  var request =
+                      http.MultipartRequest('POST', Uri.parse(uploadFileUrl));
+                  request.files.add(
+                      await http.MultipartFile.fromPath('video', filePath!));
+                  var response = await request.send();
+                  if (response.statusCode == 200) {
+                    setState(() {
+                      _api = downloadTranslationUrl;
+                    });
                   }
                 },
                 icon: const Icon(Icons.refresh),

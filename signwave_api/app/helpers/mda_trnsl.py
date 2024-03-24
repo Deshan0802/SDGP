@@ -3,7 +3,7 @@ from pose_format import Pose
 from pose_format.pose_visualizer import PoseVisualizer
 
 
-def translate(text):
+def generate_translation(text):
     sign_mt_api = (
         "https://us-central1-sign-mt.cloudfunctions.net/spoken_text_to_signed_pose"
     )
