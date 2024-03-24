@@ -4,6 +4,8 @@ import 'package:flutter_sound/flutter_sound.dart';
 import 'package:front_end/widgets/reusable.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:http/http.dart' as http;
+import 'dart:io';
 
 class MyApp extends StatelessWidget {
   @override
@@ -74,6 +76,28 @@ class _AudioRecorderState extends State<AudioToAsl> {
     }
   }
 
+  Future<void> _uploadAudio(File file) async {
+    try {
+      var uri = Uri.parse(
+          'http://10.0.2.2:8000/audio-to-asl'); // Replace with your actual backend URL
+      var request = http.MultipartRequest('POST', uri)
+        ..files.add(await http.MultipartFile.fromPath('audio', file.path));
+
+      var response = await request.send();
+
+      if (response.statusCode == 200) {
+        print('Audio uploaded successfully');
+        // Handle response if needed
+      } else {
+        print('Failed to upload audio: ${response.statusCode}');
+        // Handle upload failure if needed
+      }
+    } catch (e) {
+      print('Error uploading audio: $e');
+      // Handle other errors during upload
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,8 +157,9 @@ class _AudioRecorderState extends State<AudioToAsl> {
                         PlatformFile file = result.files.first;
                         String? filePath = file.path;
                         if (filePath != null) {
-                          // Do something with the selected file path
-                          print('Selected file path: $filePath');
+                          // Upload audio file
+                          File selectedFile = File(filePath);
+                          await _uploadAudio(selectedFile);
                         }
                       }
                     } catch (e) {
@@ -277,9 +302,7 @@ class _AudioRecorderState extends State<AudioToAsl> {
             ),
             const SizedBox(height: 30),
             ElevatedButton.icon(
-              onPressed: () {
-                //Handle conversion logic (Send audio file to backend)
-              },
+              onPressed: () {},
               icon: const Icon(Icons.refresh),
               label: const Text("Convert"),
               style: ElevatedButton.styleFrom(
