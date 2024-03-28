@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:front_end/widgets/reusable.dart';
 import 'package:front_end/widgets/vid_widget.dart';
+import 'package:image_picker/image_picker.dart';
 
 class PdfToAsl extends StatefulWidget {
   const PdfToAsl({Key? key});
@@ -67,6 +68,15 @@ class _PdfToAslState extends State<PdfToAsl> {
   //   }
   // }
 
+  Future<void> _openCamera(BuildContext context) async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.pickImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      // Do something with the picked image
+      print('Image picked: ${pickedImage.path}');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,89 +84,136 @@ class _PdfToAslState extends State<PdfToAsl> {
         headerText: 'Documents to ASL',
         bottomSheetContent: ('Translate PDF Documents Into ASL'),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(height: 50),
-              // Add your ASL conversion section here
-              const SizedBox(height: 20),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: 50),
+                // Add your ASL conversion section here
+                const SizedBox(height: 20),
 
-              Container(
-                height: 300,
-                width: 300,
-                child: Center(
-                  child: Transform.scale(
-                    scale: 1,
-                    child: VideoPlayerWidget(
-                      url: _url,
-                      resetUrl: _resetUrl,
+                Container(
+                  height: 300,
+                  width: 300,
+                  child: Center(
+                    child: Transform.scale(
+                      scale: 1,
+                      child: VideoPlayerWidget(
+                        url: _url,
+                        resetUrl: _resetUrl,
+                      ),
                     ),
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 60),
+                const SizedBox(height: 60),
 
-              // Input section
-              ElevatedButton(
-                onPressed: () => _openFileExplorer(context),
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  backgroundColor: Colors.white,
-                  side: const BorderSide(color: Colors.black, width: 2),
-                ),
-                child: const SizedBox(
-                  height: 75,
-                  width: 100,
-                  child: Column(
+                // Input section
+                Center(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 5,
+                      ElevatedButton(
+                        onPressed: () => _openFileExplorer(context),
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          backgroundColor: Colors.white,
+                          side: const BorderSide(color: Colors.black, width: 2),
+                        ),
+                        child: SizedBox(
+                          height: 75,
+                          width: 100,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Icon(
+                                Icons.picture_as_pdf,
+                                color: Colors.black,
+                                size: 30,
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                "Select file",
+                                style: TextStyle(
+                                    fontSize: 10, color: Colors.black),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      Icon(
-                        Icons.picture_as_pdf,
-                        color: Colors.black,
-                        size: 30,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "Select file",
-                        style: TextStyle(fontSize: 10, color: Colors.black),
+                      SizedBox(width: 10), // Add space between the buttons
+                      ElevatedButton(
+                        onPressed: () => _openCamera(context),
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          backgroundColor: Colors.white,
+                          side: const BorderSide(color: Colors.black, width: 2),
+                        ),
+                        child: SizedBox(
+                          height: 75,
+                          width: 100,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Icon(
+                                Icons.camera_alt,
+                                color: Colors.black,
+                                size: 30,
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                "Scan",
+                                style: TextStyle(
+                                    fontSize: 10, color: Colors.black),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton.icon(
-                onPressed: () async {
-                  var request = http.MultipartRequest(
-                      'POST', Uri.parse(uploadFileUrlDocument));
-                  request.files.add(
-                      await http.MultipartFile.fromPath('file', filePath!));
-                  var response = await request.send();
-                  if (response.statusCode == 200) {
-                    setState(() {
-                      _url = downloadTranslationUrlDocument;
-                    });
-                  }
-                },
-                icon: const Icon(Icons.refresh),
-                label: const Text("Convert"),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  foregroundColor: Colors.white,
+
+                const SizedBox(height: 20),
+                ElevatedButton.icon(
+                  onPressed: () async {
+                    var request = http.MultipartRequest(
+                        'POST', Uri.parse(uploadFileUrlDocument));
+                    request.files.add(
+                        await http.MultipartFile.fromPath('file', filePath!));
+                    var response = await request.send();
+                    if (response.statusCode == 200) {
+                      setState(() {
+                        _url = downloadTranslationUrlDocument;
+                      });
+                    }
+                  },
+                  icon: const Icon(Icons.refresh),
+                  label: const Text("Convert"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    foregroundColor: Colors.white,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
