@@ -19,8 +19,9 @@ class _VideoToASLState extends State<VideoToASL> {
   ChewieController? _chewieController;
   bool _showPlayButton = false;
 
-  String uploadFileUrl = 'http://10.0.2.2:8000/upload-video';
-  String downloadTranslationUrl = 'http://10.0.2.2:8000/download-translation';
+  String uploadVideoFileUrl = 'http://10.0.2.2:8000/upload-video';
+  String downloadTranslationVideoUrl =
+      'http://10.0.2.2:8000/download-translation-video';
   String _url = '';
   String? filePath;
 
@@ -183,14 +184,14 @@ class _VideoToASLState extends State<VideoToASL> {
               const SizedBox(height: 15),
               ElevatedButton.icon(
                 onPressed: () async {
-                  var request =
-                      http.MultipartRequest('POST', Uri.parse(uploadFileUrl));
+                  var request = http.MultipartRequest(
+                      'POST', Uri.parse(uploadVideoFileUrl));
                   request.files.add(
                       await http.MultipartFile.fromPath('video', filePath!));
                   var response = await request.send();
                   if (response.statusCode == 200) {
                     setState(() {
-                      _url = downloadTranslationUrl;
+                      _url = downloadTranslationVideoUrl;
                     });
                   }
                 },

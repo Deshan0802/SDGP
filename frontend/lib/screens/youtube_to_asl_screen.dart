@@ -1,19 +1,35 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:front_end/widgets/reusable.dart';
+import 'package:front_end/widgets/vid_widget.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class ASLForYtb extends StatefulWidget {
-  const ASLForYtb({Key? key}) : super(key: key);
+import 'package:http/http.dart' as http;
+
+class YoutubeToASL extends StatefulWidget {
+  const YoutubeToASL({Key? key}) : super(key: key);
 
   @override
-  _ASLForYtbState createState() => _ASLForYtbState();
+  _YoutubeToASLState createState() => _YoutubeToASLState();
 }
 
-class _ASLForYtbState extends State<ASLForYtb> {
+class _YoutubeToASLState extends State<YoutubeToASL> {
   late YoutubePlayerController _controller;
   TextEditingController _urlController = TextEditingController();
   String? _videoId;
   FocusNode _focusNode = FocusNode();
+
+  String uploadYoutubeVideoUrl = 'http://10.0.2.2:8000/upload-youtube-url';
+  String downloadTranslationYoutubeUrl =
+      'http://10.0.2.2:8000/download-translation-youtube';
+  String _url = '';
+
+  void _resetUrl() {
+    setState(() {
+      _url = '';
+    });
+  }
 
   @override
   void initState() {
@@ -34,7 +50,7 @@ class _ASLForYtbState extends State<ASLForYtb> {
     super.dispose();
   }
 
-  void _loadVideo() {
+  Future<void> _loadVideo() async {
     final videoId = YoutubePlayer.convertUrlToId(_urlController.text);
     if (videoId != null) {
       setState(() {
@@ -43,14 +59,15 @@ class _ASLForYtbState extends State<ASLForYtb> {
       });
       // Remove focus from text field to dismiss keyboard
       _focusNode.unfocus();
-    } else {
-      // Handle invalid URL
-      // You can show a snackbar or display an error message
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Invalid YouTube URL'),
-        ),
-      );
+      final headers = {'Content-Type': 'application/json'};
+      final body = jsonEncode({'youtube_url': _videoId});
+      final response = await http.post(Uri.parse(uploadYoutubeVideoUrl),
+          headers: headers, body: body);
+      if (response.statusCode == 200) {
+        setState(() {
+          _url = downloadTranslationYoutubeUrl;
+        });
+      }
     }
   }
 
@@ -98,7 +115,15 @@ class _ASLForYtbState extends State<ASLForYtb> {
                     width: 2,
                   ),
                 ),
-                child: const Center(child: Text('ASL Translations')),
+                child: Center(
+                  child: Transform.scale(
+                    scale: 1,
+                    child: VideoPlayerWidget(
+                      url: _url,
+                      resetUrl: _resetUrl,
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 50,

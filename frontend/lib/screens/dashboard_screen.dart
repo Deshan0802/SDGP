@@ -5,7 +5,7 @@ import 'package:front_end/screens/documet_to_asl_screen.dart';
 import 'package:front_end/screens/profile_screen.dart';
 import 'package:front_end/screens/text_to_asl_screen.dart';
 import 'package:front_end/screens/video_to_asl_screen.dart';
-import 'package:front_end/screens/ytb_to_asl_screen.dart';
+import 'package:front_end/screens/youtube_to_asl_screen.dart';
 import 'package:front_end/widgets/reusable.dart';
 
 class newDashBoard extends StatelessWidget {
@@ -174,7 +174,7 @@ class newDashBoard extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const ASLForYtb()),
+                                builder: (context) => const YoutubeToASL()),
                           );
                         },
                       )

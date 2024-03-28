@@ -22,7 +22,7 @@ def get_file():
     return "", 200
 
 
-@video_to_asl_bp.route("/download-translation", methods=["GET"])
+@video_to_asl_bp.route("/download-translation-video", methods=["GET"])
 def send_translation():
     translation_video_path = "../../" + translation_video
     return send_file(translation_video_path)
