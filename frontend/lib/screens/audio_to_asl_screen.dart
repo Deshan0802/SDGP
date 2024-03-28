@@ -7,15 +7,15 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Audio To ASL',
-      home: AudioToAsl(),
-    );
-  }
-}
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Audio To ASL',
+//       home: AudioToAsl(),
+//     );
+//   }
+// }
 
 class AudioToAsl extends StatefulWidget {
   @override
