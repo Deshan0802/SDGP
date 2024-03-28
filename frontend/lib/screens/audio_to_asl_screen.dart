@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
+import 'package:front_end/widgets/vid_widget.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -27,6 +28,11 @@ class _AudioRecorderState extends State<AudioToAsl> {
 
   bool _isRecording = false;
   String _filePath = '';
+  String? filePath;
+  String uploadFileUrlAudio = 'http://10.0.2.2:8000/upload-audio';
+  String downloadTranslationUrlAudio =
+      'http://10.0.2.2:8000/download-translation-audio';
+  String _url = '';
 
   @override
   void initState() {
@@ -54,6 +60,12 @@ class _AudioRecorderState extends State<AudioToAsl> {
     super.dispose();
   }
 
+  void _resetUrl() {
+    setState(() {
+      _url = '';
+    });
+  }
+
   Future<void> _toggleRecording() async {
     if (!_isRecording) {
       try {
@@ -76,27 +88,27 @@ class _AudioRecorderState extends State<AudioToAsl> {
     }
   }
 
-  Future<void> _uploadAudio(File file) async {
-    try {
-      var uri = Uri.parse(
-          'http://10.0.2.2:8000/audio-to-asl'); // Replace with your actual backend URL
-      var request = http.MultipartRequest('POST', uri)
-        ..files.add(await http.MultipartFile.fromPath('audio', file.path));
+  // Future<void> _uploadAudio(File file) async {
+  //   try {
+  //     var uri = Uri.parse(
+  //         'http://10.0.2.2:8000/audio-to-asl'); // Replace with your actual backend URL
+  //     var request = http.MultipartRequest('POST', uri)
+  //       ..files.add(await http.MultipartFile.fromPath('audio', file.path));
 
-      var response = await request.send();
+  //     var response = await request.send();
 
-      if (response.statusCode == 200) {
-        print('Audio uploaded successfully');
-        // Handle response if needed
-      } else {
-        print('Failed to upload audio: ${response.statusCode}');
-        // Handle upload failure if needed
-      }
-    } catch (e) {
-      print('Error uploading audio: $e');
-      // Handle other errors during upload
-    }
-  }
+  //     if (response.statusCode == 200) {
+  //       print('Audio uploaded successfully');
+  //       // Handle response if needed
+  //     } else {
+  //       print('Failed to upload audio: ${response.statusCode}');
+  //       // Handle upload failure if needed
+  //     }
+  //   } catch (e) {
+  //     print('Error uploading audio: $e');
+  //     // Handle other errors during upload
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +132,15 @@ class _AudioRecorderState extends State<AudioToAsl> {
                   width: 2,
                 ),
               ),
-              child: const Center(child: Text('ASL Translation')),
+              child: Center(
+                child: Transform.scale(
+                  scale: 1,
+                  child: VideoPlayerWidget(
+                    url: _url,
+                    resetUrl: _resetUrl,
+                  ),
+                ),
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -155,12 +175,12 @@ class _AudioRecorderState extends State<AudioToAsl> {
                       if (result != null) {
                         // Handle selected file
                         PlatformFile file = result.files.first;
-                        String? filePath = file.path;
-                        if (filePath != null) {
-                          // Upload audio file
-                          File selectedFile = File(filePath);
-                          await _uploadAudio(selectedFile);
-                        }
+                        filePath = file.path;
+                        // if (filePath != null) {
+                        //   // Upload audio file
+                        //   // File selectedFile = File(filePath!);
+                        //   // await _uploadAudio(selectedFile);
+                        // }
                       }
                     } catch (e) {
                       print('Error picking audio file: $e');
@@ -302,7 +322,18 @@ class _AudioRecorderState extends State<AudioToAsl> {
             ),
             const SizedBox(height: 30),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () async {
+                var request = http.MultipartRequest(
+                    'POST', Uri.parse(uploadFileUrlAudio));
+                request.files
+                    .add(await http.MultipartFile.fromPath('audio', filePath!));
+                var response = await request.send();
+                if (response.statusCode == 200) {
+                  setState(() {
+                    _url = downloadTranslationUrlAudio;
+                  });
+                }
+              },
               icon: const Icon(Icons.refresh),
               label: const Text("Convert"),
               style: ElevatedButton.styleFrom(
