@@ -145,17 +145,17 @@ class _AudioRecorderState extends State<AudioToAsl> {
             const SizedBox(
               height: 20,
             ),
-            ElevatedButton.icon(
-              onPressed: () {
-                //Handle play logic
-              },
-              icon: const Icon(Icons.play_arrow),
-              label: const Text("Play"),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black, // Background color
-                foregroundColor: Colors.white, // Text color
-              ),
-            ),
+            // ElevatedButton.icon(
+            //   onPressed: () {
+            //     //Handle play logic
+            //   },
+            //   icon: const Icon(Icons.play_arrow),
+            //   label: const Text("Play"),
+            //   style: ElevatedButton.styleFrom(
+            //     backgroundColor: Colors.black, // Background color
+            //     foregroundColor: Colors.white, // Text color
+            //   ),
+            // ),
             const SizedBox(
               height: 50,
             ),

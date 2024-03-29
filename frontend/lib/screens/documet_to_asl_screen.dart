@@ -96,8 +96,15 @@ class _PdfToAslState extends State<PdfToAsl> {
                 const SizedBox(height: 20),
 
                 Container(
-                  height: 300,
                   width: 300,
+                  height: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 2,
+                    ),
+                  ),
                   child: Center(
                     child: Transform.scale(
                       scale: 1,
