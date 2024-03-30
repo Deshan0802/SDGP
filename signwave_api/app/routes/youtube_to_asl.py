@@ -9,6 +9,7 @@ translation_video = None
 
 @youtube_to_asl_bp.route("/upload-youtube-url", methods=["POST"])
 def get_youtube_url():
+    print("Hello World")
     global translation_video
     data = request.json
     youtube_url = data.get("youtube_url")

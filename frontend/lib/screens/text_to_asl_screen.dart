@@ -13,7 +13,7 @@ class TextToASL extends StatefulWidget {
 
 class TextToASLState extends State<TextToASL> {
   String _textFieldValue = '';
-  String _baseApiURL = 'http://10.0.2.2:5000/textToASL';
+  String _baseApiURL = 'http://192.168.1.4:8000/textToASL';
   String _api = '';
 
   void _resetApi() {
@@ -25,9 +25,9 @@ class TextToASLState extends State<TextToASL> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-          headerText: "Text To ASL",
-          bottomSheetContent: 'Converts Input Text Into ASL.'),
+        appBar: const CustomAppBar(
+            headerText: "Text To ASL",
+            bottomSheetContent: 'Converts Input Text Into ASL.'),
         bottomNavigationBar: CustomNavigationBar(),
         // resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(

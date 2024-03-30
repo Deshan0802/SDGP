@@ -14,9 +14,9 @@ class PdfToAsl extends StatefulWidget {
 }
 
 class _PdfToAslState extends State<PdfToAsl> {
-  String uploadFileUrlDocument = 'http://10.0.2.2:8000/document-to-asl';
+  String uploadFileUrlDocument = 'http://192.168.1.4:8000/document-to-asl';
   String downloadTranslationUrlDocument =
-      'http://10.0.2.2:8000/download-translation-document';
+      'http://192.168.1.4:8000/download-translation-document';
   String _url = '';
   String? filePath;
 

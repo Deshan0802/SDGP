@@ -29,9 +29,9 @@ class _AudioRecorderState extends State<AudioToAsl> {
   bool _isRecording = false;
   String _filePath = '';
   String? filePath;
-  String uploadFileUrlAudio = 'http://10.0.2.2:8000/upload-audio';
+  String uploadFileUrlAudio = 'http://192.168.1.4:8000/upload-audio';
   String downloadTranslationUrlAudio =
-      'http://10.0.2.2:8000/download-translation-audio';
+      'http://192.168.1.4:8000/download-translation-audio';
   String _url = '';
 
   @override

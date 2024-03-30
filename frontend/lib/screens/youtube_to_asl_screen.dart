@@ -20,9 +20,9 @@ class _YoutubeToASLState extends State<YoutubeToASL> {
   String? _videoId;
   FocusNode _focusNode = FocusNode();
 
-  String uploadYoutubeVideoUrl = 'http://10.0.2.2:8000/upload-youtube-url';
+  String uploadYoutubeVideoUrl = 'http://192.168.1.4:8000/upload-youtube-url';
   String downloadTranslationYoutubeUrl =
-      'http://10.0.2.2:8000/download-translation-youtube';
+      'http://192.168.1.4:8000/download-translation-youtube';
   String _url = '';
 
   void _resetUrl() {

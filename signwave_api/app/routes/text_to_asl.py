@@ -9,12 +9,12 @@ from pose_format.pose_visualizer import PoseVisualizer
 import requests
 import cv2
 
-vid_name = "video.mp4"
-vid_save_path = "./assets/textToASL/video.mp4"
+vid_name = "translation.mp4"
+# vid_save_path = "./assets/textToASL/video.mp4"
 is_processing = False
-previous = ''
+previous = ""
 text_to_asl_bp = Blueprint("text-to-asl", __name__)
-has_processed =False
+has_processed = False
 
 
 # @text_to_asl_bp.route("/text-to-asl", methods=["POST"])
@@ -25,7 +25,6 @@ has_processed =False
 #     return jsonify({'message': 'Text received', 'text': text})
 
 
-
 # def textToASLVideo(inputText):
 #     '''
 #     Returns the video file name
@@ -33,29 +32,29 @@ has_processed =False
 #                     input (int): the string of text to convert to ASL to text
 
 #             Returns:
-#                     video (str): file name of video which is created 
+#                     video (str): file name of video which is created
 #     '''
-    
+
 #     print('------------ Text to translate to ASL : ' + inputText)
 #     apiForTextForASL = f"https://us-central1-sign-mt.cloudfunctions.net/spoken_text_to_signed_pose?text={inputText}&spoken=en&signed=ase"
 #     response = ''
 #     global previous
 #     if(previous != inputText):
 #         print("-----------------First call --------------")
-#         response = requests.post(apiForTextForASL) 
+#         response = requests.post(apiForTextForASL)
 #         if (response.status_code == 200):
 #             previous = inputText
-#             # read pose file  
+#             # read pose file
 #             pose = Pose.read(response.content)
 #             v = PoseVisualizer(pose)
-#             v.save_video(vid_save_path, v.draw()) 
+#             v.save_video(vid_save_path, v.draw())
 #         else:
 #             print(f"Error in Get Requests Error Code :{response.status_code}")
 #     else:
 #         print("-----------serve created vid on repeated requests---------")
-        
+
 #     return "../assets/textToASL/" + vid_name
-         
+
 
 # @text_to_asl_bp.route("/textToASL", methods=['GET'])
 # def textToASL():
@@ -67,27 +66,25 @@ has_processed =False
 #     print('------------ Text parameter in Request : ' + inputText)
 #     video = textToASLVideo(inputText)
 #     print("---------- END: text to ASL----------")
-#     return send_file(video) 
-
+#     return send_file(video)
 
 
 def textToASLVideo(inputText):
-    '''
+    """
     Returns the video file name
     Parameters:
         inputText (str): the string of text to convert to ASL
     Returns:
         video (str): file name of video which is created
         error_message (str): error message if an error occurred
-    '''
-    print('------------ Text to translate to ASL : ' + inputText)
+    """
+    print("------------ Text to translate to ASL : " + inputText)
     apiForTextForASL = f"https://us-central1-sign-mt.cloudfunctions.net/spoken_text_to_signed_pose?text={inputText}&spoken=en&signed=ase"
-    response = ''
+    response = ""
     global previous
     error_message = None
     global is_processing, has_processed
-    
-    
+
     if previous != inputText and not has_processed:
         print("-----------------First call --------------")
         response = requests.post(apiForTextForASL)
@@ -98,7 +95,7 @@ def textToASLVideo(inputText):
             pose = Pose.read(response.content)
             v = PoseVisualizer(pose)
             try:
-                v.save_video(vid_save_path, v.draw())
+                v.save_video(vid_name, v.draw((0, 0, 0)))
                 has_processed = True
             except Exception as e:
                 error_message = str(e)
@@ -112,33 +109,33 @@ def textToASLVideo(inputText):
     else:
         return "OK", None
 
-@text_to_asl_bp.route("/textToASL", methods=['GET'])
+
+@text_to_asl_bp.route("/textToASL", methods=["GET"])
 def textToASL():
-    '''
+    """
     Endpoint to call to translate text to ASL and get video
-    '''
+    """
     global has_processed
     print("---------- START: text to ASL--------")
-    inputText = request.args.get('inputText')
-    print('------------ Text parameter in Request : ' + inputText)
+    inputText = request.args.get("inputText")
+    print("------------ Text parameter in Request : " + inputText)
     video, error_message = textToASLVideo(inputText)
     print("---------- END: text to ASL----------")
 
     if error_message:
-        return jsonify({'error': error_message}), 500
+        return jsonify({"error": error_message}), 500
     elif video:
         # return send_file(video)
-        has_processed=False
-        return jsonify({'video': vid_name})
+        has_processed = False
+        return jsonify({"video": vid_name})
     else:
-        return jsonify({'error': 'No video generated'}), 500
-    
+        return jsonify({"error": "No video generated"}), 500
 
 
-@text_to_asl_bp.route("/getASLVideo", methods=['GET'])
+@text_to_asl_bp.route("/getASLVideo", methods=["GET"])
 def getASLVideo():
     print("---------- START: GET ASL Video--------")
-    video_name = request.args.get('videoName')
-    print('------------ Text parameter in Request : ' + video_name)
+    video_name = request.args.get("videoName")
+    print("------------ Text parameter in Request : " + video_name)
     print("---------- END: GET ASL Video----------")
-    return send_file("../assets/textToASL/" + vid_name)
+    return send_file("../../" + vid_name)

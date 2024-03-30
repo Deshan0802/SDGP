@@ -54,7 +54,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         final data = jsonDecode(response.body);
         // Do something with the data
         _initializeVideoPlayer(
-            "http://10.0.2.2:5000/getASLVideo?videoName=video.mp4");
+            "http://192.168.1.4:8000/getASLVideo?videoName=video.mp4");
         setState(() {
           _isRequestInProgress = false;
         });
