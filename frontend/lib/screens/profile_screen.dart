@@ -36,12 +36,10 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    nameController = TextEditingController(text: 'Hirushan Pathirage');
-    phoneController = TextEditingController(text: '070-4143-401');
-    emailController =
-        TextEditingController(text: 'chamuditha.20220457@iit.ac.lk');
-    addressController =
-        TextEditingController(text: 'No 435, Galle Road, Colombo 03.');
+    nameController = TextEditingController(text: 'Admin');
+    phoneController = TextEditingController(text: '-');
+    emailController = TextEditingController(text: 'admin@sw.ac.lk');
+    addressController = TextEditingController(text: 'SignWave');
   }
 
   @override

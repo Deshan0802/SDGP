@@ -15,7 +15,7 @@ class newDashBoard extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: 167,
+            height: 158,
             decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
@@ -35,22 +35,22 @@ class newDashBoard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 37,
+                      height: 22,
                     ),
                     Text(
                       'SignWave',
                       style: TextStyle(
-                        fontSize: 35,
+                        fontSize: 38,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(
-                      height: 9,
+                      height: 5,
                     ),
                     Text(
                       'DashBoard',
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: 26,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -105,54 +105,6 @@ class newDashBoard extends StatelessWidget {
                         },
                       ),
                       FeatureSection(
-                        color: Colors.purple.shade300,
-                        iconType: Icons.picture_as_pdf_outlined,
-                        featureName: "Documents",
-                        featureDescription: 'Converts Documnets Into ASL',
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const PdfToAsl()),
-                          );
-                        },
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      FeatureSection(
-                        color: Colors.yellowAccent.shade700,
-                        featureName: "Audio To ASL",
-                        iconType: Icons.audio_file_outlined,
-                        featureDescription: 'Converts Audio Files Into ASL',
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AudioToAsl()),
-                          );
-                        },
-                      ),
-                      FeatureSection(
-                        color: Colors.redAccent.shade400,
-                        featureName: "ASL To Text",
-                        iconType: Icons.sign_language,
-                        featureDescription:
-                            "Converts ASL Guestures Into English Language",
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ASLToText()),
-                          );
-                        },
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      FeatureSection(
                         color: Colors.blue.shade300,
                         featureName: "ASL For Videos",
                         iconType: Icons.video_camera_back_outlined,
@@ -165,8 +117,12 @@ class newDashBoard extends StatelessWidget {
                           );
                         },
                       ),
+                    ],
+                  ),
+                  Row(
+                    children: [
                       FeatureSection(
-                        color: Colors.greenAccent.shade400,
+                        color: Colors.redAccent.shade400,
                         featureName: "ASL For YouTube",
                         iconType: Icons.play_circle_fill,
                         featureDescription: "Generate ASL Captions For YouTube",
@@ -175,6 +131,50 @@ class newDashBoard extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const YoutubeToASL()),
+                          );
+                        },
+                      ),
+                      FeatureSection(
+                        color: Color.fromARGB(255, 238, 206, 0),
+                        featureName: "Audio To ASL",
+                        iconType: Icons.audio_file_outlined,
+                        featureDescription: 'Converts Audio Files Into ASL',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AudioToAsl()),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      FeatureSection(
+                        color: Colors.greenAccent.shade400,
+                        iconType: Icons.picture_as_pdf_outlined,
+                        featureName: "Documents",
+                        featureDescription: 'Converts Documnets Into ASL',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const PdfToAsl()),
+                          );
+                        },
+                      ),
+                      FeatureSection(
+                        color: Colors.purple.shade300,
+                        featureName: "ASL To Text",
+                        iconType: Icons.sign_language,
+                        featureDescription:
+                            "Converts ASL Guestures Into English Language",
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ASLToText()),
                           );
                         },
                       )
@@ -218,7 +218,7 @@ class FeatureSection extends StatelessWidget {
           child: Container(
         margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
         padding: const EdgeInsets.all(20.0),
-        height: 180,
+        height: 200,
         decoration: BoxDecoration(
           color: color,
           borderRadius:
@@ -241,26 +241,26 @@ class FeatureSection extends StatelessWidget {
               Icon(
                 iconType,
                 color: Colors.white,
-                size: 42,
+                size: 40,
               ),
               const SizedBox(
-                height: 5,
+                height: 3,
               ),
               Text(
                 featureDescription,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 9,
+                  fontSize: 12,
                 ),
               ),
               const SizedBox(
-                height: 5,
+                height: 3,
               ),
               Text(
                 featureName,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 18,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               )
