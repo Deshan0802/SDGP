@@ -18,10 +18,10 @@ def sign_up():
     password_confirmed = data.get("password_confirmed")
 
     if not all([first_name, last_name, email, username, password, password_confirmed]):
-        return jsonify({"message": "One or more fields are empty."}), 400
+        return jsonify({"message": "One or more fields are empty"}), 400
 
     if password != password_confirmed:
-        return jsonify({"message": "Passwords do not match."}), 400
+        return jsonify({"message": "Passwords do not match"}), 400
 
     existing_user = User.query.filter_by(username=username).first()
 

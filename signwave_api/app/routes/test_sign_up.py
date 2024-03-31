@@ -25,7 +25,7 @@ def test_sign_up_empty_fields(client):
     json_data = {}
     response = client.post("/sign-up", json=json_data)
     assert response.status_code == 400
-    assert "One or more fields are empty." in response.json["message"]
+    assert "One or more fields are empty" in response.json["message"]
 
 
 def test_sign_up_mismatched_password(client):
@@ -39,4 +39,4 @@ def test_sign_up_mismatched_password(client):
     }
     response = client.post("/sign-up", json=json_data)
     assert response.status_code == 400
-    assert "Passwords do not match." in response.json["message"]
+    assert "Passwords do not match" in response.json["message"]
