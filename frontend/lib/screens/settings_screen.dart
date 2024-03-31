@@ -24,7 +24,9 @@ class _SettingsPageState extends State<SettingsPage> {
           centerTitle: true,
           backgroundColor: Colors.orange,
           leading: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               icon: const Icon(
                 Icons.arrow_back_ios,
                 color: Colors.white,
@@ -86,7 +88,7 @@ class _SettingsPageState extends State<SettingsPage> {
         selected: 1,
         values: const <int, String>{
           1: 'English',
-          2: 'Chinese',
+          2: 'Mandarin',
           3: 'Portuguese',
         },
         onChange: (language) {/* NOOP*/},
